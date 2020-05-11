@@ -6,7 +6,7 @@ Muhammad Osama, Minh Truong, Carl Yang, Aydin Buluç and John D. Owens. **Graph 
 
 Yuechao Pan, Roger Pearce, and John D. Owens. **Scalable Breadth-First Search on a GPU Cluster**. In Proceedings of the 31st IEEE International Parallel and Distributed Processing Symposium, IPDPS 2018, May 2018. [[http](https://escholarship.org/uc/item/9bd842z6)]
 
-Yangzihao Wang, Yuechao Pan, Andrew Davidson, Yuduo Wu, Carl Yang, Leyuan Wang, Muhammad Osama, Chenshan Yuan, Weitang Liu, Andy T. Riffel, and John D. Owens. **Gunrock: GPU Graph Analytics**. ACM Transactions on Parallel Computing, 4(1):3:1&ndash;3:49, August 2017. [[DOI](http://dx.doi.org/10.1145/3108140) | [http](http://escholarship.org/uc/item/9gj6r1dj)]
+Yangzihao Wang, Yuechao Pan, Andrew Davidson, Yuduo Wu, Carl Yang, Leyuan Wang, Muhammad Osama, Chenshan Yuan, Weitang Liu, Andy T. Riffel, and John D. Owens. **Gunrock: GPU Graph Analytics**. ACM Transactions on Parallel Computing, 4(1)&#58;3:1&ndash;3:49, August 2017. [[DOI](http://dx.doi.org/10.1145/3108140) | [http](http://escholarship.org/uc/item/9gj6r1dj)]
 
 Yuechao Pan, Yangzihao Wang, Yuduo Wu, Carl Yang, and John D. Owens.
 **Multi-GPU Graph Analytics**.  In Proceedings of the 31st IEEE International Parallel and Distributed Processing Symposium, IPDPS 2017, pages 479&ndash;490, May/June 2017.
@@ -41,11 +41,13 @@ COSN '14, pages 63&ndash;68, October 2014.
 
 # Presentations
 
-GrAPL 2019, **Graph Coloring on the GPU**, May 2019. [[slides](https://github.com/gunrock/docs/blob/master/source/pdf/Graph%20Coloring%20on%20the%20GPU_Presentation.pdf)]
+FOSDEM 2020, **Gunrock: High-Performance Graph Analytics for the GPU**, Feb 2020. [[slides](https://fosdem.org/2020/schedule/event/graph_gunrock/attachments/slides/3674/export/events/attachments/graph_gunrock/slides/3674/Gunrock_FOSDEM.pdf) | [video](https://fosdem.org/2020/schedule/event/graph_gunrock/)]
+
+GrAPL 2019, **Graph Coloring on the GPU**, May 2019. [[slides](https://github.com/gunrock/docs/blob/master/_media/Graph%20Coloring%20on%20the%20GPU_Presentation.pdf)]
 
 GTC 2018, **Latest Development of the Gunrock Graph Processing Library on GPUs**, March 2018. [[slides](http://on-demand.gputechconf.com/gtc/2018/presentation/s8594-latest-development-of-the-gunrock-graph-processing-library-on-gpus.pdf) | [video](http://on-demand.gputechconf.com/gtc/2018/video/S8594/)]
 
-GTC 2018, **Writing Graph Primitives with Gunrock**, March 2018. [[slides](https://github.com/gunrock/docs/blob/master/source/pdf/Writing-Gunrock-Primitives.pdf) | [video](http://on-demand.gputechconf.com/gtc/2018/video/S8586/)]
+GTC 2018, **Writing Graph Primitives with Gunrock**, March 2018. [[slides](https://github.com/gunrock/docs/blob/master/_media/pdf/Writing-Gunrock-Primitives.pdf) | [video](http://on-demand.gputechconf.com/gtc/2018/video/S8586/)]
 
 GTC 2016, **Gunrock: A Fast and Programmable Multi-GPU Graph Processing Library**, April 2016. [[slides](http://on-demand.gputechconf.com/gtc/2016/presentation/s6374-yangzihao-wang-gunrock.pdf)]
 

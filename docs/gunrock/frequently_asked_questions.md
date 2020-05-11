@@ -32,7 +32,7 @@ The study of social networks, webgraphs, biological networks, and unstructured m
 
 ## How is it better than the current state of the art?
 
-Gunrock delivers best-in-class performance at a low cost with a high-level, productive, flexible programming model that enables writing a [large number of graph applications](#gunrock-39-s-application-cases). GPUs are becoming ubiquitous not just on the desktop but also in the cloud; Gunrock is competitive with much larger and more expensive distributed graph frameworks at a much lower cost. It generally outperforms the best CPU frameworks across its application suite, and among GPU frameworks, enables both high performance and high productivity.
+Gunrock delivers best-in-class performance at a low cost with a high-level, productive, flexible programming model that enables writing a [large number of graph applications](/gunrock/gunrock_applications). GPUs are becoming ubiquitous not just on the desktop but also in the cloud; Gunrock is competitive with much larger and more expensive distributed graph frameworks at a much lower cost. It generally outperforms the best CPU frameworks across its application suite, and among GPU frameworks, enables both high performance and high productivity.
 
 ## How would someone get it?
 

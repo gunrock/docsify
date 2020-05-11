@@ -17,7 +17,9 @@
 
 - Developers's Guide
     - [Directory Structure](devs/directory_structure)
+    - [Write and Publish Docs](devs/writing_docs)
     - [Git Forking Workflow](devs/forking_workflow_gunrock)
+    - [Release Checklist](devs/release_checklist)
     - [Unit Testing & Code Coverage](devs/writing_googletests)
     - [From Gunrock to JSON](devs/gunrock_to_json)
     - [Setup and Use gunrock/io](devs/gunrock_io_setup)

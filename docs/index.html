@@ -37,6 +37,9 @@ MathJax.Hub.Config({
   src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
 </script>
 
+<!-- GitHub Buttons-->
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+
 </head>
 
 <body>
@@ -49,7 +52,7 @@ MathJax.Hub.Config({
       executeScript: true,
       
       loadSidebar: true,
-      loadNavbar: false,
+      loadNavbar: true,
       mergeNavbar: true,
       
       maxLevel: 4,
@@ -95,7 +98,7 @@ MathJax.Hub.Config({
               url = 'https://github.com/gunrock/docsify/blob/master/docs/' + vm.route.file
             }
             // Edit document buttom, top left
-            var editHtml = '[:memo: Edit Document](' + url + ')\n'
+            var editHtml = '[:pencil2:](' + url + ')\n'
 
             return editHtml
               + html

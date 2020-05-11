@@ -6,8 +6,11 @@
   - [Gunrock Application Cases](gunrock/gunrock_applications)
   - [Building Gunrock](gunrock/building_gunrock)
   - [Methodology](gunrock/methodology)
-  - [Results and Analysis](gunrock/results)
   - [Publications](gunrock/publications_and_presentations)
+
+- Performance Analysis
+  - [Summary](analysis/results)
+  - [...](https://github.com/gunrock/io/issues)
 
 - Projects
   - [Road Map](gunrock/road_map)

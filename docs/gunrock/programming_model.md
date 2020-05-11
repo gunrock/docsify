@@ -14,15 +14,15 @@ In the current Gunrock release, we support **five** operators.
 
 + **Advance**: An _advance_ operator generates a new frontier from the current frontier by visiting the neighbors of the current frontier. A frontier can consist of either vertices or edges, and an advance step can input and output either kind of frontier. Advance is an irregularly-parallel operation for  two reasons: 1)~different vertices in a graph have different numbers of neighbors and 2)~vertices share neighbors. Thus a vertex in an input frontier map to multiple output items. An efficient advance is the most significant challenge of a GPU implementation.
 
-![Advance](../images/advance.png)
+![Advance](../_images/advance.png)
 
 + **Filter**:  A _filter_ operator generates a new frontier from the current frontier by choosing a subset of the current frontier based on programmer-specified criteria. Each input item maps to zero or one output items.
 
-![Filter](../images/filter.png)  
+![Filter](../_images/filter.png)  
 
 + **Compute**: A _compute_ operator defines an operation on all elements (vertices or edges) in its input frontier. Gunrock implements a compute operator using `ForAll()` and `ForEach()` parallel loops. However, a programmer-specified operation can also be implemented using C++ lambda functions within the traversal operators such as advance or filter. Gunrock performs these operation in parallel across all elements without regard to order.
 
-![Compute](../images/compute.png)
+![Compute](../_images/compute.png)
 
 + **Segmented intersection**: A _segmented intersection_ operator takes two input node frontiers with the same length, or an input edge frontier, and generates both the number of total intersections and the intersected node IDs as the new frontier.
 

@@ -85,7 +85,7 @@ git add /path/to/modified/files
 git commit -m "your commit message, make it useful!"
 git push origin develop
 ```
-2. Your changes are now in `develop` branch of the repo, to make them live on the internet, create a pull request from develop to master branch: [master..develop](https://github.com/gunrock/docsify/compare/master...gunrock:develop)
+2. Your changes are now in `develop` branch of the repo, to make them live on the internet, create a pull request from develop to master branch: [master..develop](https://github.com/gunrock/docs/compare/master...gunrock:develop)
 
 #### Screwed up? Would like to revert?
 Just revert your git changes/commits in the `master` and `dev` branch.

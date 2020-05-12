@@ -7,15 +7,15 @@ While providing both weak-vertex and -edge scaling, DOBFS doesn"t have good stro
 
 ## DOBFS
 
-<iframe width="100%" height="500px" src="/analysis/mgpu/mgpu_scalability_DOBFS_graph.html"></iframe>
+<iframe width="100%" height="500px" src="analysis/mgpu/mgpu_scalability_DOBFS_graph.html"></iframe>
 
 ## BFS
 
-<iframe width="100%" height="500px" src="/analysis/mgpu/mgpu_scalability_BFS_graph.html"></iframe>
+<iframe width="100%" height="500px" src="analysis/mgpu/mgpu_scalability_BFS_graph.html"></iframe>
 
 ## PageRank
 
-<iframe width="100%" height="500px" src="/analysis/mgpu/mgpu_scalability_PageRank_graph.html"></iframe>
+<iframe width="100%" height="500px" src="analysis/mgpu/mgpu_scalability_PageRank_graph.html"></iframe>
 
 
 [[DOBFS source data](/analysis/mgpu/mgpu_scalability_DOBFS_table.md)] [[BFS source data](/analysis/mgpu/mgpu_scalability_BFS_table.md)] [[PageRank source data](/analysis/mgpu/mgpu_scalability_PageRank_table.md)], with links to the output JSON for each run<br/>

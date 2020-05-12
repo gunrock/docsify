@@ -27,6 +27,18 @@
 <script src="https://cdn.jsdelivr.net/npm/vega-lite@4"></script>
 <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
 
+<style media="screen">
+  /* Add space between vega-embed links */
+  /* http://vega.github.io/vega-tutorials/airports/ */
+  .vega-embed .vega-actions a {
+    margin-left: 1em;
+    visibility: hidden;
+  }
+  .vega-embed:hover .vega-actions a {
+    visibility: visible;
+  }
+</style>
+
 <!-- MathJax Includes -->
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
@@ -54,6 +66,7 @@ MathJax.Hub.Config({
       loadSidebar: true,
       loadNavbar: true,
       mergeNavbar: true,
+      noEmoji: true,
       
       maxLevel: 4,
       subMaxLevel: 2,

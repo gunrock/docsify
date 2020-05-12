@@ -66,11 +66,11 @@ We note that Groute's circular work list overflowed on Tesla K40c for some PageR
 ## Full performance comparison
 
 The following plot compares [Gunrock 0.4](https://github.com/gunrock/gunrock/releases/tag/v0.4) with [Groute's PPoPP artifact](https://github.com/groute/ppopp17-artifact). It has multiple GPUs on one plot. We have broken them out by GPU on individual pages here:
-[ [Tesla P100](includes/groute_Tesla P100-PCIE-16GB.html)
-| [Tesla K40c](includes/groute_Tesla_K40c.html)
-| [Tesla K40m](includes/groute_Tesla_K40m.html)
-| [Tesla K80](includes/groute_Tesla_K80.html)
-| [Tesla M60](includes/groute_Tesla_M60.html)
+[ [Tesla P100](/analysis/groute/groute_Tesla P100-PCIE-16GB.md)
+| [Tesla K40c](/analysis/groute/groute_Tesla_K40c.md)
+| [Tesla K40m](/analysis/groute/groute_Tesla_K40m.md)
+| [Tesla K80](/analysis/groute/groute_Tesla_K80.md)
+| [Tesla M60](/analysis/groute/groute_Tesla_M60.md)
 ]
 
 <div id="vis_groute"></div>
@@ -90,4 +90,4 @@ The following plot compares [Gunrock 0.4](https://github.com/gunrock/gunrock/rel
       .catch(error => showError(el_groute, error));
   </script>
 
-[Source data](tables/groute_table.html), with links to the output JSON for each run<br/>
+[Source data](/analysis/groute/groute_table.md), with links to the output JSON for each run<br/>

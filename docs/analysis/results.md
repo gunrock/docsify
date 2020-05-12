@@ -7,7 +7,8 @@ We are gradually adding summaries of our results to these web pages (please let 
 - [Gunrock results on different GPUs](/analysis/gunrock_gpus)
 - [Gunrock BFS throughput as a function of frontier size](/analysis/frontier_size)
 - [Multi-GPU Gunrock Speedups](/analysis/mgpu_speedup) and [Multi-GPU Gunrock Scalability](/analysis/mgpu_scalability)
-- [Multi-GPU Gunrock Partition Performance](/analysis/groute)
+- [Multi-GPU Gunrock Partition Performance](/analysis/mgpu_partition)
+- [Comparison to Groute](/analysis/groute)
 
 For reproducibility, we maintain Gunrock configurations and results in our github [gunrock/io](https://github.com/gunrock/io/tree/master/gunrock-output) repository.
 

@@ -1,6 +1,6 @@
 # Source data for mgpu_scalability_DOBFS
 
-<table border="1" class="dataframe">
+<table class="dataframe">
   <thead>
     <tr style="text-align: right;">
       <th>algorithm</th>

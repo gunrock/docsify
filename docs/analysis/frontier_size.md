@@ -50,4 +50,4 @@ predictor of performance than the input frontier size.
       .catch(error => showError(el_output_frontier, error));
   </script>
 
-[Source data](tables/frontier_size_table.html), with links to the output JSON for each run
+[Source data](/analysis/frontier_size/frontier_size_table.md), with links to the output JSON for each run

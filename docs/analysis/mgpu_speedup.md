@@ -18,6 +18,6 @@ Most of the primitives scale fairly well from 1 to 6 GPUs. The exception is DOBF
     vegaEmbed("#mgpu_speedup_geomean", spec, opt);
   </script>
 
-[Source data](tables/mgpu_speedup_all_table.html), with links to the output JSON for each run<br/>
+[Source data](/analysis/mgpu/mgpu_speedup_all_table.md), with links to the output JSON for each run<br/>
 
-[Geomean source data](tables/mgpu_speedup_geomean_table.html)
+[Geomean source data](/analysis/mgpu/mgpu_speedup_geomean_table.md)

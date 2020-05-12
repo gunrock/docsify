@@ -52,9 +52,17 @@ MathJax.Hub.Config({
 <!-- GitHub Buttons-->
 <script async defer src="https://buttons.github.io/buttons.js"></script>
 
+<link rel="stylesheet" href="//unpkg.com/@fortawesome/fontawesome-free@5.13.0/css/fontawesome.css" />
+<link rel="stylesheet" href="//unpkg.com/@fortawesome/fontawesome-free/css/brands.css" />
+<link rel="stylesheet" href="//unpkg.com/@fortawesome/fontawesome-free/css/regular.css" />
+<link rel="stylesheet" href="//unpkg.com/@fortawesome/fontawesome-free/css/solid.css" />
+
 </head>
 
 <body>
+  <nav>
+    <a class="github-button" href="https://github.com/gunrock/gunrock/subscription" data-icon="octicon-eye" data-size="large" data-show-count="true" aria-label="Watch gunrock/gunrock on GitHub">Watch</a> <a class="github-button" href="https://github.com/gunrock/gunrock/fork" data-icon="octicon-repo-forked" data-size="large" data-show-count="true" aria-label="Fork gunrock/gunrock on GitHub">Fork</a> <a class="github-button" href="https://github.com/gunrock/gunrock" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star gunrock/gunrock on GitHub">Star</a>
+  </nav>
   <div id="app">Loading ...</div>
   <script>
     window.$docsify = {
@@ -62,11 +70,11 @@ MathJax.Hub.Config({
       coverpage: true,
       
       executeScript: true,
-      
-      loadSidebar: true,
-      loadNavbar: true,
-      mergeNavbar: true,
       noEmoji: true,
+
+      loadSidebar: true,
+      loadNavbar: false,
+      mergeNavbar: false,
       
       maxLevel: 4,
       subMaxLevel: 2,
@@ -87,7 +95,7 @@ MathJax.Hub.Config({
         light: {
           toggleBtnBg: '#ddb300'
         }
-      },
+      },      
 
       themeColor: '#ddb300',
 
@@ -111,7 +119,7 @@ MathJax.Hub.Config({
               url = 'https://github.com/gunrock/docs/blob/master/docs/' + vm.route.file
             }
             // Edit document buttom, top left
-            var editHtml = '[:pencil2:](' + url + ')\n'
+            var editHtml = '[ :fas fa-edit fa-fw: ](' + url + ')\n'
 
             return editHtml
               + html
@@ -132,6 +140,8 @@ MathJax.Hub.Config({
   <script src="//cdn.jsdelivr.net/npm/prismjs/components/prism-markdown.min.js"></script>
   <script src="//cdn.jsdelivr.net/npm/prismjs/components/prism-nginx.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/docsify-dark-mode@0.6.1/dist/index.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/external-script.min.js"></script>
+  <script src="//unpkg.com/docsify-fontawesome/dist/docsify-fontawesome.min.js"></script>
 
 </body>
 

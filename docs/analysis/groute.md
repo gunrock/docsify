@@ -66,12 +66,12 @@ We note that Groute's circular work list overflowed on Tesla K40c for some PageR
 ## Full performance comparison
 
 The following plot compares [Gunrock 0.4](https://github.com/gunrock/gunrock/releases/tag/v0.4) with [Groute's PPoPP artifact](https://github.com/groute/ppopp17-artifact). It has multiple GPUs on one plot. We have broken them out by GPU on individual pages here:
-[ [Tesla P100](/analysis/groute/groute_Tesla P100-PCIE-16GB.md)
+
+[Tesla P100](/analysis/groute/groute_Tesla_P100-PCIE-16GB.md)
 | [Tesla K40c](/analysis/groute/groute_Tesla_K40c.md)
 | [Tesla K40m](/analysis/groute/groute_Tesla_K40m.md)
 | [Tesla K80](/analysis/groute/groute_Tesla_K80.md)
 | [Tesla M60](/analysis/groute/groute_Tesla_M60.md)
-]
 
 <div id="vis_groute"></div>
   <script type="text/javascript">

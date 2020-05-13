@@ -10,7 +10,7 @@ We show two results for triangle counting on a variety of datasets across multip
   }).catch(console.error);
 </script>
 
-[Table of data for the above results, including links to JSON summaries for each experiment](analysis/gunrock_primitives_tc_avg_process_time_table.html)
+[Table of data for the above results, including links to JSON summaries for each experiment](analysis/gunrock_primitives_tc_avg_process_time_table.md)
 
 <div id="vis_gunrock_primitives_tc_edges"></div>
 <script type="text/javascript">
@@ -20,4 +20,4 @@ We show two results for triangle counting on a variety of datasets across multip
   }).catch(console.error);
 </script>
 
-[Table of data for the above results, including links to JSON summaries for each experiment](analysis/gunrock_primitives_tc_edges_table.html)
+[Table of data for the above results, including links to JSON summaries for each experiment](analysis/gunrock_primitives_tc_edges_table.md)

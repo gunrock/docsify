@@ -24,6 +24,8 @@ When we count the number of edges traversed, we do so by summing the number of o
 
 If a comparison library does not measure MTEPS for BFS, we compute it by the number of edges visited divided by runtime; if the former is not available, we use Gunrock's edges-visited count.
 
+The Gunrock team believes that citing Gunrock's forward-only results without also including full direction-optimized results is misleading to readers. We request that any use of non-fully-optimized Gunrock BFS results also include fully optimized results (direction-optimized).
+
 ### Single Source Shortest Path (SSSP)
 
 In general we find MTEPS comparisons between different approaches to SSSP not meaningful: because an edge may be visited one or many times, there is no standard way to count edges traversed. Different algorithms may not only visit a very different number of edges (Dijkstra vs. Bellman-Ford will have very different edge visit counts) but may also have a different number of edges visited across different invocations of the same primitive.

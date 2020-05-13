@@ -5,7 +5,7 @@ We show four results for single-source shortest path on a variety of datasets ac
 <div id="vis_gunrock_primitives_sssp_mteps"></div>
 <script type="text/javascript">
   var spec = "https://raw.githubusercontent.com/gunrock/io/master/plots/gunrock_primitives_sssp_mteps.json";
-  vegaEmbed('#vis_gunrock_primitives_sssp_mteps, spec).then(function(result) {
+  vegaEmbed('#vis_gunrock_primitives_sssp_mteps', spec).then(function(result) {
     // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
   }).catch(console.error);
 </script>
@@ -15,7 +15,7 @@ We show four results for single-source shortest path on a variety of datasets ac
 <div id="vis_gunrock_primitives_sssp_avg_process_time"></div>
 <script type="text/javascript">
   var spec = "https://raw.githubusercontent.com/gunrock/io/master/plots/gunrock_primitives_sssp_avg_process_time.json";
-  vegaEmbed('#vis_gunrock_primitives_sssp_avg_process_time, spec).then(function(result) {
+  vegaEmbed('#vis_gunrock_primitives_sssp_avg_process_time', spec).then(function(result) {
     // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
   }).catch(console.error);
 </script>
@@ -25,7 +25,7 @@ We show four results for single-source shortest path on a variety of datasets ac
 <div id="vis_gunrock_primitives_sssp_advance_mode"></div>
 <script type="text/javascript">
   var spec = "https://raw.githubusercontent.com/gunrock/io/master/plots/gunrock_primitives_sssp_advance_mode.json";
-  vegaEmbed('#vis_gunrock_primitives_sssp_advance_mode, spec).then(function(result) {
+  vegaEmbed('#vis_gunrock_primitives_sssp_advance_mode', spec).then(function(result) {
     // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
   }).catch(console.error);
 </script>
@@ -35,7 +35,7 @@ We show four results for single-source shortest path on a variety of datasets ac
 <div id="vis_gunrock_primitives_sssp_edges"></div>
 <script type="text/javascript">
   var spec = "https://raw.githubusercontent.com/gunrock/io/master/plots/gunrock_primitives_sssp_edges.json";
-  vegaEmbed('#vis_gunrock_primitives_sssp_edges, spec).then(function(result) {
+  vegaEmbed('#vis_gunrock_primitives_sssp_edges', spec).then(function(result) {
     // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
   }).catch(console.error);
 </script>

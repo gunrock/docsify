@@ -10,6 +10,10 @@ First, our most recent results (on Gunrock 1.0+) on several Gunrock primitives. 
 - [PageRank (PR)](/analysis/results_pr)
 - [Triangle counting (TC)](/analysis/results_tc)
 
+The following results compare across different primitives:
+- [Edges/vertices visited vs. number of edges/vertices](/analysis/results_edges_vertices)
+- [Search depth](/analysis/results_search_depth)
+
 The following are performance results largely from our [2016 ACM PPoPP paper](http://dx.doi.org/10.1145/2851141.2851145) and [2017 ACM TOPC paper](http://dx.doi.org/10.1145/3108140), or Gunrock versions current at that time.
 
 - [Gunrock performance compared with other engines for graph analytics](/analysis/engines_topc)

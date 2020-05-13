@@ -5,7 +5,7 @@ We show two results for triangle counting on a variety of datasets across multip
 <div id="vis_gunrock_primitives_tc_avg_process_time"></div>
 <script type="text/javascript">
   var spec = "https://raw.githubusercontent.com/gunrock/io/master/plots/gunrock_primitives_tc_avg_process_time.json";
-  vegaEmbed('#vis_gunrock_primitives_tc_avg_process_time, spec).then(function(result) {
+  vegaEmbed('#vis_gunrock_primitives_tc_avg_process_time', spec).then(function(result) {
     // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
   }).catch(console.error);
 </script>
@@ -15,7 +15,7 @@ We show two results for triangle counting on a variety of datasets across multip
 <div id="vis_gunrock_primitives_tc_edges"></div>
 <script type="text/javascript">
   var spec = "https://raw.githubusercontent.com/gunrock/io/master/plots/gunrock_primitives_tc_edges.json";
-  vegaEmbed('#vis_gunrock_primitives_tc_edges, spec).then(function(result) {
+  vegaEmbed('#vis_gunrock_primitives_tc_edges', spec).then(function(result) {
     // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
   }).catch(console.error);
 </script>

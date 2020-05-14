@@ -36,5 +36,5 @@ Gunrock is a stable, powerful, and forward-looking substrate for GPU-based graph
 
 -   Gunrock does no preprocessing on its datasets. Other projects have demonstrated that preprocessing datasets can deliver performance improvements. We believe this would also extend to Gunrock, but philosophically, we expect that the primary use case for Gunrock will be in pipelines of multiple stages where each stage receives an input from a previous stage, performs a computation on it, and outputs a result to the next stage. In this scenario, the previous stage's output is dynamically generated at runtime and thus not available for preprocessing. In comparing to Gunrock and other graph libraries, We hope that:
 
-        - Any graph libraries that do preprocessing report results with both preprocessed and unmodified input datasets, and
-        - Preprocessing times are clearly identified, and results reported with both preprocessing+processing and with processing alone.
+    - Any graph libraries that do preprocessing report results with both preprocessed and unmodified input datasets, and
+    - Preprocessing times are clearly identified, and results reported with both preprocessing+processing and with processing alone.

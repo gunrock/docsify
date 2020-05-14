@@ -1,6 +1,6 @@
 # Breadth-First Search
 
-We show four results for direction-optimized BFS on a variety of datasets across multiple GPUS: throughput (measured in MTEPS), runtime (measured in ms), throughput as a function of load-balancing strategy ("advance mode"), and throughput as a function of the number of edges. We may have application-specific notes on our [methodology page](/gunrock/methodology).
+We show four results for direction-optimized BFS on a variety of datasets across multiple GPUs: throughput (measured in MTEPS), runtime (measured in ms), throughput as a function of load-balancing strategy ("advance mode"), and throughput as a function of the number of edges. We may have application-specific notes on our [methodology page](/gunrock/methodology).
 
 <div id="vis_gunrock_primitives_dobfs_mteps"></div>
 <script type="text/javascript">
@@ -10,7 +10,7 @@ We show four results for direction-optimized BFS on a variety of datasets across
   }).catch(console.error);
 </script>
 
-[Table of data for the above results, including links to JSON summaries for each experiment](https://raw.githubusercontent.com/gunrock/io/master/plots/gunrock_primitives_dobfs_mteps_table.html ':include :type=markdown')
+[Table of data for the above results, including links to JSON summaries with command lines for each experiment](analysis/gunrock_primitives_dobfs_mteps_table.md)
 
 <div id="vis_gunrock_primitives_dobfs_avg_process_time"></div>
 <script type="text/javascript">
@@ -20,7 +20,7 @@ We show four results for direction-optimized BFS on a variety of datasets across
   }).catch(console.error);
 </script>
 
-[Table of data for the above results, including links to JSON summaries for each experiment](https://raw.githubusercontent.com/gunrock/io/master/plots/gunrock_primitives_dobfs_avg_process_time_table.html ':include :type=markdown')
+[Table of data for the above results, including links to JSON summaries with command lines for each experiment](analysis/gunrock_primitives_dobfs_avg_process_time_table.md)
 
 <div id="vis_gunrock_primitives_dobfs_advance_mode"></div>
 <script type="text/javascript">
@@ -30,7 +30,7 @@ We show four results for direction-optimized BFS on a variety of datasets across
   }).catch(console.error);
 </script>
 
-[Table of data for the above results, including links to JSON summaries for each experiment](https://raw.githubusercontent.com/gunrock/io/master/plots/gunrock_primitives_dobfs_advance_mode_table.html ':include :type=markdown')
+[Table of data for the above results, including links to JSON summaries with command lines for each experiment](analysis/gunrock_primitives_dobfs_advance_mode_table.md)
 
 <div id="vis_gunrock_primitives_dobfs_edges"></div>
 <script type="text/javascript">
@@ -40,4 +40,4 @@ We show four results for direction-optimized BFS on a variety of datasets across
   }).catch(console.error);
 </script>
 
-[Table of data for the above results, including links to JSON summaries for each experiment](https://raw.githubusercontent.com/gunrock/io/master/plots/gunrock_primitives_dobfs_edges_table.html ':include :type=markdown')
+[Table of data for the above results, including links to JSON summaries with command lines for each experiment](analysis/gunrock_primitives_dobfs_edges_table.md)

@@ -7,10 +7,7 @@
   - [Building Gunrock](gunrock/building_gunrock)
   - [Methodology](gunrock/methodology)
   - [Publications](gunrock/publications_and_presentations)
-
-- Performance Analysis
-  - [Summary](analysis/results)
-  - [...](https://github.com/gunrock/io/issues)
+  - [Performance Analysis](analysis/results)
 
 - Projects
   - [Road Map](gunrock/road_map)

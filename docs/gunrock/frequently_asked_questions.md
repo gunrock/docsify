@@ -1,12 +1,16 @@
 # Frequently Asked Questions
 
-Some of the most common questions we have come across during the life of Gunrock project. If your question isn't already answered below, feel free to create an [issue](https://github.com/gunrock/gunrock/issues) on GitHub.
+Here are some of the most common questions we have encountered during the life of the Gunrock project. If your question isn't already answered below, feel free to create an [issue](https://github.com/gunrock/gunrock/issues) on GitHub.
 
-## What does it do?
+## How do you refer to your project?
+
+"Gunrock" is spelled as one word with a capital G and no other capitalized letters. It is the name of the [UC Davis mascot](https://theaggie.org/2017/10/31/history-of-gunrock-answers-questions-about-mascot/), who was in turn [named for an army thoroughbred](https://www.ucdavis.edu/news/whats-gunrock-name-100-years-history/) brought to UC Davis in 1921.
+
+## What does Gunrock do?
 
 Gunrock is a fast and efficient graph processing library on the GPU that provides a set of graph algorithms used in big data analytics and visualization with high performance.  It also provides a set of operators which abstract the general operations in graph processing for other developers to build high-performance graph algorithm prototypes with minimum programming effort.
 
-## How does it do it?
+## How does Gunrock do it?
 
 Gunrock takes advantage of the immense computational power available in commodity-level, off-the-shelf Graphics Processing Units (GPUs), originally designed to handle the parallel computational tasks in computer graphics, to perform graph traversal and computation in parallel on thousands of GPU's computing cores.
 
@@ -58,7 +62,7 @@ Gunrock is targeted at developers who are familiar with basic software engineeri
 
 ## Does this process actually work? All the time? On all systems specified?
 
-Currently, Gunrock has been tested on two Linux distributions: Linux Mint and Ubuntu. But we expect it to run correctly on other Linux distributions too. We expect a Mac build would work (it has in the past), but don't currently have a Mac+NVIDIA machine on which we can test. Windows is not currently supported (we welcome pull requests that would allow us to support Windows).
+Currently, Gunrock has been tested on two Linux distributions: Linux Mint and Ubuntu. But we expect it to run correctly on other Linux distributions too. Windows is not currently supported (we welcome pull requests that would allow us to support Windows).
 
 ## How would someone test that it's working with provided sample data?
 

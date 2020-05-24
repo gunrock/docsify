@@ -3,11 +3,13 @@
 ### Methodology for Graph Analytics Performance
 We welcome comments from others on the methodology that we use for measuring Gunrock's performance.
 
-Currently, Gunrock is a library that requires no preprocessing. By this we mean that Gunrock inputs graphs in a "standard" format, e.g., compressed sparse row or coordinate, such as those available on common graph repositories ([SNAP](https://snap.stanford.edu/data/index.html) or [SuiteSparse (UF)](http://www.cise.ufl.edu/research/sparse/matrices/)). In our experiments, we use [MatrixMarket](https://people.sc.fsu.edu/~jburkardt/data/mm/mm.html) format.
+Currently, Gunrock is a library that requires no preprocessing. By this we mean that Gunrock inputs graphs on the GPU in a "standard" format, e.g., compressed sparse row or coordinate, such as those available on common graph repositories ([SNAP](https://snap.stanford.edu/data/index.html) or [SuiteSparse (UF)](http://www.cise.ufl.edu/research/sparse/matrices/)). (In our experiments, our file inputs are in  [MatrixMarket](https://people.sc.fsu.edu/~jburkardt/data/mm/mm.html) format.)
 
 Other graph libraries may benefit from preprocessing of input datasets. We would regard any manipulation of the input dataset (e.g., reordering the input or more sophisticated preprocessing such as graph coloring or  [CuSha](http://farkhor.github.io/CuSha/)'s G-Shards) to be preprocessing. We think preprocessing is an interesting future direction for Gunrock, but have not yet investigated it. We hope that any graph libraries that do preprocessing report results with both preprocessed and unmodified input datasets.
 
 (That being said, we do standardize input graphs in two ways: before running our experiments, we remove self-loops/duplicated edges. If the undirected flag is set, we convert the input graph to undirected. When we do so, that implies one edge in each direction, and we report edges for that graph accordingly. What we do here appears to be standard practice.)
+
+We respectfully request that if you compare Gunrock against a graph that has been preprocessed in some way (meaning the input format on the GPU is not pure CSR), that you indicate that you are comparing an unpreprocessed graph framework (Gunrock) against a preprocessed one, and you also report the preprocessing time.
 
 In general, we try to report results in two ways:
 
@@ -24,7 +26,7 @@ When we count the number of edges traversed, we do so by summing the number of o
 
 If a comparison library does not measure MTEPS for BFS, we compute it by the number of edges visited divided by runtime; if the former is not available, we use Gunrock's edges-visited count.
 
-The Gunrock team believes that citing Gunrock's forward-only results without also including full direction-optimized results is misleading to readers. We request that any use of non-fully-optimized Gunrock BFS results also include fully optimized results (direction-optimized).
+The Gunrock team believes that citing Gunrock's forward-only results without also including full direction-optimized results is misleading to readers. We respectfully request that any use of non-fully-optimized Gunrock BFS results also include fully optimized results (direction-optimized).
 
 ### Single Source Shortest Path (SSSP)
 

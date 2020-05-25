@@ -1,6 +1,6 @@
 # Triangle Counting
 
-We show two results for triangle counting (TC) on a variety of datasets across multiple GPUs: runtime (measured in ms) and runtime as a function of the number of edges. We may have application-specific notes on our [methodology page](/gunrock/methodology).
+We show two results for triangle counting (TC) on a variety of datasets across multiple GPUs: runtime (measured in ms) and runtime as a function of the number of edges. We may have application-specific notes on our [methodology page](/gunrock/methodology). The first plot and table answers the question "What is the fastest Gunrock run for a particular primitive-dataset-GPU combination?".
 
 Tables of data for the below results, including links to JSON summaries with command lines for each experiment: [
   [TC runtime (ms) ](analysis/gunrock_primitives_tc_avg_process_time_table.md) |

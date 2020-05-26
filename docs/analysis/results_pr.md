@@ -11,7 +11,7 @@ Tables of data for the below results, including links to JSON summaries with com
   [DOBFS runtime vs. edges](analysis/gunrock_primitives_dobfs_edges_table.md)
 ]
 
-Note these plots (rendered with [Altair](https://altair-viz.github.io/)) are interactive (you can click, drag, and zoom; and mousing over a data point shows the data associated with that point).
+Note these plots (rendered with [Altair](https://altair-viz.github.io/)) are interactive (you can click, drag, and zoom; select items in the legend; and mousing over a data point shows the data associated with that point).
 
 <script type="text/javascript">
   var spec_gunrock_primitives_dobfs_mteps_best = "https://raw.githubusercontent.com/gunrock/io/master/plots/gunrock_primitives_dobfs_mteps_best.json";

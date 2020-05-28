@@ -23,6 +23,9 @@ The following results compare across different primitives:
 This data is primarily for internal use so that we can identify performance issues as we make improvements to Gunrock.
 
 - [BFS](/analysis/gunrock_version_comparison_bfs)
+- [SSSP](/analysis/gunrock_version_comparison_sssp)
+- [BC](/analysis/gunrock_version_comparison_bc)
+- [PageRank](/analysis/gunrock_version_comparison_pr)
 
 ## Single-GPU performance results from Gunrock 0.x (2016&ndash;2017)
 

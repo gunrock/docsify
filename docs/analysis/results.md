@@ -18,6 +18,15 @@ The following results compare across different primitives:
 - [Edges/vertices visited vs. number of edges/vertices](/analysis/results_edges_vertices)
 - [Search depth](/analysis/results_search_depth)
 
+## Comparing performance across Gunrock versions
+
+This data is primarily for internal use so that we can identify performance issues as we make improvements to Gunrock.
+
+- [Breath-first search (BFS)](/analysis/gunrock_version_comparison_bfs)
+- [Single-source shortest path (SSSP)](/analysis/gunrock_version_comparison_sssp)
+- [Betweenness centrality (BC)](/analysis/gunrock_version_comparison_bc)
+- [PageRank (PR)](/analysis/gunrock_version_comparison_pr)
+
 ## Single-GPU performance results from Gunrock 0.x (2016&ndash;2017)
 
 The following are performance results largely from our [2016 ACM PPoPP paper](http://dx.doi.org/10.1145/2851141.2851145) and [2017 ACM TOPC paper](http://dx.doi.org/10.1145/3108140), or Gunrock versions current at that time.

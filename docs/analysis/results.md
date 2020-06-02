@@ -7,6 +7,7 @@ We are gradually adding summaries of our results to these web pages (please let 
 First, our most recent results (on Gunrock 1.0+) on several Gunrock primitives. <b>If you are comparing against Gunrock, these pages present the most recent results</b>, generally on a variety of input datasets and GPUs. Each page also has a link to a table of results which include, for each result, the Gunrock command line used to generate that result. If for any reason you are unable to replicate our results, please let us know.
 
 - [Breadth-first search (BFS)](/analysis/results_bfs) and also [Forward-only breadth-first search (BFS)](/analysis/results_forward_bfs)
+    - [Parameter sweep for direction-optimized BFS](/analysis/dobfs_parameter_sweep)
 - [Single-source shortest path (SSSP)](/analysis/results_sssp)
 - [Betweenness centrality (BC)](/analysis/results_bc)
 - [PageRank (PR)](/analysis/results_pr)

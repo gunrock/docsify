@@ -10,11 +10,11 @@ Tables of data for the below datasets, including links to JSON summaries with co
 Note these plots (rendered with [Altair](https://altair-viz.github.io/)) are interactive (you can click, drag, and zoom; select items in the legend; and mousing over a data point shows the data associated with that point).
 
 <script type="text/javascript">
-  var spec_gunrock_dobfs_heatmaps_rmat_n24_e16.000000_do_ab = "https://raw.githubusercontent.com/gunrock/io/master/plots/gunrock_dobfs_heatmaps_rmat_n24_e16.000000_do_ab.json";
-  vegaEmbed('#vis_gunrock_dobfs_heatmaps_rmat_n24_e16.000000_do_ab', spec_gunrock_dobfs_heatmaps_rmat_n24_e16.000000_do_ab).then(function(result) {
+  var spec_gunrock_dobfs_heatmaps_rmat_n24_e16_000000_do_ab = "https://raw.githubusercontent.com/gunrock/io/master/plots/gunrock_dobfs_heatmaps_rmat_n24_e16.000000_do_ab.json";
+  vegaEmbed('#vis_gunrock_dobfs_heatmaps_rmat_n24_e16_000000_do_ab', spec_gunrock_dobfs_heatmaps_rmat_n24_e16_000000_do_ab).then(function(result) {
     // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
   }).catch(console.error);
 
 </script>
 
-<div id="vis_gunrock_dobfs_heatmaps_rmat_n24_e16.000000_do_ab"></div>
+<div id="vis_gunrock_dobfs_heatmaps_rmat_n24_e16_000000_do_ab"></div>

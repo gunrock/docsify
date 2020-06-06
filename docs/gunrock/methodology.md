@@ -1,7 +1,9 @@
 # Methodology
 
-### Methodology for Graph Analytics Performance
+## Methodology for Graph Analytics Performance
 We welcome comments from others on the methodology that we use for measuring Gunrock's performance.
+
+### Preprocessing
 
 Currently, Gunrock is a library that requires no preprocessing. By this we mean that Gunrock inputs graphs on the GPU in a "standard" format, e.g., compressed sparse row or coordinate, such as those available on common graph repositories ([SNAP](https://snap.stanford.edu/data/index.html) or [SuiteSparse (UF)](http://www.cise.ufl.edu/research/sparse/matrices/)). (In our experiments, our file inputs are in  [MatrixMarket](https://people.sc.fsu.edu/~jburkardt/data/mm/mm.html) format.)
 
@@ -11,6 +13,8 @@ Other graph libraries may benefit from preprocessing of input datasets. We would
 
 We respectfully request that if you compare Gunrock against a graph that has been preprocessed in some way (meaning the input format on the GPU is not pure CSR), that you indicate that you are comparing an unpreprocessed graph framework (Gunrock) against a preprocessed one, and you also report the preprocessing time.
 
+### What Gunrock Reports
+
 In general, we try to report results in two ways:
 
 - **Throughput**, measured in edges traversed per second (TEPS). We generally use millions of TEPS (MTEPS) as our figure of merit.
@@ -18,9 +22,15 @@ In general, we try to report results in two ways:
 
 To calculate TEPS, we require the number of edges traversed (touched), which we count dynamically. For traversal primitives, we note that non-connected components will not be visited, so the number of visited edges may be fewer than the number of edges in the graph. We note that precisely counting edges during the execution of a particular primitive may have performance implications, so we may approximate (see BFS).
 
+### Discarding Anomalous Results
+
+For most of our results, we run multiple experiments, report the average runtime, and compute the average MTEPS from that average runtime. In these experiments, we may choose a random node within the graph as the initial point for computation (e.g., if we're doing a breadth-first search and uniformly choose a random node as the start for the BFS). Some of our input graphs may have multiple disconnected components. What happens if the BFS starts in a very small component? It will finish very quickly, and the runtime for that experiment will unfairly bias our results.
+
+Thus, we throw out experiments that we believe are anomalous (in practice, we throw out experiments that have a runtime that is abnormally short). We do this by taking the mean and standard deviation of the experiments we run and discarding any experiments that are more than two standard deviations from the mean. ([Code that implements this](https://github.com/gunrock/gunrock/blob/master/gunrock/util/info_rapidjson.cuh#L612-L660))
+
 Notes on some of the Gunrock primitives follow.
 
-### Breadth-First Search (BFS)
+## Breadth-First Search (BFS)
 
 When we count the number of edges traversed, we do so by summing the number of outbound edges for each visited vertex. For forward, non-idempotent BFS, this strategy should give us an exact count, since this strategy visits every edge incident to a visited vertex. When we enable idempotence, we may visit a node more than once and hence may visit an edge more than once. For backward (pull) BFS, when we visit a vertex, we count all edges incoming to that vertex even if we find a visited predecessor before traversing all edges (and terminate early). (To do so otherwise has performance implications.) Enterprise uses the same counting strategy.
 
@@ -28,7 +38,7 @@ If a comparison library does not measure MTEPS for BFS, we compute it by the num
 
 The Gunrock team believes that citing Gunrock's forward-only results without also including full direction-optimized results is misleading to readers. We respectfully request that any use of non-fully-optimized Gunrock BFS results also include fully optimized results (direction-optimized).
 
-### Single Source Shortest Path (SSSP)
+## Single Source Shortest Path (SSSP)
 
 In general we find MTEPS comparisons between different approaches to SSSP not meaningful: because an edge may be visited one or many times, there is no standard way to count edges traversed. Different algorithms may not only visit a very different number of edges (Dijkstra vs. Bellman-Ford will have very different edge visit counts) but may also have a different number of edges visited across different invocations of the same primitive.
 
@@ -36,10 +46,10 @@ When we report Gunrock's SSSP MTEPS, we use the number of edges queued as the ed
 
 To have a meaningful SSSP experiment, it is critical to have varying edge weights. SSSP measured on uniform edge weights is not meaningful (it becomes BFS). In our experiments, we set edge weights randomly/uniformly between 1 and 64.
 
-### Betweenness Centrality (BC)
+## Betweenness Centrality (BC)
 
 If a comparison library does not measure MTEPS for BC, we compute it by twice the number of edges visited in the forward phase divided by runtime (the same computation we use for Gunrock).
 
-### PageRank (PR)
+## PageRank (PR)
 
 We measure PageRank elapsed time on one iteration of PageRank. (Many other engines measure results this way and it is difficult to extrapolate from this measurement to runtime of the entire algorithm.)

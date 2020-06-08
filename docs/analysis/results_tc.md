@@ -10,17 +10,20 @@ Tables of data for the below results, including links to JSON summaries with com
 Note these plots (rendered with [Altair](https://altair-viz.github.io/)) are interactive (you can click, drag, and zoom; select items in the legend; and mousing over a data point shows the data associated with that point).
 
 <script type="text/javascript">
-
+  var svgopt = { renderer: "svg" }
   var spec_gunrock_primitives_tc_avg_process_time = "https://raw.githubusercontent.com/gunrock/io/master/plots/gunrock_primitives_tc_avg_process_time.json";
-  vegaEmbed('#vis_gunrock_primitives_tc_avg_process_time', spec_gunrock_primitives_tc_avg_process_time).then(function(result) {
+  vegaEmbed('#vis_gunrock_primitives_tc_avg_process_time', spec_gunrock_primitives_tc_avg_process_time, opt=svgopt).then(function(result) {
     // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
   }).catch(console.error);
 
   var spec_gunrock_primitives_tc_edges = "https://raw.githubusercontent.com/gunrock/io/master/plots/gunrock_primitives_tc_edges.json";
-  vegaEmbed('#vis_gunrock_primitives_tc_edges', spec_gunrock_primitives_tc_edges).then(function(result) {
+  vegaEmbed('#vis_gunrock_primitives_tc_edges', spec_gunrock_primitives_tc_edges, opt=svgopt).then(function(result) {
     // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
   }).catch(console.error);
 </script>
 
+## TC runtime (ms)
 <div id="vis_gunrock_primitives_tc_avg_process_time"></div>
+
+## TC runtime vs. edges
 <div id="vis_gunrock_primitives_tc_edges"></div>

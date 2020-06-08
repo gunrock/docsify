@@ -10,16 +10,20 @@ Tables of data for the below results, including links to JSON summaries with com
 Note these plots (rendered with [Altair](https://altair-viz.github.io/)) are interactive (you can click, drag, and zoom; and mousing over a data point shows the data associated with that point).
 
 <script type="text/javascript">
+  var svgopt = { renderer: "svg" }
   var spec_gunrock_primitives_all_V100_edges_visited_vs_num_edges = "https://raw.githubusercontent.com/gunrock/io/master/plots/gunrock_primitives_all_V100_edges_visited_vs_num_edges.json";
-  vegaEmbed('#vis_gunrock_primitives_all_V100_edges_visited_vs_num_edges', spec_gunrock_primitives_all_V100_edges_visited_vs_num_edges).then(function(result) {
+  vegaEmbed('#vis_gunrock_primitives_all_V100_edges_visited_vs_num_edges', spec_gunrock_primitives_all_V100_edges_visited_vs_num_edges, opt=svgopt).then(function(result) {
     // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
   }).catch(console.error);
 
   var spec_gunrock_primitives_all_V100_vertices_visited_vs_num_vertices = "https://raw.githubusercontent.com/gunrock/io/master/plots/gunrock_primitives_all_V100_vertices_visited_vs_num_vertices.json";
-  vegaEmbed('#vis_gunrock_primitives_all_V100_vertices_visited_vs_num_vertices', spec_gunrock_primitives_all_V100_vertices_visited_vs_num_vertices).then(function(result) {
+  vegaEmbed('#vis_gunrock_primitives_all_V100_vertices_visited_vs_num_vertices', spec_gunrock_primitives_all_V100_vertices_visited_vs_num_vertices, opt=svgopt).then(function(result) {
     // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
   }).catch(console.error);
 </script>
 
+## Edges visited vs. number of edges
 <div id="vis_gunrock_primitives_all_V100_edges_visited_vs_num_edges"></div>
+
+## Vertices visited vs. number of vertices
 <div id="vis_gunrock_primitives_all_V100_vertices_visited_vs_num_vertices"></div>

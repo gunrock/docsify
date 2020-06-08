@@ -8,10 +8,13 @@ Table of data for the below results, including links to JSON summaries with comm
 
 Note this plot (rendered with [Altair](https://altair-viz.github.io/)) is interactive (you can click, drag, and zoom; and mousing over a data point shows the data associated with that point).
 
-<div id="vis_gunrock_primitives_all_V100_search_depth"></div>
 <script type="text/javascript">
+  var svgopt = { renderer: "svg" }
   var spec_gunrock_primitives_all_V100_search_depth = "https://raw.githubusercontent.com/gunrock/io/master/plots/gunrock_primitives_all_V100_search_depth.json";
-  vegaEmbed('#vis_gunrock_primitives_all_V100_search_depth', spec_gunrock_primitives_all_V100_search_depth).then(function(result) {
+  vegaEmbed('#vis_gunrock_primitives_all_V100_search_depth', spec_gunrock_primitives_all_V100_search_depth, opt=svgopt).then(function(result) {
     // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
   }).catch(console.error);
 </script>
+
+## Runtime vs. search depth
+<div id="vis_gunrock_primitives_all_V100_search_depth"></div>

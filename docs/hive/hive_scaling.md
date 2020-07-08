@@ -1,14 +1,3 @@
----
-title: Scaling analysis for HIVE applications
-
-toc_footers:
-  - <a href='https://github.com/gunrock/gunrock'>Gunrock&colon; GPU Graph Analytics</a>
-  - Gunrock &copy; 2018 The Regents of the University of California.
-
-search: true
-
-full_length: true
----
 # Scaling analysis for HIVE applications
 
 The purpose of this study is to understand how the HIVE v0
@@ -27,8 +16,9 @@ partitioning schemes, thus may have different scaling results.
 ### DGX-1
 
 The DGX-1 with P100 GPUs has 4 NVLink lanes per GPU, connected as
-follows. ![DGX1-NVLink](../attachments/scaling/NVLink-DGX1.png "DGX1
-NVLink Topology")
+follows. 
+
+![DGX1-NVLink](_media/attachments/scaling/NVLink-DGX1.png)
 
 Each of the NVLink links runs at 20 GBps per direction, higher than
 PCIe 3.0 x16 (16 GBps for the whole GPU). But the topology is not
@@ -107,7 +97,7 @@ driver 410 shows considerablly better throughputs.
 The DGX-2 system has a very different NVLink topology: the GPUs are
 connected by NVSwitches, and all to all peer accesses are available.
 
-![DGX2-NVLink](../attachments/scaling/NVLink-DGX2.png "DGX2 NVLink Topology").
+![DGX2-NVLink](_media/attachments/scaling/NVLink-DGX2.png)
 
 At the time of this report, the DGX-2 is hardly available, and not to
 us. What we have locally at UC Davis are two Quadro GV100 GPUs

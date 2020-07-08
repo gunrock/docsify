@@ -1,15 +1,3 @@
----
-title: Vertex Nomination (HIVE)
-
-toc_footers:
-  - <a href='https://github.com/gunrock/gunrock'>Gunrock&colon; GPU Graph Analytics</a>
-  - Gunrock &copy; 2018 The Regents of the University of California.
-
-search: true
-
-full_length: true
----
-
 # Vertex Nomination
 
 The vertex nomination (VN) workflow is an implementation of the kind of algorithm discussed in [Coppersmith and Priebe](https://arxiv.org/abs/1201.4118).

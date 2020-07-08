@@ -1,15 +1,3 @@
----
-title: Sparse Fused Lasso (HIVE)
-
-toc_footers:
-  - <a href='https://github.com/gunrock/gunrock'>Gunrock&colon; GPU Graph Analytics</a>
-  - Gunrock &copy; 2018 The Regents of the University of California.
-
-search: true
-
-full_length: true
----
-
 # Sparse Fused Lasso
 
 Given a graph where each vertex on the graph has a weight, _sparse fused lasso (SFL)_, also named _sparse graph trend filter (GTF)_, tries to learn a new weight for each vertex that is (1) sparse (most vertices have weight 0), (2) close to the original weight in the l2 norm, and (3) close to its neighbors' weight(s) in the l1 norm. This algorithm is usually used in main trend filtering (denoising). For example, an image (grid graph) with noisy pixels can be filtered with this algorithm to get a new image without the noisy pixels, which are "smoothed out" by its neighbors.

@@ -1,15 +1,3 @@
----
-title: Template for HIVE Scan Statistics workflow report
-
-toc_footers:
-  - <a href='https://github.com/gunrock/gunrock'>Gunrock&colon; GPU Graph Analytics</a>
-  - Gunrock &copy; 2018 The Regents of the University of California.
-
-search: true
-
-full_length: true
----
-
 # Scan Statistics
 
 Scan statistics, as described in [Priebe et al.](http://www.cis.jhu.edu/~parky/CEP-Publications/PCMP-CMOT2005.pdf), is the generic method that computes a statistic for the neighborhood of each node in the graph, and looks for anomalies in those statistics. In this workflow, we implement a specific version of scan statistics where we compute the number of edges in the subgraph induced by the one-hop neighborhood of each node $u$ in the graph. It turns out that this statistic is equal to the number of triangles that node $u$ participates in plus the degree of $u$. Thus, we are able to implement scan statistics by making relatively minor modifications to our existing Gunrock triangle counting (TC) application.

@@ -1,15 +1,3 @@
----
-title: Geolocation (HIVE)
-
-toc_footers:
-  - <a href='https://github.com/gunrock/gunrock'>Gunrock&colon; GPU Graph Analytics</a>
-  - Gunrock &copy; 2018 The Regents of the University of California.
-
-search: true
-
-full_length: true
----
-
 # Geolocation
 
 Infers user locations using the location (latitude, longitude) of friends through spatial label propagation. Given a graph `G`, geolocation examines each vertex `v`'s neighbors and computes the spatial median of the neighbors' location list. The output is a list of predicted locations for all vertices with unknown locations.

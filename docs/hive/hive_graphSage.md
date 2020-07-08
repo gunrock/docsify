@@ -1,15 +1,3 @@
----
-title: HIVE workflow report for GraphSAGE GPU implementation
-
-toc_footers:
-  - <a href='https://github.com/gunrock/gunrock'>Gunrock&colon; GPU Graph Analytics</a>
-  - Gunrock &copy; 2018 The Regents of the University of California.
-
-search: true
-
-full_length: true
----
-
 # GraphSAGE
 
 GraphSAGE is a way to fit graphs into a neural network: instead of getting the

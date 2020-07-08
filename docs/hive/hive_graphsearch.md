@@ -1,15 +1,3 @@
----
-title: Graph Search (HIVE)
-
-toc_footers:
-  - <a href='https://github.com/gunrock/gunrock'>Gunrock&colon; GPU Graph Analytics</a>
-  - Gunrock &copy; 2018 The Regents of the University of California.
-
-search: true
-
-full_length: true
----
-
 # GraphSearch
 
 The graph search (GS) workflow is a walk-based method that searches a graph for nodes that score highly on some arbitrary indicator of interest.

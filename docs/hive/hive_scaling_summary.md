@@ -18,16 +18,12 @@ For many reasons, perfect scalability is rare. For the purposes of this summary,
 - **Cost of inter-GPU communication.** The single-GPU implementation has all of its data resident on that GPU. In contrast, a multi-GPU implementation distributes its memory across the GPUs. Most applications require transferring data between GPUs during the computation, and that communication path is slower than the local memory bandwidth on one GPU. This transfer takes time, and thus reduces performance and scalability.
 - **Load imbalance across GPUs.** GPUs must coordinate their execution. While this coordination may potentially be cheap, one common way to coordinate is through the concept of a "barrier" in a program, where all GPUs must reach that barrier before any proceed. If those GPUs take a different amount of time to reach the barrier, all GPUs must wait at the barrier until the slowest one completes its work. This wait time reduces performance and thus scalability.
 
-/* For the purposes of this explanation, let us assume that our program is structured as a convergent iterative process: run a kernel on an input, producing an output; check if the output has converged; and if it has not, treat the output as an input to the next iteration of the kernel. We repeat running the kernel until the output converges. (PageRank, for instance, has this structure, as do most applications in Gunrock's application suite.) */
-
 The dominant parallel programming model at the small scale is termed "bulk synchronous parallel" (BSP). In the BSP model, we divide the input across our GPUs and run the kernel in parallel on each GPU on its share of the input. Once that kernel is complete on all GPUs, we exchange data between GPUs and when that is complete, we start the next kernel.
 
 BSP implementations have non-ideal scalability in practice for both the reasons above:
 
 - BSP has a phase for communication between GPUs. No computation is done in this phase. This limits scalability.
 - BSP has a barrier at the end of each phase. Any load imbalance within a phase across GPUs also limits scalability.
-
-/* If our program is a convergent iterative process, a multi-GPU bulk-synchronous implementation of that program will suffer from both of the reasons above that result in reduced scalability: */
 
 ## Practical Limitations to Scalability
 
@@ -40,7 +36,7 @@ The primary metric we will use to evaluate the scaling penalty due to inter-GPU 
 We can quantify scalability with respect to inter-GPU communication with two (related) metrics:
 
 1. The ratio between computation and communication. A high ratio indicates better scaling. Our report indicates that "Specific to the DGX-1 system with P100 GPUs, a ratio larger than about 10 to 1 is expected for an app to have at least marginal scalability."
-2. The volume of data transferred on each communication phase. Implementations that must send only a small amount of data between GPUs should scale fairly well; implementations that send a lot will scale poorly. In our original report, we analyzed communication volume in great detail, results we will summarize below.
+2. The volume of data transferred on each communication phase. Implementations that must send only a small amount of data between GPUs should scale fairly well; implementations that send a lot will scale poorly. In our original report, we analyzed communication volume in great detail (results we will summarize below).
 
 These two metrics are related since having more communication volume implies a lower computation-to-communication ratio.
 

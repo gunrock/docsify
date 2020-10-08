@@ -33,10 +33,10 @@ The implementation has been hugely guided by
 2. Edge Dropout
   - [With probability `p`, mask (disable) an edge value](https://github.com/achalagarwal/gunrock/blob/d0202e3bbb88560bc97666675c0a94aa9e491c9c/gunrock/app/GuNNrock/dropout/dropout.cuh#L53)
   - Results in new edge values
-3. Edge Weight Sparse Multiplication
+3. Edge Weight Sparse Multiplication (Neighborhood Gather)
   - [Multiplication of edge values with trainable weights](https://github.com/achalagarwal/gunrock/blob/d0202e3bbb88560bc97666675c0a94aa9e491c9c/gunrock/app/GuNNrock/sparseMatMul/sparseMatMul_enactor.cuh#L89)
-  - Summing the result from the multiplication to result in the XW<sub>0</sub> matrix
-4. Graph Neighbor Sum 
+  - Result in the XW<sub>0</sub> matrix
+4. Graph Neighbor Sum (Aggregation)
   - [Summing the neighbour vectors for each vertex](https://github.com/achalagarwal/gunrock/blob/d0202e3bbb88560bc97666675c0a94aa9e491c9c/gunrock/app/GuNNrock/graphsum/graphsum_enactor.cuh#L99)
   - Results in the AXW<sub>0</sub> matrix
 5. ReLU
@@ -54,18 +54,18 @@ The implementation has been hugely guided by
   
 <sup><sub>__Backward Propagation__</sub></sup>
 
-10. `backprop 8.` 
+10. backprop for 8.
   - Results in the gradients of AXW<sub>0</sub>W<sub>1</sub> matrix
-11. `backprop 7.` 
+11. backprop for 7. 
   - Compute the gradients of W<sub>1</sub> matrix and stores it to update the W<sub>1</sub> weight matrix later
   - Results in the gradients of AXW<sub>0</sub> matrix
-12. `backprop 6.` 
+12. backprop for 6. 
   - Results in the updated gradients of AXW<sub>0</sub> matrix
-13. `backprop 5.` 
+13. backprop for 5. 
   - Results in the updated gradients of AXW<sub>0</sub> matrix
-14. `backprop 4.` 
+14. backprop for 4. 
   - Results in the updated gradients of XW<sub>0</sub> matrix
-15. `backprop 3.`
+15. backprop for 3.
   - Compute the gradients of W<sub>0</sub> matrix and stores it to update the W<sub>0</sub> weight matrix later
 [16.]: <> (backprop 2 does not exist as that computation does not involve any trainable weight)
 16. Update weight matrices W<sub>0</sub> and W<sub>1</sub>
@@ -89,28 +89,57 @@ The 17 steps above share computation patterns
       ))
 ```
 
-2. To multiply dense matrix (X: nodes * features) with dense matrix (W<sub>0</sub>: features * dimension_0):
+2. Neighborhood Gather / Scatter
+Gather neigbhorhood features (X) for all vertices after multiplication with edge weight (weights)
 
 ```CUDA
-auto denseMM =
-        [X, output, dimension_0, W0] __host__ __device__(
+    auto denseMM =
+        [X, output, C, W] __host__ __device__(
             const VertexT &src, VertexT &dest, const SizeT &edge_id,
             const VertexT &input_item, const SizeT &input_pos,
             SizeT &output_pos) -> bool {
-      for (int i = 0; i < dimension_0; i++) {
-        atomicAdd(output + src * dimension_0 + i, W0[edge_id] * X[dest * dimension_0 + i]);
+      for (int i = 0; i < C; i++) {
+        atomicAdd(output + src * C + i, W[edge_id] * X[dest * C + i]);
       }
       return true;
     };
    
-GUARD_CU(oprtr::Advance<oprtr::OprtrType_V2V> (
+    GUARD_CU(oprtr::Advance<oprtr::OprtrType_V2V> (
             graph.csr (), &local_vertices, null_ptr, oprtr_parameters,
             denseMM));
 ```
 
-3. 
+3. To aggregate feature matrix M (shape: YxZ) along the adjacency list
 
-What was implemented with respect to the entire workflow?
+```CUDA
+    auto sumNeighbors =
+        [M, output, Z] __host__ __device__(
+            const VertexT &src, VertexT &dest, const SizeT &edge_id,
+            const VertexT &input_item, const SizeT &input_pos,
+            SizeT &output_pos) -> bool {
+     
+      for (int i = 0; i < Z; i++)
+        atomicAdd(output + src * Z + i, *(M + dest * Z + i));
+      return true;
+    };
+    
+    GUARD_CU(oprtr::Advance<oprtr::OprtrType_V2V> (
+            graph.csr (), &local_vertices, null_ptr, oprtr_parameters,
+            sumNeighbors));
+    
+```
+
+
+### What was implemented with respect to the entire workflow?
+
+The various modules viz.:
+
+- Activation Function (ReLU)
+- Dropout
+- Graph Sum
+- Loss Function (Cross Entropy)
+- SpMM Multiplication
+- Manual differentiation for all the operators
 
 
 ## How To Run This Application on DARPA's DGX-1
@@ -157,9 +186,13 @@ Note: This run / these runs are faster on DARPA's DGX-1.
 
 #### To extract weights:
 
-How do you make sure your output is correct/meaningful? (What are you comparing against?)
+Uncomment [call to `Extract()` function](https://github.com/achalagarwal/gunrock/blob/d0202e3bbb88560bc97666675c0a94aa9e491c9c/gunrock/app/GuNNrock/gcn_app.cu#L119) which provides both W<sub>0</sub> and W<sub>1</sub> trained matrices
 
-The operators have tests that are verified internally and the backpropagation has been verified using python scripts with the theoretical implementation
+#### How do you make sure your output is correct/meaningful? (What are you comparing against?)
+
+- Some of the operators have unittests
+- Backpropagation has been verified using Autodiff in Python 
+- Manual verification of the overall algorithm with the theoretical reference
 
 ## Performance and Analysis
 
@@ -168,6 +201,10 @@ The operators have tests that are verified internally and the backpropagation ha
 
 ### Implementation limitations
 
+- No provision for using local weight matrices (to checkpoint training on disk)
+- No provision for Learning Rate modulation
+- No provsion for hyperparamter grid search
+
 e.g.:
 
 - Size of dataset that fits into GPU memory (what is the specific limitation?)
@@ -175,12 +212,12 @@ e.g.:
 
 ### Comparison against existing implementations
 
-- Reference implementation (python? Matlab?)
-- OpenMP reference
+- Reference implementation (python: https://github.com/Tiiiger/SGC + https://github.com/zhouchunpong/Simplifying-Graph-Convolutional-Networks)
+
 
 Comparison is both performance and accuracy/quality.
 
-
+- 
 
 ### Performance limitations
 

@@ -24,23 +24,44 @@ The GCN algorithm can be mapped into the following steps:
 1. Initialization
 -   Data Reading/Parsing
 -   Parameter Initialization
--   [Random weight initialisation](https://github.com/achalagarwal/gunrock/blob/d0202e3bbb88560bc97666675c0a94aa9e491c9c/gunrock/app/GuNNrock/gcn_problem.cuh#L225) W<sub>1</sub> and W<sub>2</sub>
+-   [Random initialization of weight matrices](https://github.com/achalagarwal/gunrock/blob/d0202e3bbb88560bc97666675c0a94aa9e491c9c/gunrock/app/GuNNrock/gcn_problem.cuh#L225) W<sub>0</sub> and W<sub>1</sub>
 
 <sup><sub>__Forward Propagation__</sub></sup>
 
 2. Edge Dropout
   - [With probability `p`, mask (disable) an edge value](https://github.com/achalagarwal/gunrock/blob/d0202e3bbb88560bc97666675c0a94aa9e491c9c/gunrock/app/GuNNrock/dropout/dropout.cuh#L53)
+  - Results in new edge values
 3. Edge Weight Sparse Multiplication
-  - Multiplication of edge values with trainable weights
-4. Graph Sum
+  - [Multiplication of edge values with trainable weights](https://github.com/achalagarwal/gunrock/blob/d0202e3bbb88560bc97666675c0a94aa9e491c9c/gunrock/app/GuNNrock/sparseMatMul/sparseMatMul_enactor.cuh#L89)
+  - Summing the result from the multiplication to result in the XW<sub>0</sub> matrix
+4. Graph Neighbor Sum 
+  - [Summing the neighbour vectors for each vertex](https://github.com/achalagarwal/gunrock/blob/d0202e3bbb88560bc97666675c0a94aa9e491c9c/gunrock/app/GuNNrock/graphsum/graphsum_enactor.cuh#L99)
+  - Results in the AXW<sub>0</sub> matrix
 5. ReLU
+  - on the AXW<sub>0</sub> matrix
 6. Dropout
-7. Matrix Multiplication
-8. Graph Sum
+  - on the rectified AXW<sub>0</sub> matrix
+7. Multiplication of W<sub>1</sub> weight matrix
+  - results in AXW<sub>0</sub>W<sub>1</sub>
+8. Repeat Graph Neighbor Sum 
+  - [Summing the neighbour vectors for each vertex](https://github.com/achalagarwal/gunrock/blob/d0202e3bbb88560bc97666675c0a94aa9e491c9c/gunrock/app/GuNNrock/graphsum/graphsum_enactor.cuh#L99)
+  - Results in the AAXW<sub>0</sub>W<sub>1</sub> matrix
 9. Cross Entropy Loss
-
+  - Compute training loss
+  - Backprop with the loss value obtained
+  
 <sup><sub>__Backward Propagation__</sub></sup>
 
+8. `backprop` 
+7. `backprop` 
+6. `backprop` 
+5. `backprop` 
+4. `backprop` 
+3. `backprop` 
+2. `backprop` 
+1. `backprop` 
+* 7B.
+* 6B.
 
 The description of the lower level operators used to implement some of the steps described above:
 

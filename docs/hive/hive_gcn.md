@@ -47,21 +47,25 @@ The GCN algorithm can be mapped into the following steps:
   - [Summing the neighbour vectors for each vertex](https://github.com/achalagarwal/gunrock/blob/d0202e3bbb88560bc97666675c0a94aa9e491c9c/gunrock/app/GuNNrock/graphsum/graphsum_enactor.cuh#L99)
   - Results in the AAXW<sub>0</sub>W<sub>1</sub> matrix
 9. Cross Entropy Loss
-  - Compute training loss
-  - Backprop with the loss value obtained
+  - Compute training loss and likewise gradients of AAXW<sub>0</sub>W<sub>1</sub> matrix
+  - Start Backprop
   
 <sup><sub>__Backward Propagation__</sub></sup>
 
-8. `backprop` 
-7. `backprop` 
-6. `backprop` 
-5. `backprop` 
-4. `backprop` 
-3. `backprop` 
-2. `backprop` 
-1. `backprop` 
-* 7B.
-* 6B.
+10. `backprop 8.` 
+  - Results in the gradients of AXW<sub>0</sub>W<sub>1</sub> matrix
+2. `backprop 7.` 
+  - Compute the gradients of W<sub>1</sub> matrix and stores it to update the W<sub>1</sub> weight matrix later
+  - Results in the gradients of AXW<sub>0</sub> matrix
+3. `backprop 6.` 
+  - Results in the updated gradients of AXW<sub>0</sub> matrix
+4. `backprop 5.` 
+  - Results in the updated gradients of AXW<sub>0</sub> matrix
+5. `backprop 4.` 
+6. `backprop 3.` 
+7. `backprop 2.` 
+8. `backprop 1.` 
+
 
 The description of the lower level operators used to implement some of the steps described above:
 

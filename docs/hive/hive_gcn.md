@@ -21,12 +21,26 @@ The implementation has been hugely guided by
 
 The GCN algorithm can be mapped into the following steps:
 
-1. 
-2. 
-3.
-4.
-5.
-6.
+1. Initialization
+-   Data Reading/Parsing
+-   Parameter Initialization
+-   [Random weight initialisation](https://github.com/achalagarwal/gunrock/blob/d0202e3bbb88560bc97666675c0a94aa9e491c9c/gunrock/app/GuNNrock/gcn_problem.cuh#L225) W<sub>1</sub> and W<sub>2</sub>
+
+<sup><sub>__Forward Propagation__</sub></sup>
+
+2. Edge Dropout
+  - [With probability `p`, mask (disable) an edge value](https://github.com/achalagarwal/gunrock/blob/d0202e3bbb88560bc97666675c0a94aa9e491c9c/gunrock/app/GuNNrock/dropout/dropout.cuh#L53)
+3. Edge Weight Sparse Multiplication
+  - Multiplication of edge values with trainable weights
+4. Graph Sum
+5. ReLU
+6. Dropout
+7. Matrix Multiplication
+8. Graph Sum
+9. Cross Entropy Loss
+
+<sup><sub>__Backward Propagation__</sub></sup>
+
 
 The description of the lower level operators used to implement some of the steps described above:
 

@@ -19,12 +19,14 @@ The implementation has been hugely guided by
 - https://arxiv.org/abs/1609.02907
 
 
-The GCN algorithm can be mapped into the following steps:
+### The GCN algorithm can be mapped into the following steps:
 
 1. Initialization
 -   Data Reading/Parsing
 -   Parameter Initialization
 -   [Random initialization of weight matrices](https://github.com/achalagarwal/gunrock/blob/d0202e3bbb88560bc97666675c0a94aa9e491c9c/gunrock/app/GuNNrock/gcn_problem.cuh#L225) W<sub>0</sub> and W<sub>1</sub>
+
+[comment]: <> (Forward propagation and Backpropagation are explained for a single epoch, the same process is iterated for --num_iterations)
 
 <sup><sub>__Forward Propagation__</sub></sup>
 
@@ -54,26 +56,59 @@ The GCN algorithm can be mapped into the following steps:
 
 10. `backprop 8.` 
   - Results in the gradients of AXW<sub>0</sub>W<sub>1</sub> matrix
-2. `backprop 7.` 
+11. `backprop 7.` 
   - Compute the gradients of W<sub>1</sub> matrix and stores it to update the W<sub>1</sub> weight matrix later
   - Results in the gradients of AXW<sub>0</sub> matrix
-3. `backprop 6.` 
+12. `backprop 6.` 
   - Results in the updated gradients of AXW<sub>0</sub> matrix
-4. `backprop 5.` 
+13. `backprop 5.` 
   - Results in the updated gradients of AXW<sub>0</sub> matrix
-5. `backprop 4.` 
-6. `backprop 3.` 
-7. `backprop 2.` 
-8. `backprop 1.` 
+14. `backprop 4.` 
+  - Results in the updated gradients of XW<sub>0</sub> matrix
+15. `backprop 3.`
+  - Compute the gradients of W<sub>0</sub> matrix and stores it to update the W<sub>0</sub> weight matrix later
+[16.]: <> (backprop 2 does not exist as that computation does not involve any trainable weight)
+16. Update weight matrices W<sub>0</sub> and W<sub>1</sub>
+  - Use the new weight matrices in the next epoch (iteration)
 
+<sup><sub>__End of training__</sub></sup>
 
-The description of the lower level operators used to implement some of the steps described above:
+17. Export the trained weight matrices along with the loss/accuracy/runtime metrics
 
-1. 
+### The description of the lower level operators used to implement some of the steps described above:
 
-2. 
+The 17 steps above share computation patterns
 
-3.
+1. To update an Array1D, the `ForEach` op has been used
+
+```CUDA
+ GUARD_CU (arr.ForEach (
+          [params]__host__ __device__(ValueT &x) {
+            x = update(x, params);
+          }
+      ))
+```
+
+2. To multiply dense matrix (X: nodes * features) with dense matrix (W<sub>0</sub>: features * dimension_0):
+
+```CUDA
+auto denseMM =
+        [X, output, dimension_0, W0] __host__ __device__(
+            const VertexT &src, VertexT &dest, const SizeT &edge_id,
+            const VertexT &input_item, const SizeT &input_pos,
+            SizeT &output_pos) -> bool {
+      for (int i = 0; i < dimension_0; i++) {
+        atomicAdd(output + src * dimension_0 + i, W0[edge_id] * X[dest * dimension_0 + i]);
+      }
+      return true;
+    };
+   
+GUARD_CU(oprtr::Advance<oprtr::OprtrType_V2V> (
+            graph.csr (), &local_vertices, null_ptr, oprtr_parameters,
+            denseMM));
+```
+
+3. 
 
 What was implemented with respect to the entire workflow?
 
@@ -91,15 +126,19 @@ What was implemented with respect to the entire workflow?
   
 ### Running the application
 
-<code>
-// building gunrock 
-// cd to build/bin folder
+<!-- <code> -->
+```bash
+# build gunrock 
 
+# cd to bin folder
+cd ./build/bin
+
+# run gcn binary
 ./gcn --feature_file <featurefile> --graph_file <graphfile> --split_file <splitfile>
 
-// can decide a fixed number of training iterations 
-
-</code>
+# vary parameters like: Number of training iterations, silent run, etc. 
+```
+<!-- </code> -->
 
 Note: This run / these runs are faster on DARPA's DGX-1.
 

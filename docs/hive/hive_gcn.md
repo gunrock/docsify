@@ -196,6 +196,9 @@ Uncomment [call to `Extract()` function](https://github.com/achalagarwal/gunrock
 
 ## Performance and Analysis
 
+@JDO
+Will be adding results for more datasets, are there any specific metrics that you think I should focus on? I could share the highlevel metrics from nvsight?
+
 ```bash
 
 # citeseer dataset (default)

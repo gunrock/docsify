@@ -196,10 +196,26 @@ Uncomment [call to `Extract()` function](https://github.com/achalagarwal/gunrock
 
 ## Performance and Analysis
 
-Latest runs will be carried out (on V100) and results will be updated (TODO)
+```bash
 
-### runtime
-### metrics
+# citeseer dataset (default)
+time ./gcn --max_iter=1000
+
+real	0m6.419s
+user	0m5.263s
+sys	0m2.112s
+```
+
+*Average training time:* 5.73ms
+*Lowest training time:* 3.3ms
+*Highest training time:* 11.8ms
+
+**Modules (% time taken)**
+1. Graph Sum (Total: 45%, Forward: 30%, Backprop: 15%)
+2. Sparse Matrix Multiplication (Forward: 15.2%, Backprop: 8.2%)
+3. Cross Entropy Loss (15.6%)
+4. Matrix Multiplication (Forward: 10.2%, Backprop: 12.3%)
+
 
 ### Implementation limitations
 
@@ -282,6 +298,7 @@ Pooling operators have been shown to help increase the quality as well as the pe
 
 > How would your implementation change? What support would Gunrock need to add? </br>
 Gunrock needs to provide support for Union-Find on graphs, edge contraction etc. 
+
 
 
 ### Notes on larger datasets

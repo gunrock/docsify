@@ -196,6 +196,8 @@ Uncomment [call to `Extract()` function](https://github.com/achalagarwal/gunrock
 
 ## Performance and Analysis
 
+Latest runs will be carried out (on V100) and results will be updated (TODO)
+
 ### runtime
 ### metrics
 
@@ -214,8 +216,8 @@ e.g.:
 
 - Reference implementation (python: https://github.com/Tiiiger/SGC + https://github.com/zhouchunpong/Simplifying-Graph-Convolutional-Networks)
 
+The accuracy shouldn't be affected, the performance benchmark will be added (TODO)
 
-Comparison is both performance and accuracy/quality.
 
 - 
 
@@ -225,25 +227,62 @@ e.g., random memory access?
 
 ## Next Steps
 
-### Alternate approaches
+### Alternate/Next approaches
 
-If you had an infinite amount of time, is there another way (algorithm/approach) we should consider to implement this?
+1. Auto backpropagation
+
+Integrate autodiff in Gunrock so that a developer does not need to generate backpropagation code manually. https://github.com/mitsuba-renderer/enoki, https://github.com/mitsuba-renderer/enoki
+
+2. Use optimised Sparse Matrix multiplication and aggregations
+
+Currently we use pure atomics for all such operations and shifting to better/optimised algorithms will make our training faster
+
+3. Providing a queue of graphs to read from disk (depends on application)
+
+To better leverage the speed that gunrock provides for training GNNs, we should batch our graphs from CPU to GPU so that the I/O time is minimized
+
+4. Move to better GNN architectures
+
+GNN research has led to various different GNN architectures that perform better on certain datasets/tasks. Providing support for a canonical set of operators to support multiple GNN architectures.
+
 
 ### Gunrock implications
 
-What did we learn about Gunrock? What is hard to use, or slow? What potential Gunrock features would have been helpful in implementing this workflow?
+> What did we learn about Gunrock? What is hard to use, or slow? What potential Gunrock features would have been helpful in implementing this workflow?
+
+1. Gunrock as a framework for GNN would not be for the masses, it is better suited as a library to a Python Interface so that users can quickly iterate over their code etc.
+
+2. Gunrock has optimised traversal and frontier operators that make certain operations faster but providing support for optimised implementations of matrix multiplication / sparse matrix multiplication / support for 2D arrays / quick integration between apps amongst themselves etc. will make it faster for users to develop their architectures
+
 
 ### Notes on multi-GPU parallelization
 
-What will be the challenges in parallelizing this to multiple GPUs on the same node?
+> What will be the challenges in parallelizing this to multiple GPUs on the same node?
 
-Can the dataset be effectively divided across multiple GPUs, or must it be replicated?
+1. Effectively dividing across multiple GPUs
+
+- Model Parallelization
+
+Easy as we can have a glue module that receives data from all the split components and completes the pipeline
+
+- Large Graph (Monolithic model)
+
+There is some work done on graph partitioning for GNN training specifically, that can be leveraged.
+Secondly, all the provided operators need to support multi gpu mode and that will be plenty work.
 
 ### Notes on dynamic graphs
 
 (Only if appropriate)
 
-Does this workload have a dynamic-graph component? If so, what are the implications of that? How would your implementation change? What support would Gunrock need to add?
+> Does this workload have a dynamic-graph component?
+Not currently but it could benefit from support for dynamic graphs (Pooling operators)
+
+> If so, what are the implications of that? 
+Pooling operators have been shown to help increase the quality as well as the performance of training
+
+> How would your implementation change? What support would Gunrock need to add?
+Gunrock needs to provide support for Union-Find on graphs, edge contraction etc. 
+
 
 ### Notes on larger datasets
 

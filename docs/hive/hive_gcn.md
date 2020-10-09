@@ -212,9 +212,9 @@ Highest training time: **11.8ms** </br>
 
 **Modules (% time taken)**
 1. Graph Sum (Total: 45%, Forward: 30%, Backprop: 15%)
-2. Sparse Matrix Multiplication (Forward: 15.2%, Backprop: 8.2%)
+2. Sparse Matrix Multiplication (Total: 23.4%, Forward: 15.2%, Backprop: 8.2%)
 3. Cross Entropy Loss (15.6%)
-4. Matrix Multiplication (Forward: 10.2%, Backprop: 12.3%)
+4. Matrix Multiplication (Total: 22.5%, Forward: 10.2%, Backprop: 12.3%)
 
 
 ### Implementation limitations

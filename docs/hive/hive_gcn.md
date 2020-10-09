@@ -35,7 +35,7 @@ The implementation has been hugely guided by
   - Results in new edge values
 3. Edge Weight Sparse Multiplication (Neighborhood Gather)
   - [Multiplication of edge values with trainable weights](https://github.com/achalagarwal/gunrock/blob/d0202e3bbb88560bc97666675c0a94aa9e491c9c/gunrock/app/GuNNrock/sparseMatMul/sparseMatMul_enactor.cuh#L89)
-  - Result in the XW<sub>0</sub> matrix
+  - Results in the XW<sub>0</sub> matrix
 4. Graph Neighbor Sum (Aggregation)
   - [Summing the neighbour vectors for each vertex](https://github.com/achalagarwal/gunrock/blob/d0202e3bbb88560bc97666675c0a94aa9e491c9c/gunrock/app/GuNNrock/graphsum/graphsum_enactor.cuh#L99)
   - Results in the AXW<sub>0</sub> matrix
@@ -140,7 +140,7 @@ The various modules viz.:
 - Loss Function (Cross Entropy)
 - SpMM Multiplication
 - Manual differentiation for all the operators
-
+- ...
 
 ## How To Run This Application on DARPA's DGX-1
 
@@ -274,13 +274,13 @@ Secondly, all the provided operators need to support multi gpu mode and that wil
 
 (Only if appropriate)
 
-> Does this workload have a dynamic-graph component?
+> Does this workload have a dynamic-graph component? </br>
 Not currently but it could benefit from support for dynamic graphs (Pooling operators)
 
-> If so, what are the implications of that? 
+> If so, what are the implications of that? </br>
 Pooling operators have been shown to help increase the quality as well as the performance of training
 
-> How would your implementation change? What support would Gunrock need to add?
+> How would your implementation change? What support would Gunrock need to add? </br>
 Gunrock needs to provide support for Union-Find on graphs, edge contraction etc. 
 
 

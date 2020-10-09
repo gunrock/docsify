@@ -206,9 +206,9 @@ user	0m5.263s
 sys	0m2.112s
 ```
 
-*Average training time:* 5.73ms
-*Lowest training time:* 3.3ms
-*Highest training time:* 11.8ms
+Average training time: **5.73ms** </br>
+Lowest training time: **3.3ms** </br>
+Highest training time: **11.8ms** </br>
 
 **Modules (% time taken)**
 1. Graph Sum (Total: 45%, Forward: 30%, Backprop: 15%)

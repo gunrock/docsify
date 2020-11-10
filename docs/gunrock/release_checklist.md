@@ -19,3 +19,4 @@ We follow the versioning semantics proposed by Tom Preston-Werner (https://semve
 9. If all builds (and code coverage) for `pre-release` to `master` pass, merge the pull request
 10. [Draft a new release](https://github.com/gunrock/gunrock/releases) on github, following the versioning semantics
 11. Add an in-depth change-log, using the exisiting examples for [major](https://github.com/gunrock/gunrock/releases/tag/v1.0), [minor](https://github.com/gunrock/gunrock/releases/tag/v1.1) or [patch](https://github.com/gunrock/gunrock/releases/tag/v0.5.1) release
+12. Update the `release` tag to point to newly created release with `git tag -f release` on the new version tag

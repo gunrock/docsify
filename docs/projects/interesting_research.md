@@ -1,17 +1,3 @@
----
-title: Interesting Graph Research Projects with Possible Gunrock Applicability
-
-toc_footers:
-  - <a href='https://github.com/gunrock/gunrock'>Gunrock&colon; GPU Graph Analytics</a>
-  - Gunrock &copy; 2019 The Regents of the University of California.
-
-search: false
-
-noindex: true
-
-full_length: true
----
-
 # Interesting Graph Research Projects with Possible Gunrock Applicability
 
 We may see papers during the course of our work lives that have possible applicability to Gunrock. There's three steps to making use of those:

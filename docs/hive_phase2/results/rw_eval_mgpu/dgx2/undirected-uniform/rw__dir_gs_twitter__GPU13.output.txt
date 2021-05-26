@@ -6,8 +6,8 @@ Reading from /home/u00u7u37rw7AjJoA4e357/data/gunrock/hive_datasets/mario-2TB/gr
 Reading from /home/u00u7u37rw7AjJoA4e357/data/gunrock/hive_datasets/mario-2TB/graphsearch/dir_gs_twitter.mtx.coo_node_values, typeId = 18, targetId = 18, length = 7199978
   Subtracting 1 from node Ids...
   Edge doubleing: 21741663 -> 43483326 edges
-  graph loaded as COO in 2.115003s.
-Converting 7199978 vertices, 43483326 directed edges ( ordered tuples) to CSR format...Done (0s).
+  graph loaded as COO in 2.054528s.
+Converting 7199978 vertices, 43483326 directed edges ( ordered tuples) to CSR format...Done (1s).
 Degree Histogram (7199978 vertices, 43483326 edges):
     Degree 0: 0 (0.000000 %)
     Degree 2^0: 2979013 (41.375307 %)
@@ -31,44 +31,43 @@ Using advance mode LB
 Using filter mode CULL
 __________________________
 --------------------------
-Run 0 elapsed: 567.326069, #iterations = 128
+Run 0 elapsed: 1252.705812, #iterations = 128
 __________________________
 --------------------------
-Run 1 elapsed: 647.855997, #iterations = 128
+Run 1 elapsed: 685.761929, #iterations = 128
 __________________________
 --------------------------
-Run 2 elapsed: 629.566193, #iterations = 128
+Run 2 elapsed: 616.323948, #iterations = 128
 __________________________
 --------------------------
-Run 3 elapsed: 587.805033, #iterations = 128
+Run 3 elapsed: 605.511904, #iterations = 128
 __________________________
 --------------------------
-Run 4 elapsed: 670.341015, #iterations = 128
+Run 4 elapsed: 668.921947, #iterations = 128
 __________________________
 --------------------------
-Run 5 elapsed: 658.724070, #iterations = 128
+Run 5 elapsed: 667.783976, #iterations = 128
 __________________________
 --------------------------
-Run 6 elapsed: 670.395136, #iterations = 128
+Run 6 elapsed: 645.379066, #iterations = 128
 __________________________
 --------------------------
-Run 7 elapsed: 534.806013, #iterations = 128
+Run 7 elapsed: 682.275057, #iterations = 128
 __________________________
 --------------------------
-Run 8 elapsed: 545.606852, #iterations = 128
+Run 8 elapsed: 763.127804, #iterations = 128
 __________________________
 --------------------------
-Run 9 elapsed: 609.573126, #iterations = 128
-Validate_Results: total_neighbors_seen=74731821492
+Run 9 elapsed: 668.207884, #iterations = 128
+Validate_Results: total_neighbors_seen=75243018547
 Validate_Results: total_steps_taken=914397206
 -------- NO VALIDATION --------
 [rw] finished.
- avg. elapsed: 612.199950 ms
+ avg. elapsed: 600.329351 ms
  iterations: 128
- min. elapsed: 534.806013 ms
- max. elapsed: 670.395136 ms
- load time: 2512.2 ms
- preprocess time: 1694.700000 ms
- postprocess time: 106.128931 ms
- total time: 8082.329988 ms
-
+ min. elapsed: 605.511904 ms
+ max. elapsed: 763.127804 ms
+ load time: 2438.83 ms
+ preprocess time: 1696.610000 ms
+ postprocess time: 110.960007 ms
+ total time: 9208.202839 ms

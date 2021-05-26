@@ -6,8 +6,8 @@ Reading from /home/u00u7u37rw7AjJoA4e357/data/gunrock/hive_datasets/mario-2TB/po
   Subtracting 1 from node Ids...
   Edge doubleing: 30622564 -> 61245128 edges
   Removed 16641200 duplicate edges and self circles.
-  graph loaded as COO in 4.670451s.
-Converting 1632803 vertices, 44603928 directed edges ( ordered tuples) to CSR format...Done (0s).
+  graph loaded as COO in 6.240974s.
+Converting 1632803 vertices, 44603928 directed edges ( ordered tuples) to CSR format...Done (1s).
 Degree Histogram (1632803 vertices, 44603928 edges):
     Degree 0: 0 (0.000000 %)
     Degree 2^0: 163971 (10.042301 %)
@@ -31,44 +31,45 @@ Using advance mode LB
 Using filter mode CULL
 __________________________
 --------------------------
-Run 0 elapsed: 90.994120 ms, #iterations = 1
+Run 0 elapsed: 90.554953 ms, #iterations = 1
 __________________________
 --------------------------
-Run 1 elapsed: 89.634895 ms, #iterations = 1
+Run 1 elapsed: 102.220058 ms, #iterations = 1
 __________________________
 --------------------------
-Run 2 elapsed: 90.358019 ms, #iterations = 1
+Run 2 elapsed: 101.652145 ms, #iterations = 1
 __________________________
 --------------------------
-Run 3 elapsed: 89.745998 ms, #iterations = 1
+Run 3 elapsed: 90.437889 ms, #iterations = 1
 __________________________
 --------------------------
-Run 4 elapsed: 90.295792 ms, #iterations = 1
+Run 4 elapsed: 90.581179 ms, #iterations = 1
 __________________________
 --------------------------
-Run 5 elapsed: 90.785027 ms, #iterations = 1
+Run 5 elapsed: 90.575933 ms, #iterations = 1
 __________________________
 --------------------------
-Run 6 elapsed: 91.145992 ms, #iterations = 1
+Run 6 elapsed: 90.600967 ms, #iterations = 1
 __________________________
 --------------------------
-Run 7 elapsed: 89.614868 ms, #iterations = 1
+Run 7 elapsed: 102.555990 ms, #iterations = 1
 __________________________
 --------------------------
-Run 8 elapsed: 90.404987 ms, #iterations = 1
+Run 8 elapsed: 90.580940 ms, #iterations = 1
 __________________________
 --------------------------
-Run 9 elapsed: 91.002941 ms, #iterations = 1
+Run 9 elapsed: 90.458870 ms, #iterations = 1
 Scan statistics Validity: FAIL: [0]: 17 != 0
 result[...17, 749, 4, 1, 28, ...]
 reference[...0, 0, 0, 0, 0, ...]
 1632803 errors occurred.
 [ss] finished.
- avg. elapsed: 90.398264 ms
+ avg. elapsed: 94.021893 ms
  iterations: 1
- min. elapsed: 89.614868 ms
- max. elapsed: 91.145992 ms
- load time: 4887.11 ms
- preprocess time: 3572.140000 ms
- postprocess time: 22.135973 ms
- total time: 6147.175789 ms
+ min. elapsed: 90.437889 ms
+ max. elapsed: 102.555990 ms
+ load time: 6508.35 ms
+ preprocess time: 2021.140000 ms
+ postprocess time: 14.894962 ms
+ total time: 4578.721046 ms
+ms

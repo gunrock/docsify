@@ -95,13 +95,26 @@ for table in tables:
                 "speedup",
                 type="quantitative",
                 axis=alt.Axis(
-                    title="Speedup over 1 GPU",
+                    title=f"{table} Speedup over 1 GPU",
                 ),
                 scale=alt.Scale(type="linear"),
+            ),
+            shape=alt.Shape(
+                "dataset",
+                type="nominal",
             ),
         )
         .interactive()
     )
+    has_variants = "variant" in tables[table].columns  # multiple variants
+    if has_variants:
+        charts[table] = charts[table].encode(
+            color=alt.Color(
+                "variant",
+                type="nominal",
+            ),
+        )
+
     save(
         chart=charts[table],
         df=tables[table],

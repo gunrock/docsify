@@ -85,11 +85,11 @@ for table in tables:
         .encode(
             x=alt.X(
                 "num-gpus",
-                type="quantitative",
+                type="ordinal",
                 axis=alt.Axis(
                     title="Number of GPUs",
                 ),
-                scale=alt.Scale(type="linear"),
+                scale=alt.Scale(zero=False, type="linear"),
             ),
             y=alt.Y(
                 "speedup",

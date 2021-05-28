@@ -4,7 +4,7 @@ Loading Matrix-market coordinate-formatted graph ...
 Reading from /home/u00u7u37rw7AjJoA4e357/data/gunrock/gunrock_dataset/mario-2TB/large/europe_osm/europe_osm.mtx.coo_edge_pairs, typeId = 262, targetId = 262, length = 54054660
   Subtracting 1 from node Ids...
   Edge doubleing: 54054660 -> 108109320 edges
-  graph loaded as COO in 4.714843s.
+  graph loaded as COO in 6.401787s.
 Converting 50912018 vertices, 108109320 directed edges ( ordered tuples) to CSR format...Done (2s).
 Degree Histogram (50912018 vertices, 108109320 edges):
     Degree 0: 0 (0.000000 %)
@@ -16,7 +16,7 @@ Degree Histogram (50912018 vertices, 108109320 edges):
 __________________________
 pr_nibble::CPU_Reference: reached max iterations. breaking at it=5
 --------------------------
- Elapsed: 9814.766602
+ Elapsed: 12050.271484
 ==============================================
 64bit-VertexT=false 64bit-SizeT=false 64bit-ValueT=true undirected=false advance-mode=LB
 Using advance mode LB
@@ -24,14 +24,14 @@ Using filter mode CULL
 __________________________
 pr_nibble::Stop_Condition: reached max iterations. breaking at it=5
 --------------------------
-Run 0 elapsed: 14.762163, #iterations = 5
+Run 0 elapsed: 14.070034, #iterations = 5
 12 errors occurred.
 [pr_nibble] finished.
- avg. elapsed: 14.762163 ms
+ avg. elapsed: 14.070034 ms
  iterations: 5
- min. elapsed: 14.762163 ms
- max. elapsed: 14.762163 ms
- load time: 7057.97 ms
- preprocess time: 1319.560000 ms
- postprocess time: 1790.176868 ms
- total time: 3277.488947 ms
+ min. elapsed: 14.070034 ms
+ max. elapsed: 14.070034 ms
+ load time: 8686.23 ms
+ preprocess time: 1350.250000 ms
+ postprocess time: 2555.069923 ms
+ total time: 4071.449995 ms

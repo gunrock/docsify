@@ -5,8 +5,8 @@ Reading from /home/u00u7u37rw7AjJoA4e357/data/gunrock/gunrock_dataset/mario-2TB/
   Subtracting 1 from node Ids...
   Edge doubleing: 57515616 -> 115031232 edges
   Removed 2279810 duplicate edges and self circles.
-  graph loaded as COO in 4.152548s.
-Converting 1139905 vertices, 112751422 directed edges ( ordered tuples) to CSR format...Done (0s).
+  graph loaded as COO in 5.499411s.
+Converting 1139905 vertices, 112751422 directed edges ( ordered tuples) to CSR format...Done (1s).
 Degree Histogram (1139905 vertices, 112751422 edges):
     Degree 0: 32662 (2.865326 %)
     Degree 2^0: 24445 (2.144477 %)
@@ -27,7 +27,7 @@ Degree Histogram (1139905 vertices, 112751422 edges):
 __________________________
 pr_nibble::CPU_Reference: reached max iterations. breaking at it=5
 --------------------------
- Elapsed: 1676.944946
+ Elapsed: 2076.902832
 ==============================================
 64bit-VertexT=false 64bit-SizeT=false 64bit-ValueT=true undirected=false advance-mode=LB
 Using advance mode LB
@@ -35,14 +35,14 @@ Using filter mode CULL
 __________________________
 pr_nibble::Stop_Condition: reached max iterations. breaking at it=5
 --------------------------
-Run 0 elapsed: 5.549908, #iterations = 5
+Run 0 elapsed: 5.130053, #iterations = 5
 256 errors occurred.
 [pr_nibble] finished.
- avg. elapsed: 5.549908 ms
+ avg. elapsed: 5.130053 ms
  iterations: 5
- min. elapsed: 5.549908 ms
- max. elapsed: 5.549908 ms
- load time: 4313.82 ms
- preprocess time: 2596.150000 ms
- postprocess time: 35.524130 ms
- total time: 2641.980171 ms
+ min. elapsed: 5.130053 ms
+ max. elapsed: 5.130053 ms
+ load time: 5739.79 ms
+ preprocess time: 3297.150000 ms
+ postprocess time: 47.070026 ms
+ total time: 3354.276896 ms

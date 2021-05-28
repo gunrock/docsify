@@ -4,8 +4,8 @@ Loading Matrix-market coordinate-formatted graph ...
 Reading from /home/u00u7u37rw7AjJoA4e357/data/gunrock/gunrock_dataset/mario-2TB/large/europe_osm/europe_osm.mtx.coo_edge_pairs, typeId = 262, targetId = 262, length = 54054660
   Subtracting 1 from node Ids...
   Edge doubleing: 54054660 -> 108109320 edges
-  graph loaded as COO in 4.519968s.
-Converting 50912018 vertices, 108109320 directed edges ( ordered tuples) to CSR format...Done (2s).
+  graph loaded as COO in 2.873713s.
+Converting 50912018 vertices, 108109320 directed edges ( ordered tuples) to CSR format...Done (1s).
 Degree Histogram (50912018 vertices, 108109320 edges):
     Degree 0: 0 (0.000000 %)
     Degree 2^0: 2055578 (4.037510 %)
@@ -16,22 +16,22 @@ Degree Histogram (50912018 vertices, 108109320 edges):
 __________________________
 pr_nibble::CPU_Reference: reached max iterations. breaking at it=5
 --------------------------
- Elapsed: 9045.159180
+ Elapsed: 11152.459961
 ==============================================
 64bit-VertexT=false 64bit-SizeT=false 64bit-ValueT=true undirected=false advance-mode=LB
 Using advance mode LB
 Using filter mode CULL
 __________________________
-pr_nibble::Stop_Condition: reached max iterations. breaking at it=5
+pr_nibble::Stop_Condition: gradient too small. breaking at it=4
 --------------------------
-Run 0 elapsed: 15.020847, #iterations = 5
+Run 0 elapsed: 16.172886, #iterations = 4
 12 errors occurred.
 [pr_nibble] finished.
- avg. elapsed: 15.020847 ms
- iterations: 5
- min. elapsed: 15.020847 ms
- max. elapsed: 15.020847 ms
- load time: 6767.19 ms
- preprocess time: 1604.350000 ms
- postprocess time: 1727.882147 ms
- total time: 3492.105007 ms
+ avg. elapsed: 16.172886 ms
+ iterations: 4
+ min. elapsed: 16.172886 ms
+ max. elapsed: 16.172886 ms
+ load time: 4394.13 ms
+ preprocess time: 4570.020000 ms
+ postprocess time: 2410.878897 ms
+ total time: 7146.810055 ms

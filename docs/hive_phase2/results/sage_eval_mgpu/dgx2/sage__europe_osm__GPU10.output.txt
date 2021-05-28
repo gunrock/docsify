@@ -4,7 +4,7 @@ Loading Matrix-market coordinate-formatted graph ...
 Reading from /home/u00u7u37rw7AjJoA4e357/data/gunrock/gunrock_dataset/mario-2TB/large/europe_osm/europe_osm.mtx.coo_edge_pairs, typeId = 262, targetId = 262, length = 54054660
   Subtracting 1 from node Ids...
   Edge doubleing: 54054660 -> 108109320 edges
-  graph loaded as COO in 4.558190s.
+  graph loaded as COO in 2.883811s.
 Converting 50912018 vertices, 108109320 directed edges ( ordered tuples) to CSR format...Done (1s).
 Degree Histogram (50912018 vertices, 108109320 edges):
     Degree 0: 0 (0.000000 %)
@@ -24,17 +24,17 @@ Using randomly generated Wa2
 Using randomly generated features
 Using advance mode LB
 Using filter mode CULL
-rand-seed = 1622006765
+rand-seed = 1622220244
 __________________________
 --------------------------
-Run 0 elapsed: 26919.208050 ms, #iterations = 3108
+Run 0 elapsed: 26486.764908 ms, #iterations = 3108
 Embedding validation: PASS
 [sage] finished.
- avg. elapsed: 26919.208050 ms
+ avg. elapsed: 26486.764908 ms
  iterations: 3108
- min. elapsed: 26919.208050 ms
- max. elapsed: 26919.208050 ms
- load time: 6203.6 ms
- preprocess time: 92123.200000 ms
- postprocess time: 25588.598013 ms
- total time: 144652.262926 ms
+ min. elapsed: 26486.764908 ms
+ max. elapsed: 26486.764908 ms
+ load time: 4602.12 ms
+ preprocess time: 104036.000000 ms
+ postprocess time: 129301.800966 ms
+ total time: 259872.202158 ms

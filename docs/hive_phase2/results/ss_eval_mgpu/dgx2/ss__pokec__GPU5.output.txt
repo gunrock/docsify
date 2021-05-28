@@ -6,7 +6,7 @@ Reading from /home/u00u7u37rw7AjJoA4e357/data/gunrock/hive_datasets/mario-2TB/po
   Subtracting 1 from node Ids...
   Edge doubleing: 30622564 -> 61245128 edges
   Removed 16641200 duplicate edges and self circles.
-  graph loaded as COO in 15.347030s.
+  graph loaded as COO in 8.064491s.
 Converting 1632803 vertices, 44603928 directed edges ( ordered tuples) to CSR format...Done (0s).
 Degree Histogram (1632803 vertices, 44603928 edges):
     Degree 0: 0 (0.000000 %)
@@ -31,44 +31,44 @@ Using advance mode LB
 Using filter mode CULL
 __________________________
 --------------------------
-Run 0 elapsed: 89.969873 ms, #iterations = 1
+Run 0 elapsed: 97.163916 ms, #iterations = 1
 __________________________
 --------------------------
-Run 1 elapsed: 90.656996 ms, #iterations = 1
+Run 1 elapsed: 90.396881 ms, #iterations = 1
 __________________________
 --------------------------
-Run 2 elapsed: 90.684891 ms, #iterations = 1
+Run 2 elapsed: 101.660967 ms, #iterations = 1
 __________________________
 --------------------------
-Run 3 elapsed: 90.101004 ms, #iterations = 1
+Run 3 elapsed: 91.137886 ms, #iterations = 1
 __________________________
 --------------------------
-Run 4 elapsed: 89.839935 ms, #iterations = 1
+Run 4 elapsed: 90.687990 ms, #iterations = 1
 __________________________
 --------------------------
-Run 5 elapsed: 90.581179 ms, #iterations = 1
+Run 5 elapsed: 90.054035 ms, #iterations = 1
 __________________________
 --------------------------
-Run 6 elapsed: 89.860916 ms, #iterations = 1
+Run 6 elapsed: 96.255064 ms, #iterations = 1
 __________________________
 --------------------------
-Run 7 elapsed: 90.400934 ms, #iterations = 1
+Run 7 elapsed: 90.402126 ms, #iterations = 1
 __________________________
 --------------------------
-Run 8 elapsed: 90.465069 ms, #iterations = 1
+Run 8 elapsed: 90.734959 ms, #iterations = 1
 __________________________
 --------------------------
-Run 9 elapsed: 89.698792 ms, #iterations = 1
+Run 9 elapsed: 90.143919 ms, #iterations = 1
 Scan statistics Validity: FAIL: [0]: 17 != 0
 result[...17, 749, 4, 1, 28, ...]
 reference[...0, 0, 0, 0, 0, ...]
 1632803 errors occurred.
 [ss] finished.
- avg. elapsed: 90.225959 ms
+ avg. elapsed: 82.697678 ms
  iterations: 1
- min. elapsed: 89.698792 ms
- max. elapsed: 90.684891 ms
- load time: 15949.8 ms
- preprocess time: 977.206000 ms
- postprocess time: 34.852028 ms
- total time: 3528.283119 ms
+ min. elapsed: 90.054035 ms
+ max. elapsed: 97.163916 ms
+ load time: 8423.68 ms
+ preprocess time: 1779.460000 ms
+ postprocess time: 19.114971 ms
+ total time: 4841.383934 ms

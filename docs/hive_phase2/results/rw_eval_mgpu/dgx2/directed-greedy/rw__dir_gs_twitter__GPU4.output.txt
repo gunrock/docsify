@@ -5,8 +5,8 @@ Reading from /home/u00u7u37rw7AjJoA4e357/data/gunrock/hive_datasets/mario-2TB/gr
   Reading node values from /home/u00u7u37rw7AjJoA4e357/data/gunrock/hive_datasets/mario-2TB/graphsearch/dir_gs_twitter.mtx.coo_node_values
 Reading from /home/u00u7u37rw7AjJoA4e357/data/gunrock/hive_datasets/mario-2TB/graphsearch/dir_gs_twitter.mtx.coo_node_values, typeId = 18, targetId = 18, length = 7199978
   Subtracting 1 from node Ids...
-  graph loaded as COO in 1.097653s.
-Converting 7199978 vertices, 21741663 directed edges ( ordered tuples) to CSR format...Done (0s).
+  graph loaded as COO in 1.098134s.
+Converting 7199978 vertices, 21741663 directed edges ( ordered tuples) to CSR format...Done (1s).
 Degree Histogram (7199978 vertices, 21741663 edges):
     Degree 0: 2678671 (37.203878 %)
     Degree 2^0: 2133686 (29.634618 %)
@@ -30,43 +30,43 @@ Using advance mode LB
 Using filter mode CULL
 __________________________
 --------------------------
-Run 0 elapsed: 32.104015, #iterations = 32
+Run 0 elapsed: 35.434008, #iterations = 32
 __________________________
 --------------------------
-Run 1 elapsed: 37.475824, #iterations = 32
+Run 1 elapsed: 35.532951, #iterations = 32
 __________________________
 --------------------------
-Run 2 elapsed: 37.060022, #iterations = 32
+Run 2 elapsed: 37.169933, #iterations = 32
 __________________________
 --------------------------
-Run 3 elapsed: 36.932945, #iterations = 32
+Run 3 elapsed: 41.757107, #iterations = 32
 __________________________
 --------------------------
-Run 4 elapsed: 36.869049, #iterations = 32
+Run 4 elapsed: 37.889004, #iterations = 32
 __________________________
 --------------------------
-Run 5 elapsed: 36.947012, #iterations = 32
+Run 5 elapsed: 37.189007, #iterations = 32
 __________________________
 --------------------------
-Run 6 elapsed: 36.374092, #iterations = 32
+Run 6 elapsed: 37.247896, #iterations = 32
 __________________________
 --------------------------
-Run 7 elapsed: 37.808180, #iterations = 32
+Run 7 elapsed: 38.970947, #iterations = 32
 __________________________
 --------------------------
-Run 8 elapsed: 35.434008, #iterations = 32
+Run 8 elapsed: 36.539078, #iterations = 32
 __________________________
 --------------------------
-Run 9 elapsed: 36.221027, #iterations = 32
+Run 9 elapsed: 37.676096, #iterations = 32
 Validate_Results: total_neighbors_seen=219892901
 Validate_Results: total_steps_taken=11899183
 -------- NO VALIDATION --------
 [rw] finished.
- avg. elapsed: 33.112216 ms
+ avg. elapsed: 33.364892 ms
  iterations: 32
  min. elapsed: 35.434008 ms
- max. elapsed: 37.808180 ms
- load time: 1545.58 ms
- preprocess time: 1034.060000 ms
- postprocess time: 565.470934 ms
- total time: 2076.586962 ms
+ max. elapsed: 38.970947 ms
+ load time: 1541.64 ms
+ preprocess time: 1582.900000 ms
+ postprocess time: 166.170835 ms
+ total time: 2243.377924 ms

@@ -8,7 +8,7 @@ From the Phase 1 writeup:
 
 ## Summary of Results
 
-... We implemented mGPU 
+We re-forumlate the `application_classification` workload to improve memory locality and admit a natural multi-GPU implementation.  We then parallelized the core computational region of `application_classification` across GPUs.  For the kernels in that region that do not require communication between GPUs, we attain near-perfect scaling.  Runtime of the entire application remains bottlenecked by network bandwidth between GPUs.  However, mitigating this bottleneck should be possible further optimization of the memory layout.
 
 ## Summary of Implementation
 

@@ -1,6 +1,7 @@
 {
+    "avg-process-time": 45.466,
+    "command-line": "./main /home/u00u7u37rw7AjJoA4e357/data/gunrock/gunrock_dataset/mario-2TB/large/indochina-2004/indochina-2004.bin 1000 vn_eval_mgpu/dgx2/1000/vn__indochina-2004__GPU3.json ",
     "dataset": "indochina-2004",
-    "gpu-elapsed-ms": 45.5,
     "gpuinfo": {
         "clock_rate": 1702000,
         "compute_version": 70,
@@ -16,8 +17,10 @@
     "graph-edges": 194109311,
     "graph-file": "/home/u00u7u37rw7AjJoA4e357/data/gunrock/gunrock_dataset/mario-2TB/large/indochina-2004/indochina-2004.bin",
     "graph-nodes": 7414866,
-    "num_gpus": 3,
     "primitive": "vn",
-    "time": "Fri May 28 00:21:50 2021\n",
-    "variant": "num_seeds:1000"
+    "tag": [
+        "variant:num_seeds-1000",
+        "num-gpus:3"
+    ],
+    "time": "Fri May 28 22:25:57 2021\n"
 }

@@ -1,6 +1,7 @@
 {
+    "avg-process-time": 4.445,
+    "command-line": "./main ./data/rmat20.bin 100 vn_eval_mgpu/dgx2/100/vn__rmat20__GPU15.json ",
     "dataset": "rmat20",
-    "gpu-elapsed-ms": 6.465,
     "gpuinfo": {
         "clock_rate": 1702000,
         "compute_version": 70,
@@ -16,8 +17,10 @@
     "graph-edges": 31361722,
     "graph-file": "./data/rmat20.bin",
     "graph-nodes": 645820,
-    "num_gpus": 15,
     "primitive": "vn",
-    "time": "Fri May 28 00:23:41 2021\n",
-    "variant": "num_seeds:100"
+    "tag": [
+        "variant:num_seeds-100",
+        "num-gpus:15"
+    ],
+    "time": "Fri May 28 23:10:01 2021\n"
 }

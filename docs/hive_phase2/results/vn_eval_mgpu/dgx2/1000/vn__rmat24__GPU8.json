@@ -1,6 +1,7 @@
 {
+    "avg-process-time": 32.029,
+    "command-line": "./main ./data/rmat24.bin 1000 vn_eval_mgpu/dgx2/1000/vn__rmat24__GPU8.json ",
     "dataset": "rmat24",
-    "gpu-elapsed-ms": 33.595,
     "gpuinfo": {
         "clock_rate": 1702000,
         "compute_version": 70,
@@ -16,8 +17,10 @@
     "graph-edges": 520523686,
     "graph-file": "./data/rmat24.bin",
     "graph-nodes": 8860450,
-    "num_gpus": 8,
     "primitive": "vn",
-    "time": "Fri May 28 00:39:04 2021\n",
-    "variant": "num_seeds:1000"
+    "tag": [
+        "variant:num_seeds-1000",
+        "num-gpus:8"
+    ],
+    "time": "Fri May 28 22:36:18 2021\n"
 }

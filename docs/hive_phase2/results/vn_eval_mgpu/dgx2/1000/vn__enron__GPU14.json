@@ -1,6 +1,7 @@
 {
+    "avg-process-time": 4.009,
+    "command-line": "./main /home/u00u7u37rw7AjJoA4e357/data/gunrock/gunrock_dataset/mario-2TB/large/enron/enron.bin 1000 vn_eval_mgpu/dgx2/1000/vn__enron__GPU14.json ",
     "dataset": "enron",
-    "gpu-elapsed-ms": 4.581,
     "gpuinfo": {
         "clock_rate": 1702000,
         "compute_version": 70,
@@ -16,8 +17,10 @@
     "graph-edges": 276143,
     "graph-file": "/home/u00u7u37rw7AjJoA4e357/data/gunrock/gunrock_dataset/mario-2TB/large/enron/enron.bin",
     "graph-nodes": 69244,
-    "num_gpus": 14,
     "primitive": "vn",
-    "time": "Fri May 28 01:00:09 2021\n",
-    "variant": "num_seeds:1000"
+    "tag": [
+        "variant:num_seeds-1000",
+        "num-gpus:14"
+    ],
+    "time": "Fri May 28 23:37:45 2021\n"
 }

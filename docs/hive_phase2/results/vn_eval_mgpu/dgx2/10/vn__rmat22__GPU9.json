@@ -1,6 +1,7 @@
 {
+    "avg-process-time": 7.05,
+    "command-line": "./main ./data/rmat22.bin 10 vn_eval_mgpu/dgx2/10/vn__rmat22__GPU9.json ",
     "dataset": "rmat22",
-    "gpu-elapsed-ms": 8.058,
     "gpuinfo": {
         "clock_rate": 1702000,
         "compute_version": 70,
@@ -16,8 +17,10 @@
     "graph-edges": 128194008,
     "graph-file": "./data/rmat22.bin",
     "graph-nodes": 2393285,
-    "num_gpus": 9,
     "primitive": "vn",
-    "time": "Fri May 28 00:32:34 2021\n",
-    "variant": "num_seeds:10"
+    "tag": [
+        "variant:num_seeds-10",
+        "num-gpus:9"
+    ],
+    "time": "Fri May 28 23:01:58 2021\n"
 }

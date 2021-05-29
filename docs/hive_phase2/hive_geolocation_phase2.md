@@ -10,20 +10,11 @@ We rely on a Gunrock's multi-GPU `ForALL` operator to implement Geolocation as t
 
 The Phase 1 single-GPU implementation is [here](../hive/hive_yourworkflowname).
 
-We parallelize across GPUs by ...
-
-The multi-GPU implementation differs from the single-GPU implementation in the following way:
-
-- A
-- B
-- C
-
-
-Take as long as you need, but this might be short. Don't provide info that is already in the Phase 1 report.
+We parallelize across GPUs by using multi-GPU `ForAll` operator that splits the latitude and longitude arrays of Geolocation algorithm equally over multiple devices. For more detail on how `ForAll` was written to be multi-GPU can be found "Gunrock's `ForAll` Operator" section of the report. One optimization that we experimented with was using `BlockLoads` and shared memory (fast memory), to collectively load and process latitudes and longitudes in fast memory.
 
 ### Differences in implementation from Phase 1
 
-(If any.)
+No change from Phase 1.
 
 ## How To Run This Application on DARPA's DGX-1
 
@@ -43,6 +34,8 @@ include a transcript
 
 ### Running the application
 
+Note: Serban to edit.
+
 #### Datasets
 
 Provide their names. We will probably make a separate page for them so you can just use their names.
@@ -61,41 +54,16 @@ include a transcript
 
 ### Output
 
-(Only include this if it's different than Phase 1. Otherwise: "No change from Phase 1.")
-
-What is output when you run? Output file? JSON? Anything else? How do you extract relevant statistics from the output?
-
-How do you make sure your output is correct/meaningful? (What are you comparing against?)
-
-## Performance and Analysis
-
-(Only include this if it's different than Phase 1. Otherwise: "No change from Phase 1.")
-
-How do you measure performance? What are the relevant metrics? Runtime? Throughput? Some sort of accuracy/quality metric?
+No change from Phase 1.
 
 ### Implementation limitations
 
-(Only include this if it's different than Phase 1. Otherwise: "No change from Phase 1.")
-
-e.g.:
-
-- Size of dataset that fits into GPU memory (what is the specific limitation?)
-- Restrictions on the type/nature of the dataset
-
-### Comparison against existing implementations
-
-(Delete this if there's nothing different from Phase 1.)
-
-- Reference implementation (python? Matlab?)
-- OpenMP reference
-
-Comparison is both performance and accuracy/quality.
+No change from Phase 1.
 
 ### Performance limitations
 
-(Only include this if it's different than Phase 1. Otherwise: "No change from Phase 1.")
-
-e.g., random memory access?
+**Single-GPU:** No change from Phase 1.
+**Multiple-GPUs:** Performance bottlneck is the remote memory accesses from one GPU to another GPU's memory through NVLink. What we observed was if we simply extend `ForAll` fromn single to multiple GPUs, the remote memory accesses to neighbor's latitude and longitude arrays cause NVLink's network bandwidth to be the bottleneck for the entire application.
 
 ## Scalability behavior
 
@@ -112,6 +80,4 @@ e.g., random memory access?
 | 7    |              |                                 |
 | 8    |              |                                 |
 
-Why is scaling not ideal?
-
-What limits our scalability?
+Scaling is not ideal because we perform too many remote memory accesses causing the GPU to be constantly waiting to compute, therefore wasting the potential that GPU's throughput offers us. We require an efficient way to broadcast the latitudes and longitudes of a vertex to all other GPUs local memory in between each iteration, which can help mitigate this issue and may result in better scaling characteristics. One possible way to achieve this in the future works is by not using a `ForAll` and instead more specialized operators, designed with access patterns of these applications in mind.

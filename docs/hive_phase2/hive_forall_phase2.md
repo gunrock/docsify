@@ -53,6 +53,16 @@ for(int i = 0; i < num_gpus; ++i) {
 }
 ```
 
+The above is a great initial formulation to achieve asynchronous device-side launch of our `ForAll` kernel, but we can do better! One component that is missing from the concurrency is that even though the device-side execution is now asynchrnous with the multi-streams abstraction, on the CPU-side, we are still launching kernels sequentially. We can remedy that by using muiltiple CPU threads to asynchronously launch our multi-streams kernels to achieve asynchrony on the CPU-side as well:
+```cpp
+// We can use openmp or C++ thread to achieve the multithreaded launch:
+#pragma omp parallel for
+for(int i = 0; i < num_gpus; ++i) {
+  cudaSetDevice(i);
+  ForAll<<<GRID_DIM, BLOCK_DIM, 0, streams[i]>>>(...);
+}
+```
+
 ## Scalability Analysis
 ### Expected Scaling
 ### Observed Scaling

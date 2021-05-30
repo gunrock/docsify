@@ -19,7 +19,7 @@ No change from Phase 1.
 
 ## How To Run This Application on NVIDIA's DGX-2
 
-### Prereqs/input
+### Prerequisites
 ```
 git clone https://github.com/gunrock/gunrock -b mgpu-geo
 mkdir build

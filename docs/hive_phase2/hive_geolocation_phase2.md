@@ -62,8 +62,19 @@ This will launch jobs that sweep across 1 to 16 GPU configurations per dataset a
 
 
 #### Datasets
+**Locations:**
 
-Provide their names. We will probably make a separate page for them so you can just use their names.
+```
+/home/u00u7u37rw7AjJoA4e357/data/gunrock/hive_datasets/mario-2TB/geolocation/twitter/graph
+/home/u00u7u37rw7AjJoA4e357/data/gunrock/hive_datasets/mario-2TB/geolocation/instagram/graph
+```
+
+**Names:**
+
+```
+twitter
+instagram
+```
 
 #### Single-GPU (for baseline)
 

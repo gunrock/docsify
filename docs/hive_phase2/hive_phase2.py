@@ -19,6 +19,7 @@ files = sorted(
                 and f != "hive_datasets.md"
                 and f != "hive_template_phase2.md"
                 and f != "hive_phase2_summary.md"
+                and f != "hive_forall_phase2.md"
             )
         )
     ]
@@ -61,14 +62,16 @@ with open("hive_phase2_summary.md", "a") as dest:
         with open(f) as file:
             contents = file.read()
             title = re.search("# (.*)\n", contents).group(1)
-            summary = re.search(
-                "\n## Summary of Results\n\n([^#]*)\n\n#", contents
-            ).group(1)
+            summary = re.search("\n## Summary of Results\n\n([^#]*)\n\n#", contents)
+            if summary == None:
+                summary = re.search("\n## Summary of Results\n\n([^#]*)", contents)
+            summary = summary.group(1)
             dest.write(
                 f"## {title} \n**[{title}](https://gunrock.github.io/docs/{fname})** \n{summary}\n\n"
             )
 
 files.insert(0, "hive_phase2_summary.md")
+files.insert(1, "hive_forall_phase2.md")
 
 pandoc_cmd = [
     "pandoc",

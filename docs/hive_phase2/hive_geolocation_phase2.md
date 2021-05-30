@@ -27,12 +27,14 @@ cd build/
 cmake ..
 make -j16 geo
 ```
+**Verify git SHA:** `commit b6e928b118f7ce792f82291cee5aa5d32547aaa3`
 
+**Dataset locations:**
 
-
-(e.g., "build Gunrock's `dev-refactor` branch with hash X", "this particular dataset needs to be in this particular directory")
-
-Include a github hash for the version you're using.
+```
+/home/u00u7u37rw7AjJoA4e357/data/gunrock/hive_datasets/mario-2TB/geolocation/twitter/graph
+/home/u00u7u37rw7AjJoA4e357/data/gunrock/hive_datasets/mario-2TB/geolocation/instagram/graph
+```
 
 ### ~~Partitioning the input dataset~~
 

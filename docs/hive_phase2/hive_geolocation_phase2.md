@@ -17,15 +17,24 @@ We parallelize across GPUs by using multi-GPU `ForAll` operator that splits the 
 
 No change from Phase 1.
 
-## How To Run This Application on DARPA's DGX-1
+## How To Run This Application on NVIDIA's DGX-2
 
 ### Prereqs/input
+```
+git clone https://github.com/gunrock/gunrock -b mgpu-geo
+mkdir build
+cd build/
+cmake ..
+make -j16 geo
+```
+
+
 
 (e.g., "build Gunrock's `dev-refactor` branch with hash X", "this particular dataset needs to be in this particular directory")
 
 Include a github hash for the version you're using.
 
-### Partitioning the input dataset
+### ~~Partitioning the input dataset~~
 
 How did you do this? Command line if appropriate.
 
@@ -35,7 +44,20 @@ include a transcript
 
 ### Running the application
 
-Note: Serban to edit.
+From the `build` directory
+
+```
+cd ../examples/geo/
+./hive-mgpu-run.sh  
+```
+
+This will launch jobs that sweep across 1 to 16 GPU configurations per dataset and option configuration as specified in `hive-geo-test.sh`.
+ 
+**Option:** to run on a different partition and/or less GPUs, specify parameters to the script above as follows: 
+```
+./hive-mgpu-run.sh  [num-gpus] [slurm-partion-name]
+```
+
 
 #### Datasets
 

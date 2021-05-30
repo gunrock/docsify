@@ -98,7 +98,11 @@ pandoc_cmd = [
     "report/hive_phase2.pdf",
     # '-o', 'darpa.tex',
 ]
-pandoc_cmd.extend(files)
+tex = []
+for file in files:
+    tex.append(file)
+
+pandoc_cmd.extend(tex)
 
 print(pandoc_cmd)
 

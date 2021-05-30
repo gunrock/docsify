@@ -70,9 +70,6 @@ with open("hive_phase2_summary.md", "a") as dest:
                 f"## {title} \n**[{title}](https://gunrock.github.io/docs/{fname})** \n{summary}\n\n"
             )
 
-files.insert(0, "hive_phase2_summary.md")
-files.insert(1, "hive_forall_phase2.md")
-
 pandoc_cmd = [
     "pandoc",
     "--template=report/hive_phase2_template.tex",
@@ -101,6 +98,14 @@ pandoc_cmd = [
 tex = []
 for file in files:
     tex.append(file)
+    # format is hive_X_phase2.md
+    app = re.search("hive_(.*)_phase2.md", file)
+    if app:
+        plotfile = f"plots/{app.group(1)}_plots.md"
+        if os.path.isfile(plotfile):
+            tex.append(plotfile)
+
+tex = ["hive_phase2_summary.md", "hive_forall_phase2.md"] + tex
 
 pandoc_cmd.extend(tex)
 

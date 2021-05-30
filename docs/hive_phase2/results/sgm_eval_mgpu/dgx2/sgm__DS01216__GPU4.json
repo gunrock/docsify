@@ -1,5 +1,5 @@
 {
-    "avg-process-time": 11.193632125854492,
+    "avg-process-time": 2.635648012161255,
     "command-line": "./bin/sgm /home/u00u7u37rw7AjJoA4e357/data/gunrock/hive_datasets/mario-2TB/seeded-graph-matching/connectome/DS01216/sparse/A.mtx sgm_eval_mgpu/dgx2/sgm__DS01216__GPU4.json ",
     "dataset": "DS01216",
     "gpuinfo": {
@@ -21,5 +21,5 @@
     "tag": [
         "num-gpus:4"
     ],
-    "time": "Sun May 30 00:46:09 2021\n"
+    "time": "Sun May 30 09:03:28 2021\n"
 }

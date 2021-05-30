@@ -1,2 +1,2 @@
-Dimension = 3231
+Dimension = 254
 Tolerance = 1

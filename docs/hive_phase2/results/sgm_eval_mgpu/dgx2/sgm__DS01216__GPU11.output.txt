@@ -1,3 +1,2 @@
-Dimension = 1216
+Dimension = 140
 Tolerance = 1
-Elapsed (ms): 5.110592

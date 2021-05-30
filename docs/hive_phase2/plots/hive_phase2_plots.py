@@ -58,6 +58,8 @@ charts = {}
 # get list of primitives
 prims = df["primitive"].unique()
 for prim in prims:
+    with open(f"{prim}_plots.md", "w") as plotlist:
+        plotlist.write(f'## Scalability plots\n\n![](../plots/{prim}.pdf "test")')
     dfs[prim] = df[df["primitive"] == prim]
     dfs[prim] = dfs[prim].dropna(axis=1, how="all")  # drop columns if all n/a
 

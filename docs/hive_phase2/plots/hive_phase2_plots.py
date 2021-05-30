@@ -26,8 +26,14 @@ def normalizeBy1GPU(df, dest, quantityToNormalize, columnsToGroup):
     return dfmerge
 
 
+def fileIsNotA100(f):
+    return "dgxa100" not in f
+
+
 # slurp up all JSONs
-df = filesToDF(roots=["../results"], fnFilterInputFiles=[fileEndsWithJSON])
+roots = ["../results/"]
+# roots = ["../results/vn_eval_mgpu/dgxa100_40g_1tb/"]
+df = filesToDF(roots=roots, fnFilterInputFiles=[fileEndsWithJSON, fileIsNotA100])
 # df["num-gpus"] = df["jsonfile"].str.extract(r"GPU(\d+)")
 # df["num-gpus"] = pd.to_numeric(df["num-gpus"])
 df.rename({"walkmode": "variant"}, axis="columns", inplace=True)

@@ -95,20 +95,41 @@ pandoc_cmd = [
     "report/hive_phase2.pdf",
     # '-o', 'darpa.tex',
 ]
-tex = []
+
+# make a couple of temporary files
+spacer_tempfile = tempfile.NamedTemporaryFile(mode="w+", suffix=".md")
+spacer_tempfile.write("\n")
+table_tempfile = tempfile.NamedTemporaryFile(mode="w+", suffix=".md")
+table_tempfile.write("\n\n# Tables of Performance Results\n\n")
+
+# list of input files
+mdfiles = ["hive_phase2_summary.md", "hive_forall_phase2.md"]
 for file in files:
-    tex.append(file)
+    mdfiles.append(file)
     # format is hive_X_phase2.md
     app = re.search("hive_(.*)_phase2.md", file)
-    if app:
+    if app:  # if there's a writeup
         plotfile = f"plots/{app.group(1)}_plots.md"
         if os.path.isfile(plotfile):
-            tex.append(plotfile)
+            mdfiles.append(plotfile)
+mdfiles.extend([table_tempfile.name])  # section heading for tables
+# now add (table file, spacer), repeat
+flatten = lambda t: [item for sublist in t for item in sublist]
+mdfiles.extend(
+    flatten(
+        map(
+            lambda x: ["tables/" + x, spacer_tempfile.name],
+            sorted(os.listdir("tables")),
+        )
+    )
+)
 
-tex = ["hive_phase2_summary.md", "hive_forall_phase2.md"] + tex
 
-pandoc_cmd.extend(tex)
+pandoc_cmd.extend(mdfiles)
 
 print(pandoc_cmd)
 
 subprocess.run(pandoc_cmd)
+
+spacer_tempfile.close()
+table_tempfile.close()

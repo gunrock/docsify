@@ -113,7 +113,7 @@ No change from Phase 1.
 
 Scaling is not ideal because we perform too many remote memory accesses causing the GPU to be constantly waiting to compute, therefore wasting the potential that GPU's throughput offers us. We require an efficient way to broadcast the latitudes and longitudes of a vertex to all other GPUs local memory in between each iteration, which can help mitigate this issue and may result in better scaling characteristics. One possible way to achieve this in the future works is by not using a `ForAll` and instead more specialized operators, designed with access patterns of these applications in mind.
 
-## <a name="alt-configs"></a> Running the application (alternate configurations)
+## Running the application (alternate configurations) {#alt-configs}
 
 To facilitate test sweeps across 1 to 16 GPUs, multiple application options, and datasets we make use of two bash scripts: `hive-mgpu-run.sh` and `hive-geo-test.sh`.
 

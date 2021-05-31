@@ -10,6 +10,10 @@ From the Phase 1 writeup:
 
 Note that mathematically this reduces to a sparse-sparse matrix multiplication of `G`'s adjacency matrix.
 
+## Scalability Summary
+
+One short phrase.
+
 ## Summary of Results
 
 We implemented a multi-GPU version of sparse-sparse matrix multiplication, based on chunking the rows of the left hand matrix.  This yields a communication-free implementation with good scaling properties.  However, our current implementation remains partially limited by load imbalance across GPUs.
@@ -69,7 +73,7 @@ This will launch jobs that sweep across 1 to 16 GPU configurations per dataset a
 
 ```
 ml_1000000
-ml_5000000 
+ml_5000000
 ml_full
 ```
 
@@ -112,7 +116,7 @@ No change from Phase 1.
 
 ### Implementation limitations
 
-Implementation limitations are largely the same as in Phase 1.  
+Implementation limitations are largely the same as in Phase 1.
 
 The input graph still must fit onto a single GPU, as this parallelization strategy requires the adjacency matrix `A` to be replicated across all GPUs.
 
@@ -124,20 +128,6 @@ No change from Phase 1 -- in the multi-GPU setting, each GPU is doing almost exa
 
 ## Scalability behavior
 
-**THIS IS REALLY THE ONLY IMPORTANT THING**
-
-| GPUs | Runtime (ms) | Speedup over single-GPU version |
-|------|--------------|---------------------------------|
-| 1    |              |                                 |
-| 2    |              |                                 |
-| 3    |              |                                 |
-| 4    |              |                                 |
-| 5    |              |                                 |
-| 6    |              |                                 |
-| 7    |              |                                 |
-| 8    |              |                                 |
-
 Scaling is predominantly limited by the presence of load imbalance due to the constant size chunking of rows.  To attain perfect scaling, we would want to use a dynamically chunk of the left hand matrix such that the number of nonzero elements is approximately equal, rather than such that the number of _rows_ is approximately equal.  This is a somewhat non-trivial optimization -- we'd need either some heuristic for creating chunks of rows with _approximately_ the same number of nonzero elements _or_ we'd need to add support for accumulating values across GPUs.  However, we do expect that one of these approaches would lead to further improvements in scaling.
 
 The time it takes to copy the input adjacency matrix `A` to each GPU also contributes to some imperfect scaling, though the cost of this operation tends to be small compared to the cost of the actal computation.
-  

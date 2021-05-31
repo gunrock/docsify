@@ -4,6 +4,10 @@
 
 One-paragraph summary of application, written at a high level.
 
+## Scalability Summary
+
+One short phrase.
+
 ## Summary of Results
 
 One or two sentences that summarize "if you had one or two sentences to sum up your whole effort, what would you say". I will copy this directly to the high-level executive summary in the first page of the report. Talk to JDO about this. Write it last, probably.
@@ -41,7 +45,7 @@ make -j16 ss
 
 ### Partitioning the input dataset
 
-Partitioning is handled automatically as Scan Statistics relies on Gunrock's multi-GPU `ForALL` operator and its frontier vertices are split evenly across all available GPUs (see `ForAll` **(TODO how to link to `hive_forall_phase2.md`?)** 
+Partitioning is handled automatically as Scan Statistics relies on Gunrock's multi-GPU `ForALL` operator and its frontier vertices are split evenly across all available GPUs (see `ForAll` **(TODO how to link to `hive_forall_phase2.md`?)**
 
 ### Running the application (default configurations)
 
@@ -134,17 +138,6 @@ e.g., random memory access?
 ## Scalability behavior
 
 **THIS IS REALLY THE ONLY IMPORTANT THING**
-
-| GPUs | Runtime (ms) | Speedup over single-GPU version |
-|------|--------------|---------------------------------|
-| 1    |              |                                 |
-| 2    |              |                                 |
-| 3    |              |                                 |
-| 4    |              |                                 |
-| 5    |              |                                 |
-| 6    |              |                                 |
-| 7    |              |                                 |
-| 8    |              |                                 |
 
 Why is scaling not ideal?
 

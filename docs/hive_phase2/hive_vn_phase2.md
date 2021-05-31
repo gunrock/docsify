@@ -1,31 +1,71 @@
 # Vertex Nomination
 
-!> JDO notes, delete these when you copy this to `hive_yourworkflowname`: The goal of this report is to be useful to DARPA and to your colleagues. This is not a research paper. Be very honest. If there are limitations, spell them out. If something is broken or works poorly, say so. Above all else, make sure that the instructions to replicate the results you report are good instructions, and the process to replicate are as simple as possible; we want anyone to be able to replicate these results in a straightforward way.
-
-One-paragraph summary of application, written at a high level.
+The [Phase 1 writeup]((../hive/hive_vn.md)) contains a detailed description of the application.  The most important point to note is that `vertex_nomination` is a "multiple-source shortest paths" algorithm.  The algorithm description and implementation are identical to canonical single-source shorest paths (SSSP), with the minor modification that the search starts from multiple vertices instead of one.
 
 ## Summary of Results
 
-One or two sentences that summarize "if you had one or two sentences to sum up your whole effort, what would you say". I will copy this directly to the high-level executive summary in the first page of the report. Talk to JDO about this. Write it last, probably.
+We implemented `vertex_nomination` as a standalone CUDA program, and achieve good weak scaling performance by eliminating communication during the `advance` phase of the algorithm and using a frontier representation that allows an easy-to-compute reduction across devices.
 
-## Summary of Gunrock Implementation
+## Summary of Gunrock Implementation and Differences from Phase 1
 
-The Phase 1 single-GPU implementation is [here](../hive/hive_yourworkflowname).
+The Phase 1 single-GPU implementation is [here](../hive/hive_vn.md).
 
-We parallelize across GPUs by ...
+In Phase 1, `vertex_nomination` was implemented for a single GPU using the Gunrock framework.  However, The Phase 2 multi-GPU implementation required some functionality that is not currently available in Gunrock, so we implemented it as a standalone CUDA program (using the `thrust` and `NCCL` libraries).
 
-The multi-GPU implementation differs from the single-GPU implementation in the following way:
+Specifically, the multi-GPU `vertex_nomination` uses a fixed-size (boolean or integer) array to represent the input and output frontiers, while Gunrock predominantly uses a dynamically-sized list of vertex IDs.  The fixed-size representation admits a more natural multi-GPU implementation, and avoids a complex merge / deduplication step in favor of a cheap `or` reduce step.
 
-- A
-- B
-- C
+As described in the Phase 1 report, the core kernel in `vertex_nomination` is the following advance:
+```python
+def _advance_op(src, dst, distances):
+    src_distance   = distances[src]
+    edge_weight    = edge_weights[(src, dst)]
+    new_distance   = src_distance + edge_weight
+    old_distance   = distances[dst]
+    distances[dst] = min(old_distance, new_distance)
+    return new_distance < old_distance
+```
 
+which runs in a loop like the following pseudocode:
+```python
+# advance
+thread_parallel for src in input_frontier:
+  thread_parallel for dst in src.neighbors():
+    if _advance_op(src, dst, distances):
+      output_frontier.add(dst)
+```
 
-Take as long as you need, but this might be short. Don't provide info that is already in the Phase 1 report.
+In the multi-GPU implementation, the loop instead looks like the following pseudocode:
 
-### Differences in implementation from Phase 1
+```python
+# advance per GPU
+device_parallel for device in devices:
+  thread_parallel for src in local_input_frontiers[device].get_chunk(device):
+    thread_parallel for dst in src.neighbors():
+      if _advance_op(src, dst, local_distances[device]):
+        local_output_frontiers[device][dst] = True
 
-(If any.)
+# reduce across GPUs
+local_input_frontiers = all_reduce(local_output_frontiers, op="or")
+device_parallel for device in devices:
+  local_output_frontiers[device][:] = False
+
+local_distances = all_reduce(local_distances, op="min")
+```
+
+In the per-GPU `advance` phase, each device has 
+  - a _local_ replica of the complete input graph
+  - a chunk of nodes it is responsible for computing on
+  - a _local_ copy of the `input_frontier` that is read from
+  - a _local_ copy of the `output_frontier` that is written to
+  - a _local_ copy of the `distance` array that is read / written
+
+This data layout means that no communication between devices is required during the advance phase.
+
+During the `reduce` phase, 
+  - the local output frontiers are reduced with the `or` operator (remember they are boolean masks)
+  - the local `distances` arrays are reduced with the `min` operator
+
+After this phase, the copies of the input frontiers and the computed distances are the same on each device.  In our implementation, these reduces uses the `ncclAllReduce` function from NVIDIA's `nccl` library.
 
 ## How To Run This Application on NVIDIA's DGX-2
 
@@ -43,7 +83,9 @@ make
 
 ### Partitioning the input dataset
 
-Ben comment
+The input graph is replicated across all devices.
+
+Each device is reponsible for running the `advance` operation on a subset of nodes in the graph (eg, `GPU:0` operates on node range `[0, n_nodes / n_gpus]`, `GPU:1` on `[n_nodes / n_gpus + 1, 2 * n_nodes / n_gpus]`, etc).  Assuming a random node labeling, this correspond to a random partition of nodes across devices.
 
 ### Running the application (default configurations)
 
@@ -100,41 +142,23 @@ include a transcript
 
 ### Output
 
-(Only include this if it's different than Phase 1. Otherwise: "No change from Phase 1.")
-
-What is output when you run? Output file? JSON? Anything else? How do you extract relevant statistics from the output?
-
-How do you make sure your output is correct/meaningful? (What are you comparing against?)
+No change from Phase 1.
 
 ## Performance and Analysis
 
-(Only include this if it's different than Phase 1. Otherwise: "No change from Phase 1.")
-
-How do you measure performance? What are the relevant metrics? Runtime? Throughput? Some sort of accuracy/quality metric?
+No change from Phase 1.
 
 ### Implementation limitations
 
-(Only include this if it's different than Phase 1. Otherwise: "No change from Phase 1.")
+Implementation limitations are largely the same as in the Phase 1 Gunrock-based implementation.
 
-e.g.:
-
-- Size of dataset that fits into GPU memory (what is the specific limitation?)
-- Restrictions on the type/nature of the dataset
-
-### Comparison against existing implementations
-
-(Delete this if there's nothing different from Phase 1.)
-
-- Reference implementation (python? Matlab?)
-- OpenMP reference
-
-Comparison is both performance and accuracy/quality.
+Note that in the current implementation, the _entire_ input graph is replicated across all devices.  That means that this implementation cannot run on datasets that are large than the memory of a single GPU.
 
 ### Performance limitations
 
-(Only include this if it's different than Phase 1. Otherwise: "No change from Phase 1.")
+The `advance` phase does not include any communication between devices, so the performance limitations are the same as in Phase 1.
 
-e.g., random memory access?
+The `reduce` phase requires copying and reducing `local_output_frontiers` and `local_distances` across GPUs, and is memory bandwidth bound.
 
 ## Scalability behavior
 
@@ -151,6 +175,6 @@ e.g., random memory access?
 | 7    |              |                                 |
 | 8    |              |                                 |
 
-Why is scaling not ideal?
+Scaling is not perfectly ideal because of the time taken by the `reduce` phase, which is additional work in the multi-GPU setting that is not present in the single-GPU case.  As the number of GPUs increases, the cost of this communication increases relative to the per-GPU cost of computation, which limits weak scaling of our implementation.
 
-What limits our scalability?
+Scaling is primarily limited by the current restriction that the entire input graph must fit in a single GPUs memory.  From a programming perspective, it would be straightforward to partition the input graph across GPUs -- however, this would lead to remote memory accesses in the `advance` phase and impact performance substantially.

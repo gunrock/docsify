@@ -130,7 +130,10 @@ mdfiles.extend(
     flatten(
         map(
             lambda x: ["tables/" + x, spacer_tempfile.name],
-            sorted(os.listdir("tables")),
+            filter(
+                lambda f: f.endswith("md") and f != "README.md",
+                sorted(os.listdir("tables")),
+            ),
         )
     )
 )

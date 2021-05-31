@@ -129,6 +129,11 @@ pandoc_cmd.extend(mdfiles)
 
 print(pandoc_cmd)
 
+# I don't understand why the next two lines are necessary
+# but otherwise the table doesn't appear
+table_tempfile.seek(0)
+table_tempfile.read()
+
 subprocess.run(pandoc_cmd)
 
 spacer_tempfile.close()

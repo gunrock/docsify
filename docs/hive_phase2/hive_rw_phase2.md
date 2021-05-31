@@ -79,6 +79,11 @@ gs_twitter.values
 ```
 ### Running the application (alternate configurations)
 
+This application relies on Gunrock's random walk `rw` primitive. Modify `WALK_MODE` to control the application's `--walk-mode` parameter and specify `--undirected` as `true` or `false`. Please see the Phase 1 single-GPU implementation details [here](https://gunrock.github.io/docs/#/hive/hive_graphsearch) for additional parameter information.
+
+Modify `OUTPUT_DIR` to store generated output and json files in an alternate location.
+
+
 #### Single-GPU (for baseline)
 
 <code>

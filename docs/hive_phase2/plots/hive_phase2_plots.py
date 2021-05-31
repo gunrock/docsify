@@ -55,6 +55,9 @@ dfs = {}
 tables = {}
 charts = {}
 
+tablespage = open("../tables/index.md", "w")
+tablespage.write("# Tables of results\n\n")
+
 # get list of primitives
 prims = df["primitive"].unique()
 for prim in prims:
@@ -85,10 +88,17 @@ for prim in prims:
                 dfs[name] = dfs[prim][dfs[prim]["variant"] == variant]
                 tables[name] = dfs[name][cols]
                 tables[name].to_markdown(buf=f"../tables/{name}.md", index=False)
+                tables[name].to_html(
+                    buf=f"../tables/{name}.html", index=False, border=0
+                )
                 plotlist.write(f'![](plots/{name}.pdf "{name}")\n\n')
+                tablespage.write(f"[{name}](hive_phase2/tables/{name}.html)\n\n")
     else:
         # only write top-level table if there are no subtables
         tables[prim].to_markdown(buf=f"../tables/{prim}.md", index=False)
+        tables[prim].to_html(buf=f"../tables/{prim}.html", index=False, border=0)
+        tablespage.write(f"[{prim}](hive_phase2/tables/{prim}.html)\n\n")
+tablespage.close()
 
 
 # now start plotting all tables

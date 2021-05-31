@@ -27,27 +27,66 @@ Our experiments conclude that this “bidding” step was the bottleneck for our
 
 We now assign each row of the matrix to an entire block instead of a CUDA thread, and process the row in parallel instead of sequentially.
 
-## How To Run This Application on DARPA's DGX-1
+## How To Run This Application on NVIDIA's DGX-2
 
-### Prereqs/input
-
-(e.g., "build Gunrock's `dev-refactor` branch with hash X", "this particular dataset needs to be in this particular directory")
-
-Include a github hash for the version you're using.
-
+### Prerequisites
+```
+git clone https://github.com/owensgroup/SGM -b mgpu
+cd SGM/test/
+make
+```
+**Verify git SHA:** `commit d41a43d5653455c1adc59841499ce84a63ecd2db`
 ### Partitioning the input dataset
 
-How did you do this? Command line if appropriate.
+Data partitioning occurs at runtime whereby matrix rows are split across multiple GPUs. Please see the summary above for more information.
 
-<code>
-include a transcript
-</code>
+### Running the application (default configurations)
 
-### Running the application
+From the `test` directory
+
+```
+./hive-mgpu-run.sh
+```
+
+This will launch jobs that sweep across 1 to 16 GPU configurations per dataset as specified in `hive-sgm-test.sh`. **(see `hive_run_apps_phase2.md` for more info)**.
+
+**Please note:** due to an intermittent bug (occassional infinite loop) in the implementation, the scheduled SLURM job is set to timeout after three minutes (all used datasets should complete in under one minute).
 
 #### Datasets
+**Default Locations:**
 
-Provide their names. We will probably make a separate page for them so you can just use their names.
+```
+/home/u00u7u37rw7AjJoA4e357/data/gunrock/hive_datasets/mario-2TB/seeded-graph-matching/connectome
+```
+
+**Names:**
+
+```
+DS00833
+DS01216
+DS01876
+DS03231
+DS06481
+DS16784
+```
+
+### Running the application (alternate configurations)
+
+#### hive-mgpu-run.sh
+
+Due to the bug mentioned above, a user may wish to increase or decrease the SLURM job cancellation time. Modify the `--time` options shown here:
+
+```
+SLURM_CMD="srun --cpus-per-gpu 2 -G $i -p $PARTITION_NAME -N 1 --time=3:00 "
+```
+
+Modify `OUTPUT_DIR` to store generated output and json files in an alternate location.
+
+#### hive-sgm-test.sh
+
+A tolerance value can be specified by setting a value in `APP_OPTIONS`
+
+Please review the provided script and see "Running the Applications" chapter for details on running with additional datasets.
 
 #### Single-GPU (for baseline)
 

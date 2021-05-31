@@ -20,6 +20,7 @@ files = sorted(
                 and f != "hive_template_phase2.md"
                 and f != "hive_phase2_summary.md"
                 and f != "hive_forall_phase2.md"
+                and f != "hive_run_apps_phase2.md"
             )
         )
     ]
@@ -103,7 +104,7 @@ table_tempfile = tempfile.NamedTemporaryFile(mode="w+", suffix=".md")
 table_tempfile.write("\n\n# Tables of Performance Results\n\n")
 
 # list of input files
-mdfiles = ["hive_phase2_summary.md", "hive_forall_phase2.md"]
+mdfiles = ["hive_phase2_summary.md", "hive_run_apps_phase2.md", "hive_forall_phase2.md"]
 for file in files:
     mdfiles.append(file)
     # format is hive_X_phase2.md

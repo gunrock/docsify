@@ -161,7 +161,7 @@ with open(f"README.md", "w") as plotspage:
         # note to self: { } in fstrings need to be {{ }}
         plotspage.write(
             f"""
-  var spec_{chart_id} = "https://raw.githubusercontent.com/gunrock/docs/master/hive_phase2/plots/{chart}.json";
+  var spec_{chart_id} = "https://raw.githubusercontent.com/gunrock/docs/master/docs/hive_phase2/plots/{chart}.json";
   vegaEmbed('#vis_{chart_id}', spec_{chart_id}, opt=svgopt).then(function(result) {{
     // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
   }}).catch(console.error);

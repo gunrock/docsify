@@ -30,19 +30,7 @@ files = sorted(
 # files.append("hive_scaling.html.md")
 
 print(
-    """---
-title: HIVE Phase 2 Report&colon; Executive Summary
-
-toc_footers:
-  - <a href='https://github.com/gunrock/gunrock'>Gunrock&colon; GPU Graph Analytics</a>
-  - Gunrock &copy; 2021 The Regents of the University of California.
-
-search: true
-
-full_length: true
----
-
-# HIVE Phase 2 Report&colon; Executive Summary
+    """# HIVE Phase 2 Report&colon; Executive Summary
 
 This report is located online at the following URL: <https://gunrock.github.io/docs/hive_phase2/hive_phase2_summary.html>.
 
@@ -68,7 +56,8 @@ with open("hive_phase2_summary.md", "a") as dest:
                 summary = re.search("\n## Summary of Results\n\n([^#]*)", contents)
             summary = summary.group(1)
             dest.write(
-                f"## {title} \n**[{title}](https://gunrock.github.io/docs/{fname})** \n{summary}\n\n"
+                # f"## {title} \n**[{title}](https://gunrock.github.io/docs/{fname})** \n{summary}\n\n"
+                f"## {title} \n**[{title}](hive_phase2/{fname}.md)** \n{summary}\n\n"
             )
 
 pandoc_cmd = [

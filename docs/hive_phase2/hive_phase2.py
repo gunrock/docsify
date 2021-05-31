@@ -72,8 +72,14 @@ with open("hive_phase2_summary.md", "a") as dest:
                 summary = re.search("\n## Summary of Results\n\n([^#]*)", contents)
             summary = summary.group(1)
             print(linkify(title))
-            summaries += f"## [App: {title}](#{linkify(title)})\n\n{summary}\n\n"
+            summaries += f"## [App: {title}](#{linkify(title)}) ([HTML](hive_phase2/{fname}))\n\n{summary}\n\n"
     dest.write(summaries)
+    dest.write(
+        """---
+
+We also produce web versions of our [scalability plots](hive_phase2/plots/) and [scalability tables of results](hive_phase2/tables/).
+"""
+    )
 
 pandoc_cmd = [
     "pandoc",

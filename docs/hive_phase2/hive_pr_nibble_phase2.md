@@ -41,7 +41,7 @@ make -j16 pr_nibble
 
 ### Partitioning the input dataset
 
-Partitioning is handled automatically as Local Graph Clustering relies on Gunrock's multi-GPU `ForALL` operator and its frontier vertices are split evenly across all available GPUs (see `ForAll` **(TODO how to link to `hive_forall_phase2.md`?)** 
+Partitioning is handled automatically as Local Graph Clustering relies on Gunrock's multi-GPU `ForALL` operator and its frontier vertices are split evenly across all available GPUs. Please refer to the chapter on [Gunrock's `ForAll` Operator](#gunrocks-forall-operator) for additional information.
 
 ### Running the application (default configurations)
 

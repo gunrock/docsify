@@ -133,5 +133,34 @@ for table in tables:
         df=tables[table],
         plotname=table,
         outputdir="./",
-        formats=["png", "pdf"],
+        formats=["png", "pdf", "json"],
     )
+
+
+with open(f"index.md", "w") as plotspage:
+    plotspage.write(
+        """## Scalability plots
+<script type="text/javascript">
+  var svgopt = { renderer: "svg" }
+"""
+    )
+    divs = ""
+    for chart in sorted(charts):
+        chart_id = chart.replace("-", "_")
+
+        # note to self: { } in fstrings need to be {{ }}
+        plotspage.write(
+            f"""
+  var spec_{chart_id} = "https://raw.githubusercontent.com/gunrock/docs/master/hive_phase2/plots/{chart}.json";
+  vegaEmbed('#vis_{chart_id}', spec_{chart_id}, opt=svgopt).then(function(result) {{
+    // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+  }}).catch(console.error);
+
+"""
+        )
+        divs += f"""
+<div id="vis_{chart_id}"></div>
+
+"""
+    plotspage.write("</script>\n\n")
+    plotspage.write(divs)

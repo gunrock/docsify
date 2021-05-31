@@ -1,5 +1,5 @@
 {
-    "avg-process-time": 1.9113279581069946,
+    "avg-process-time": 17.16819190979004,
     "command-line": "./bin/sgm /home/u00u7u37rw7AjJoA4e357/data/gunrock/hive_datasets/mario-2TB/seeded-graph-matching/connectome/DS01216/sparse/A.mtx sgm_eval_mgpu/dgx2/sgm__DS01216__GPU15.json ",
     "dataset": "DS01216",
     "gpuinfo": {
@@ -21,5 +21,5 @@
     "tag": [
         "num-gpus:15"
     ],
-    "time": "Sun May 30 10:19:42 2021\n"
+    "time": "Sun May 30 01:00:49 2021\n"
 }

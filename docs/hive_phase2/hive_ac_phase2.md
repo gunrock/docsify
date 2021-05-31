@@ -30,31 +30,77 @@ Upon examination of the Phase 1 `application_classification` implementation, we 
 
 Because it is not a canonical graph workload, `application_classification` is written outside of Gunrock using the `thrust` and `cub` libraries (as in HIVE Phase 1).
 
-## How To Run This Application on DARPA's DGX-1
 
-### Prereqs/input
+## How To Run This Application on NVIDIA's DGX-2
 
-__Note:__ Serban to edit.
+### Prerequisites
+
+The setup process assumes [Anaconda](https://www.anaconda.com/products/individual) is already installed.
 
 ```
-# get code
-git clone https://github.com/bkj/application_classification
+git clone \ 
+	https://github.com/porumbes/application_classification \
+	-b dev/mgpu_manual_reduce
+
 cd application_classification
-git checkout 40c38a343ac1662d3abf82fcfa86b6c720368c62
 
 # prep binary input data
-python prob2bin.py
+./hive-gen-data.sh 
 
 # build
-mkdir -p results
-make clean
-make -j12
+make -j16
+```
+**Verify git SHA:** `commit 7e20dd05126c174c51b7155cb1f2f9e3084080b3`
 
-# run
-CUDA_VISIBLE_DEVICES=0       ./main data/data.bin data/pattern.bin > results/cuda_result1
-CUDA_VISIBLE_DEVICES=0,1     ./main data/data.bin data/pattern.bin > results/cuda_result2
-CUDA_VISIBLE_DEVICES=0,1,2   ./main data/data.bin data/pattern.bin > results/cuda_result3
-CUDA_VISIBLE_DEVICES=0,1,2,3 ./main data/data.bin data/pattern.bin > results/cuda_result4
+### Partitioning the input dataset
+
+Partitioning is done automatically by the application.
+
+### Running the application (default configurations)
+
+```
+./hive-mgpu-run.sh
+```
+
+This will launch jobs that sweep across 1 to 16 GPU configurations per dataset and application options as specified in `hive-ac-test.sh`. See [Running the Applications](#running-the-applications) for additional information.
+
+
+#### Datasets
+
+**Default Locations:**
+
+```
+/home/u00u7u37rw7AjJoA4e357/data/gunrock/hive_datasets/mario-2TB/application_classification/
+```
+with subdirectory: `ac_JohnsHopkins_random`
+
+
+**Names:**
+
+```
+rmat18
+georgiyPattern
+JohnsHopkins
+```
+
+### Running the application (alternate configurations)
+
+#### hive-mgpu-run.sh
+
+Modify `OUTPUT_DIR` to store generated output and json files in an alternate location.
+
+#### hive-gen-data.sh 
+
+Unlike most of the other applications, Application Classification makes use of an additional script, `hive-gen-data.sh`, to generate necessary input. Please review the chapter on [Running the Applications](#running-the-applications) ror information on running with additional datasets.
+
+#### hive-ac-test.sh
+
+Please see the Phase 1 single-GPU implementation details [here](https://gunrock.github.io/docs/#/hive/hive_application_classification) for additional parameter information and review the provided script. 
+
+Given the setup in `hive-gen-data.sh`, modify the key-value store, `DATA_PATTERN` with the generated `rmat18_data.bin` as the key and the generated `georgiyPattern_pattern.bin` as the value. For example:
+
+```
+DATA_PATTERN["rmat18"]="georgiyPattern"
 ```
 
 ### Partitioning the input dataset

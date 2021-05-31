@@ -37,9 +37,9 @@ The primary reason to modify this script is to provide additional dataset inform
 	
 * `DATA_PREFIX` path to directory containing desired dataset
 * `NAME` a simple string naming the dataset, generally sans a file extension (e.g., `NAME[0]="twitter"` for `twitter.mtx`) 
-* `GRAPH` aggregated options for the chosen dataset to pass to the application
+* `GRAPH` aggregated options for the chosen dataset to pass to the application (i.e., combine `DATA_PREFIX` and `NAME` with additional information expected by the application)
 
-**Please note** that you must update the for loop index if you add items to the arrays mentioned.
+**Please note** that you must update the associated for loop index if you add or remove items to the arrays mentioned.
 
 
 ### Future Script Simplification

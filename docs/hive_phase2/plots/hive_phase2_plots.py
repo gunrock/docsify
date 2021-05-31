@@ -55,7 +55,7 @@ dfs = {}
 tables = {}
 charts = {}
 
-tablespage = open("../tables/index.md", "w")
+tablespage = open("../tables/README.md", "w")
 tablespage.write("# Tables of results\n\n")
 
 # get list of primitives
@@ -147,7 +147,7 @@ for table in tables:
     )
 
 
-with open(f"index.md", "w") as plotspage:
+with open(f"README.md", "w") as plotspage:
     plotspage.write(
         """## Scalability plots
 <script type="text/javascript">
@@ -161,7 +161,7 @@ with open(f"index.md", "w") as plotspage:
         # note to self: { } in fstrings need to be {{ }}
         plotspage.write(
             f"""
-  var spec_{chart_id} = "https://raw.githubusercontent.com/gunrock/docs/master/hive_phase2/plots/{chart}.json";
+  var spec_{chart_id} = "https://raw.githubusercontent.com/gunrock/docs/master/docs/hive_phase2/plots/{chart}.json";
   vegaEmbed('#vis_{chart_id}', spec_{chart_id}, opt=svgopt).then(function(result) {{
     // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
   }}).catch(console.error);

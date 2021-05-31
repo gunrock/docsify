@@ -55,7 +55,7 @@ dfs = {}
 tables = {}
 charts = {}
 
-tablespage = open("../tables/index.md", "w")
+tablespage = open("../tables/README.md", "w")
 tablespage.write("# Tables of results\n\n")
 
 # get list of primitives
@@ -147,7 +147,7 @@ for table in tables:
     )
 
 
-with open(f"index.md", "w") as plotspage:
+with open(f"README.md", "w") as plotspage:
     plotspage.write(
         """## Scalability plots
 <script type="text/javascript">

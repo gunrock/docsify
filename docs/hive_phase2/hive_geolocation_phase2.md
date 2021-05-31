@@ -1,11 +1,12 @@
 # Geolocation
 
-From Phase 1. report:
+From Phase 1 report:
+
 > Infers user locations using the location (latitude, longitude) of friends through spatial label propagation. Given a graph `G`, geolocation examines each vertex `v`'s neighbors and computes the spatial median of the neighbors' location list. The output is a list of predicted locations for all vertices with unknown locations.
 
 ## Summary of Results
 
-We rely on a Gunrock's multi-GPU `ForALL` operator to implement Geolocation as the entire behavior can be described within a single-loop like structure. The core computation focuses on calculating a spatial median, and for multi-GPU `ForAll`, that work is split such that each GPU gets equal number of vertices to process. We see a minor speed-up on a DGX-A100 going from 1 to 3 GPUs on a twitter dataset, but in general, due to the communication over the GPU-GPU interconnects for all the neighbors of each vertex, there's a general pattern of slowdown going from 1 GPU to multiple GPUs, and no scaling is observed.
+We rely on a Gunrock's multi-GPU `ForALL` operator to implement Geolocation as the entire behavior can be described within a single-loop like structure. The core computation focuses on calculating a spatial median, and for multi-GPU `ForAll`, that work is split such that each GPU gets an equal number of vertices to process. We see a minor speed-up on a DGX-A100 going from 1 to 3 GPUs on a twitter dataset, but in general, due to the communication over the GPU-GPU interconnects for all the neighbors of each vertex, there's a general pattern of slowdown going from 1 GPU to multiple GPUs, and no scaling is observed.
 
 ## Summary of Gunrock Implementation
 
@@ -29,40 +30,24 @@ make -j16 geo
 ```
 **Verify git SHA:** `commit b6e928b118f7ce792f82291cee5aa5d32547aaa3`
 
-**Dataset locations:**
+### Partitioning the input dataset
 
-```
-/home/u00u7u37rw7AjJoA4e357/data/gunrock/hive_datasets/mario-2TB/geolocation/twitter/graph
-/home/u00u7u37rw7AjJoA4e357/data/gunrock/hive_datasets/mario-2TB/geolocation/instagram/graph
-```
+Partitioning is handled automatically. Geolocation relies on Gunrock's multi-GPU `ForALL` operator and its frontier vertices are split evenly across all available GPUs (see `ForAll` **(TODO how to link to `hive_forall_phase2.md`?)** 
 
-### ~~Partitioning the input dataset~~
-
-How did you do this? Command line if appropriate.
-
-<code>
-include a transcript
-</code>
-
-### Running the application
+### Running the application (default configurations)
 
 From the `build` directory
 
 ```
 cd ../examples/geo/
-./hive-mgpu-run.sh  
+./hive-mgpu-run.sh
 ```
 
-This will launch jobs that sweep across 1 to 16 GPU configurations per dataset and option configuration as specified in `hive-geo-test.sh`.
- 
-**Option:** to run on a different partition and/or less GPUs, specify parameters to the script above as follows: 
-```
-./hive-mgpu-run.sh  [num-gpus] [slurm-partion-name]
-```
+This will launch jobs that sweep across 1 to 16 GPU configurations per dataset and application option as specified in `hive-geo-test.sh` **(see `hive_run_apps_phase2.md` for more info)**.
 
 
 #### Datasets
-**Locations:**
+**Default Locations:**
 
 ```
 /home/u00u7u37rw7AjJoA4e357/data/gunrock/hive_datasets/mario-2TB/geolocation/twitter/graph
@@ -75,6 +60,18 @@ This will launch jobs that sweep across 1 to 16 GPU configurations per dataset a
 twitter
 instagram
 ```
+
+### Running the application (alternate configurations)
+
+#### hive-mgpu-run.sh
+
+Modify `GEO_ITER` and `SPATIAL_ITER` to change the values of `--geo-iter` and `--spatial-iter`, respectively, passed to `hive-geo-test.sh`. Please see the Phase 1 single-GPU implementation details [here](https://gunrock.github.io/docs/#/hive/hive_geolocation) for additional parameter information.
+
+Modify `OUTPUT_DIR` to store generated output and json files in an alternate location.
+
+#### hive-geo-test.sh
+
+Please review the provided script and see "Running the Applications" chapter for details on running with additional datasets.
 
 #### Single-GPU (for baseline)
 
@@ -99,7 +96,8 @@ No change from Phase 1.
 ### Performance limitations
 
 **Single-GPU:** No change from Phase 1.
-**Multiple-GPUs:** Performance bottlneck is the remote memory accesses from one GPU to another GPU's memory through NVLink. What we observed was if we simply extend `ForAll` fromn single to multiple GPUs, the remote memory accesses to neighbor's latitude and longitude arrays cause NVLink's network bandwidth to be the bottleneck for the entire application.
+
+**Multiple-GPUs:** Performance bottlneck is the remote memory accesses from one GPU to another GPU's memory through NVLink. What we observed was if we simply extend `ForAll` from single to multiple GPUs, the remote memory accesses to neighbor's latitude and longitude arrays cause NVLink's network bandwidth to be the bottleneck for the entire application.
 
 ## Scalability behavior
 

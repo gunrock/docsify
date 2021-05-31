@@ -19,6 +19,7 @@ files = sorted(
                 and f != "hive_datasets.md"
                 and f != "hive_template_phase2.md"
                 and f != "hive_phase2_summary.md"
+                and f != "hive_forall_phase2.md"
             )
         )
     ]
@@ -61,14 +62,13 @@ with open("hive_phase2_summary.md", "a") as dest:
         with open(f) as file:
             contents = file.read()
             title = re.search("# (.*)\n", contents).group(1)
-            summary = re.search(
-                "\n## Summary of Results\n\n([^#]*)\n\n#", contents
-            ).group(1)
+            summary = re.search("\n## Summary of Results\n\n([^#]*)\n\n#", contents)
+            if summary == None:
+                summary = re.search("\n## Summary of Results\n\n([^#]*)", contents)
+            summary = summary.group(1)
             dest.write(
                 f"## {title} \n**[{title}](https://gunrock.github.io/docs/{fname})** \n{summary}\n\n"
             )
-
-files.insert(0, "hive_phase2_summary.md")
 
 pandoc_cmd = [
     "pandoc",
@@ -95,8 +95,46 @@ pandoc_cmd = [
     "report/hive_phase2.pdf",
     # '-o', 'darpa.tex',
 ]
-pandoc_cmd.extend(files)
+
+# make a couple of temporary files
+spacer_tempfile = tempfile.NamedTemporaryFile(mode="w+", suffix=".md")
+spacer_tempfile.write("\n")
+table_tempfile = tempfile.NamedTemporaryFile(mode="w+", suffix=".md")
+table_tempfile.write("\n\n# Tables of Performance Results\n\n")
+
+# list of input files
+mdfiles = ["hive_phase2_summary.md", "hive_forall_phase2.md"]
+for file in files:
+    mdfiles.append(file)
+    # format is hive_X_phase2.md
+    app = re.search("hive_(.*)_phase2.md", file)
+    if app:  # if there's a writeup
+        plotfile = f"plots/{app.group(1)}_plots.md"
+        if os.path.isfile(plotfile):
+            mdfiles.append(plotfile)
+mdfiles.extend([table_tempfile.name])  # section heading for tables
+# now add (table file, spacer), repeat
+flatten = lambda t: [item for sublist in t for item in sublist]
+mdfiles.extend(
+    flatten(
+        map(
+            lambda x: ["tables/" + x, spacer_tempfile.name],
+            sorted(os.listdir("tables")),
+        )
+    )
+)
+
+
+pandoc_cmd.extend(mdfiles)
 
 print(pandoc_cmd)
 
+# I don't understand why the next two lines are necessary
+# but otherwise the table doesn't appear
+table_tempfile.seek(0)
+table_tempfile.read()
+
 subprocess.run(pandoc_cmd)
+
+spacer_tempfile.close()
+table_tempfile.close()

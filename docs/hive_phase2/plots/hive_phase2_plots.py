@@ -26,8 +26,14 @@ def normalizeBy1GPU(df, dest, quantityToNormalize, columnsToGroup):
     return dfmerge
 
 
+def fileIsNotA100(f):
+    return "dgxa100" not in f
+
+
 # slurp up all JSONs
-df = filesToDF(roots=["../results"], fnFilterInputFiles=[fileEndsWithJSON])
+roots = ["../results/"]
+# roots = ["../results/vn_eval_mgpu/dgxa100_40g_1tb/"]
+df = filesToDF(roots=roots, fnFilterInputFiles=[fileEndsWithJSON, fileIsNotA100])
 # df["num-gpus"] = df["jsonfile"].str.extract(r"GPU(\d+)")
 # df["num-gpus"] = pd.to_numeric(df["num-gpus"])
 df.rename({"walkmode": "variant"}, axis="columns", inplace=True)
@@ -52,6 +58,8 @@ charts = {}
 # get list of primitives
 prims = df["primitive"].unique()
 for prim in prims:
+    with open(f"{prim}_plots.md", "w") as plotlist:
+        plotlist.write(f'## Scalability plots\n\n![](plots/{prim}.pdf "{prim}")\n\n')
     dfs[prim] = df[df["primitive"] == prim]
     dfs[prim] = dfs[prim].dropna(axis=1, how="all")  # drop columns if all n/a
 
@@ -70,13 +78,18 @@ for prim in prims:
     # now add back in columns we care about
     cols.extend(["num-gpus", "avg-process-time", "speedup"])
     tables[prim] = dfs[prim][cols]
-    tables[prim].to_markdown(buf=f"../tables/{prim}.md", index=False)
     if has_variants:
-        for variant in dfs[prim]["variant"].unique().tolist():
-            name = prim + "_" + variant
-            dfs[name] = dfs[prim][dfs[prim]["variant"] == variant]
-            tables[name] = dfs[name][cols]
-            tables[name].to_markdown(buf=f"../tables/{name}.md", index=False)
+        with open(f"{prim}_plots.md", "a") as plotlist:
+            for variant in dfs[prim]["variant"].unique().tolist():
+                name = prim + "_" + variant
+                dfs[name] = dfs[prim][dfs[prim]["variant"] == variant]
+                tables[name] = dfs[name][cols]
+                tables[name].to_markdown(buf=f"../tables/{name}.md", index=False)
+                plotlist.write(f'![](plots/{name}.pdf "{name}")\n\n')
+    else:
+        # only write top-level table if there are no subtables
+        tables[prim].to_markdown(buf=f"../tables/{prim}.md", index=False)
+
 
 # now start plotting all tables
 for table in tables:
@@ -89,7 +102,7 @@ for table in tables:
                 axis=alt.Axis(
                     title="Number of GPUs",
                 ),
-                scale=alt.Scale(zero=False, type="linear"),
+                scale=alt.Scale(type="linear"),
             ),
             y=alt.Y(
                 "speedup",

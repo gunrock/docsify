@@ -85,9 +85,7 @@ Modify `OUTPUT_DIR` to store generated output and json files in an alternate loc
 
 #### hive-proj-test.sh
 
-A tolerance value can be specified by setting a value in `APP_OPTIONS`
-
-Please review the provided script and see "Running the Applications" chapter for details on running with additional datasets.
+Please review the provided script and see [Running the Applications](#running-the-applications) for details on running with additional datasets. In addition matrix market `.mtx` must first be converted to binary as follows:
 
 ```
 # convert data to binary

@@ -91,7 +91,7 @@ Modify `OUTPUT_DIR` to store generated output and json files in an alternate loc
 
 #### hive-gen-data.sh 
 
-Unlike most of the other applications, Application Classification makes use of an additional script, `hive-gen-data.sh`, to generate necessary input. Please review the chapter on [Running the Applications](#running-the-applications) ror information on running with additional datasets.
+Unlike most of the other applications, Application Classification makes use of an additional script, `hive-gen-data.sh`, to generate necessary input. Please review the chapter on [Running the Applications](#running-the-applications) for information on running with additional datasets.
 
 #### hive-ac-test.sh
 

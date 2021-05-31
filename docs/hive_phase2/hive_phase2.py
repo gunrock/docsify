@@ -46,6 +46,11 @@ Specific notes on applications and scaling follow:
     file=open("hive_phase2_summary.md", "w"),
 )
 
+
+def linkify(str):
+    return str.replace(" ", "-").translate({ord(i): None for i in "()"}).lower()
+
+
 with open("hive_phase2_summary.md", "a") as dest:
     for f in files:
         fname = f[:-3]
@@ -57,9 +62,10 @@ with open("hive_phase2_summary.md", "a") as dest:
             if summary == None:
                 summary = re.search("\n## Summary of Results\n\n([^#]*)", contents)
             summary = summary.group(1)
+            print(linkify(title))
             dest.write(
                 # f"## {title} \n**[{title}](https://gunrock.github.io/docs/{fname})** \n{summary}\n\n"
-                f"## {title} \n**[{title}](hive_phase2/{fname}.md)** \n{summary}\n\n"
+                f"## [App: {title}](#{linkify(title)})\n\n{summary}\n\n"
             )
 
 pandoc_cmd = [

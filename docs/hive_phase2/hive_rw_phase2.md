@@ -27,13 +27,17 @@ Take as long as you need, but this might be short. Don't provide info that is al
 
 (If any.)
 
-## How To Run This Application on DARPA's DGX-1
+## How To Run This Application on NVIDIA's DGX-2
 
-### Prereqs/input
-
-(e.g., "build Gunrock's `dev-refactor` branch with hash X", "this particular dataset needs to be in this particular directory")
-
-Include a github hash for the version you're using.
+### Prerequisites
+```
+git clone  https://github.com/gunrock/gunrock -b multigpu
+mkdir build
+cd build/
+cmake ..
+make -j16 rw
+```
+**Verify git SHA:** `commit d70a73c5167c5b59481d8ab07c98b376e77466cc`
 
 ### Partitioning the input dataset
 
@@ -43,11 +47,37 @@ How did you do this? Command line if appropriate.
 include a transcript
 </code>
 
-### Running the application
+### Running the application (default configurations)
+
+From the `build` directory
+
+```
+cd ../examples/rw/
+./hive-mgpu-run.sh
+```
+
+This will launch jobs that sweep across 1 to 16 GPU configurations per dataset and application option as specified across three different test scripts: 
+
+* `hive-rw-undirected-uniform.sh`
+* `hive-rw-directed-uniform.sh`
+* `hive-rw-directed-greedy.sh`
+
+ **(see `hive_run_apps_phase2.md` for more info)**.
 
 #### Datasets
+**Default Locations:**
 
-Provide their names. We will probably make a separate page for them so you can just use their names.
+```
+/home/u00u7u37rw7AjJoA4e357/data/gunrock/hive_datasets/mario-2TB/graphsearch
+```
+
+**Names:**
+
+```
+dir_gs_twitter 
+gs_twitter.values
+```
+### Running the application (alternate configurations)
 
 #### Single-GPU (for baseline)
 

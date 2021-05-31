@@ -32,17 +32,20 @@ files = sorted(
 print(
     """# HIVE Phase 2 Report&colon; Executive Summary
 
-This report is located online at the following URL: <https://gunrock.github.io/docs/hive_phase2/hive_phase2_summary>.
+This report is also located online at the following URL: <https://gunrock.github.io/docs/hive_phase2/hive_phase2_summary>. Links currently work better in the PDF version than the HTML version.
 
 Herein UC Davis produces the following deliverables that it promised to deliver in Phase 2:
 
-_list_
+- Implementation of DARPA HIVE v0 apps as single-node, multi-GPU applications using the [Gunrock](https://gunrock.github.io/) framework
+- Performance characterization of these applications across multiple GPUs
+- Analysis of the limits of scalability for these applications
 
-We first [describe how to reproduce our results](#running-the-applications) and then [describe the scalability behavior of our ForAll operator](#gunrocks-forall-operator).
+In our writeup, we first [describe how to reproduce our results](#running-the-applications) and then [describe the scalability behavior of our ForAll operator](#gunrocks-forall-operator).
 
-Specific notes on applications and scaling follow:
+We begin with a table that summarizes the scalability behavior for each application, then a longer description of each application:
 
-""",
+| Application | Scalability behavior |
+| ----------- | -------------------- |""",
     file=open("hive_phase2_summary.md", "w"),
 )
 
@@ -52,21 +55,25 @@ def linkify(str):
 
 
 with open("hive_phase2_summary.md", "a") as dest:
+    summaries = ""
     for f in files:
         fname = f[:-3]
         print(f)
         with open(f) as file:
             contents = file.read()
             title = re.search("# (.*)\n", contents).group(1)
+            scalability_summary = re.search(
+                "\n## Scalability Summary\n\n([^#]*)\n\n#", contents
+            )
+            if scalability_summary:
+                dest.write(f"| {title} | {scalability_summary.group(1)} |\n")
             summary = re.search("\n## Summary of Results\n\n([^#]*)\n\n#", contents)
             if summary == None:
                 summary = re.search("\n## Summary of Results\n\n([^#]*)", contents)
             summary = summary.group(1)
             print(linkify(title))
-            dest.write(
-                # f"## {title} \n**[{title}](https://gunrock.github.io/docs/{fname})** \n{summary}\n\n"
-                f"## [App: {title}](#{linkify(title)})\n\n{summary}\n\n"
-            )
+            summaries += f"## [App: {title}](#{linkify(title)})\n\n{summary}\n\n"
+    dest.write(summaries)
 
 pandoc_cmd = [
     "pandoc",

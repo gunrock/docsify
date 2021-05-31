@@ -27,27 +27,64 @@ Take as long as you need, but this might be short. Don't provide info that is al
 
 (If any.)
 
-## How To Run This Application on DARPA's DGX-1
+## How To Run This Application on NVIDIA's DGX-2
 
-### Prereqs/input
+### Prerequisites
 
-(e.g., "build Gunrock's `dev-refactor` branch with hash X", "this particular dataset needs to be in this particular directory")
+The setup process assumes [Anaconda](https://www.anaconda.com/products/individual) is already installed.
 
-Include a github hash for the version you're using.
+```
+git clone  git clone https://github.com/porumbes/mgpu_sssp -b main
+cd mgpu_sssp
+bash install.sh # downloads and compiles NVIDIA's nccl library
+make
+```
+**Verify git SHA:** `commit 4f93307e7a0aa7f71e8ab024771e950e40247a4e`
 
 ### Partitioning the input dataset
 
-How did you do this? Command line if appropriate.
+Ben comment
 
-<code>
-include a transcript
-</code>
+### Running the application (default configurations)
 
-### Running the application
+```
+./hive-mgpu-run.sh
+```
+
+This will launch jobs that sweep across 1 to 16 GPU configurations per dataset and application options as specified in `hive-vn-test.sh` **(see `hive_run_apps_phase2.md` for more info)**.
+
 
 #### Datasets
+**Default Locations:**
 
-Provide their names. We will probably make a separate page for them so you can just use their names.
+```
+/home/u00u7u37rw7AjJoA4e357/data/gunrock/gunrock_dataset/mario-2TB/large
+```
+
+**Names:**
+
+```
+chesapeake
+rmat18
+rmat20
+rmat22
+rmat24
+enron
+hollywood-2009
+indochina-2004
+```
+
+### Running the application (alternate configurations)
+
+#### hive-mgpu-run.sh
+
+Modify `NUM_SEEDS` to specify the number of seed locations to be used by `hive-vn-test.sh`.
+
+Modify `OUTPUT_DIR` to store generated output and json files in an alternate location.
+
+#### hive-vn-test.sh
+
+Please see the Phase 1 single-GPU implementation details [here](https://gunrock.github.io/docs/#/hive/hive_vn) for additional parameter information, review the provided script, and see [Running the Applications](#running-the-applications) chapter for details on running with additional datasets.
 
 #### Single-GPU (for baseline)
 

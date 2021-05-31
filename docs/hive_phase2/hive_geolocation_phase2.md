@@ -1,11 +1,12 @@
 # Geolocation
 
-From Phase 1. report:
+From Phase 1 report:
+
 > Infers user locations using the location (latitude, longitude) of friends through spatial label propagation. Given a graph `G`, geolocation examines each vertex `v`'s neighbors and computes the spatial median of the neighbors' location list. The output is a list of predicted locations for all vertices with unknown locations.
 
 ## Summary of Results
 
-We rely on a Gunrock's multi-GPU `ForALL` operator to implement Geolocation as the entire behavior can be described within a single-loop like structure. The core computation focuses on calculating a spatial median, and for multi-GPU `ForAll`, that work is split such that each GPU gets equal number of vertices to process. We see a minor speed-up on a DGX-A100 going from 1 to 3 GPUs on a twitter dataset, but in general, due to the communication over the GPU-GPU interconnects for all the neighbors of each vertex, there's a general pattern of slowdown going from 1 GPU to multiple GPUs, and no scaling is observed.
+We rely on a Gunrock's multi-GPU `ForALL` operator to implement Geolocation as the entire behavior can be described within a single-loop like structure. The core computation focuses on calculating a spatial median, and for multi-GPU `ForAll`, that work is split such that each GPU gets an equal number of vertices to process. We see a minor speed-up on a DGX-A100 going from 1 to 3 GPUs on a twitter dataset, but in general, due to the communication over the GPU-GPU interconnects for all the neighbors of each vertex, there's a general pattern of slowdown going from 1 GPU to multiple GPUs, and no scaling is observed.
 
 ## Summary of Gunrock Implementation
 
@@ -43,12 +44,12 @@ From the `build` directory
 
 ```
 cd ../examples/geo/
-./hive-mgpu-run.sh  
+./hive-mgpu-run.sh
 ```
 
 This will launch jobs that sweep across 1 to 16 GPU configurations per dataset and application option as specified in `hive-geo-test.sh` (see below for [alternate configurations](#alt-configs)).
- 
-**Option:** to run on a different partition and/or less GPUs, specify parameters to the script above as follows: 
+
+**Option:** to run on a different partition and/or less GPUs, specify parameters to the script above as follows:
 ```
 ./hive-mgpu-run.sh  [num-gpus] [slurm-partion-name]
 ```
@@ -92,7 +93,8 @@ No change from Phase 1.
 ### Performance limitations
 
 **Single-GPU:** No change from Phase 1.
-**Multiple-GPUs:** Performance bottlneck is the remote memory accesses from one GPU to another GPU's memory through NVLink. What we observed was if we simply extend `ForAll` fromn single to multiple GPUs, the remote memory accesses to neighbor's latitude and longitude arrays cause NVLink's network bandwidth to be the bottleneck for the entire application.
+
+**Multiple-GPUs:** Performance bottlneck is the remote memory accesses from one GPU to another GPU's memory through NVLink. What we observed was if we simply extend `ForAll` from single to multiple GPUs, the remote memory accesses to neighbor's latitude and longitude arrays cause NVLink's network bandwidth to be the bottleneck for the entire application.
 
 ## Scalability behavior
 
@@ -195,7 +197,7 @@ mkdir -p "$OUTPUT_DIR/$SUB_DIR"
 for i in {0..1}
 do
    # prepare output json file name with number of gpus for this run
-   JSON_FILE="geo__${NAME[$i]}__GPU${NUM_GPUS}"	
+   JSON_FILE="geo__${NAME[$i]}__GPU${NUM_GPUS}"
 
    #echo \
    $BIN_PREFIX$APP_NAME \

@@ -2,6 +2,10 @@
 
 The [Phase 1 writeup]((../hive/hive_vn.md)) contains a detailed description of the application.  The most important point to note is that `vertex_nomination` is a "multiple-source shortest paths" algorithm.  The algorithm description and implementation are identical to canonical single-source shorest paths (SSSP), with the minor modification that the search starts from multiple vertices instead of one.
 
+## Scalability Summary
+
+One short phrase.
+
 ## Summary of Results
 
 We implemented `vertex_nomination` as a standalone CUDA program, and achieve good weak scaling performance by eliminating communication during the `advance` phase of the algorithm and using a frontier representation that allows an easy-to-compute reduction across devices.
@@ -52,7 +56,7 @@ device_parallel for device in devices:
 local_distances = all_reduce(local_distances, op="min")
 ```
 
-In the per-GPU `advance` phase, each device has 
+In the per-GPU `advance` phase, each device has
   - a _local_ replica of the complete input graph
   - a chunk of nodes it is responsible for computing on
   - a _local_ copy of the `input_frontier` that is read from
@@ -61,7 +65,7 @@ In the per-GPU `advance` phase, each device has
 
 This data layout means that no communication between devices is required during the advance phase.
 
-During the `reduce` phase, 
+During the `reduce` phase,
   - the local output frontiers are reduced with the `or` operator (remember they are boolean masks)
   - the local `distances` arrays are reduced with the `min` operator
 
@@ -162,19 +166,6 @@ The `reduce` phase requires copying and reducing `local_output_frontiers` and `l
 
 ## Scalability behavior
 
-**THIS IS REALLY THE ONLY IMPORTANT THING**
-
-| GPUs | Runtime (ms) | Speedup over single-GPU version |
-|------|--------------|---------------------------------|
-| 1    |              |                                 |
-| 2    |              |                                 |
-| 3    |              |                                 |
-| 4    |              |                                 |
-| 5    |              |                                 |
-| 6    |              |                                 |
-| 7    |              |                                 |
-| 8    |              |                                 |
-
 Scaling is not perfectly ideal because of the time taken by the `reduce` phase, which is additional work in the multi-GPU setting that is not present in the single-GPU case.  As the number of GPUs increases, the cost of this communication increases relative to the per-GPU cost of computation, which limits weak scaling of our implementation.
 
-Scaling is primarily limited by the current restriction that the entire input graph must fit in a single GPUs memory.  From a programming perspective, it would be straightforward to partition the input graph across GPUs -- however, this would lead to remote memory accesses in the `advance` phase and impact performance substantially.
+Scaling is primarily limited by the current restriction that the entire input graph must fit in a single GPU's memory.  From a programming perspective, it would be straightforward to partition the input graph across GPUs; however, this would lead to remote memory accesses in the `advance` phase and impact performance substantially.

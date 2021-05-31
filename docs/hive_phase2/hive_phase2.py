@@ -38,7 +38,7 @@ Herein UC Davis produces the following deliverables that it promised to deliver 
 
 _list_
 
-We first [describe how to reproduce our results](hive_phase2/hive_run_apps_phase2) and then [describe the scalability behavior of our ForAll operator](hive_phase2/hive_forall_phase2.md).
+We first [describe how to reproduce our results](#running-the-applications) and then [describe the scalability behavior of our ForAll operator](#gunrocks-forall-operator).
 
 Specific notes on applications and scaling follow:
 

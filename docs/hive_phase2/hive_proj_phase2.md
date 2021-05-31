@@ -33,34 +33,62 @@ The adjacency matrix `A` is assumed to be randomly permuted and the number of ro
 
 The multi-GPU implementation consists of wrapper code around the Phase 1 implementation that distributes `A` across all of the GPUs, launches independent computation on each GPU, and collects the results.
 
-## How To Run This Application on DARPA's DGX-1
+## How To Run This Application on NVIDIA's DGX-2
 
-### Prereqs/input
-
-__Note:__ Serban to edit.
+### Prerequisites
 
 ```
-# get code
-git clone https://github.com/owensgroup/graphblas_proj
+git clone https://github.com/owensgroup/graphblas_proj -b dev/mgpu2
 cd graphblas_proj
-git checkout 813780b6f4e8a88fc374f6581b5a808ba58dd7cd
-
-# convert data to binary
-python data/mtx2bin.py --inpath data/ml_full.mtx
-
-# build
-make clean
-make -j12
-
-# run
-./proj data/ml_full.bin
+make -j16
 ```
 
-### Running the application
+**Verify git SHA:** `commit c55074593fac49de088ca9afa9d2e82422bccda4`
+
+### Partitioning the input dataset
+
+Data partitioning occurs at runtime whereby matrix `A` is distributed across all available GPUs. Please see the summary above for more information.
+
+### Running the application (default configurations)
+
+```
+./hive-mgpu-run.sh
+```
+
+This will launch jobs that sweep across 1 to 16 GPU configurations per dataset as specified in `hive-proj-test.sh`.  See [Running the Applications](#running-the-applications) for additional information.
 
 #### Datasets
 
-Provide their names. We will probably make a separate page for them so you can just use their names.
+**Default Locations:**
+
+```
+/home/u00u7u37rw7AjJoA4e357/data/gunrock/hive_datasets/mario-2TB/proj_movielens
+```
+
+**Names:**
+
+```
+ml_1000000
+ml_5000000 
+ml_full
+```
+
+### Running the application (alternate configurations)
+
+#### hive-mgpu-run.sh
+
+Modify `OUTPUT_DIR` to store generated output and json files in an alternate location.
+
+#### hive-proj-test.sh
+
+A tolerance value can be specified by setting a value in `APP_OPTIONS`
+
+Please review the provided script and see "Running the Applications" chapter for details on running with additional datasets.
+
+```
+# convert data to binary
+python data/mtx2bin.py --inpath data/ml_full.mtx
+```
 
 #### Single-GPU (for baseline)
 

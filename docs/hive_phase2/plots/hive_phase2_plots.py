@@ -78,7 +78,6 @@ for prim in prims:
     # now add back in columns we care about
     cols.extend(["num-gpus", "avg-process-time", "speedup"])
     tables[prim] = dfs[prim][cols]
-    tables[prim].to_markdown(buf=f"../tables/{prim}.md", index=False)
     if has_variants:
         with open(f"{prim}_plots.md", "a") as plotlist:
             for variant in dfs[prim]["variant"].unique().tolist():
@@ -87,6 +86,10 @@ for prim in prims:
                 tables[name] = dfs[name][cols]
                 tables[name].to_markdown(buf=f"../tables/{name}.md", index=False)
                 plotlist.write(f'![](plots/{name}.pdf "{name}")\n\n')
+    else:
+        # only write top-level table if there are no subtables
+        tables[prim].to_markdown(buf=f"../tables/{prim}.md", index=False)
+
 
 # now start plotting all tables
 for table in tables:
@@ -99,7 +102,7 @@ for table in tables:
                 axis=alt.Axis(
                     title="Number of GPUs",
                 ),
-                scale=alt.Scale(zero=False, type="linear"),
+                scale=alt.Scale(type="linear"),
             ),
             y=alt.Y(
                 "speedup",

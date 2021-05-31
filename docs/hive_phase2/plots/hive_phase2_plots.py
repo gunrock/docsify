@@ -59,7 +59,7 @@ charts = {}
 prims = df["primitive"].unique()
 for prim in prims:
     with open(f"{prim}_plots.md", "w") as plotlist:
-        plotlist.write(f'## Scalability plots\n\n![](plots/{prim}.pdf "test")')
+        plotlist.write(f'## Scalability plots\n\n![](plots/{prim}.pdf "{prim}")\n\n')
     dfs[prim] = df[df["primitive"] == prim]
     dfs[prim] = dfs[prim].dropna(axis=1, how="all")  # drop columns if all n/a
 
@@ -80,11 +80,13 @@ for prim in prims:
     tables[prim] = dfs[prim][cols]
     tables[prim].to_markdown(buf=f"../tables/{prim}.md", index=False)
     if has_variants:
-        for variant in dfs[prim]["variant"].unique().tolist():
-            name = prim + "_" + variant
-            dfs[name] = dfs[prim][dfs[prim]["variant"] == variant]
-            tables[name] = dfs[name][cols]
-            tables[name].to_markdown(buf=f"../tables/{name}.md", index=False)
+        with open(f"{prim}_plots.md", "a") as plotlist:
+            for variant in dfs[prim]["variant"].unique().tolist():
+                name = prim + "_" + variant
+                dfs[name] = dfs[prim][dfs[prim]["variant"] == variant]
+                tables[name] = dfs[name][cols]
+                tables[name].to_markdown(buf=f"../tables/{name}.md", index=False)
+                plotlist.write(f'![](plots/{name}.pdf "{name}")\n\n')
 
 # now start plotting all tables
 for table in tables:

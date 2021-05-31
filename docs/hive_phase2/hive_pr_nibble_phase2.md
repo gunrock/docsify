@@ -27,27 +27,60 @@ Take as long as you need, but this might be short. Don't provide info that is al
 
 (If any.)
 
-## How To Run This Application on DARPA's DGX-1
+## How To Run This Application on NVIDIA's DGX-2
 
-### Prereqs/input
-
-(e.g., "build Gunrock's `dev-refactor` branch with hash X", "this particular dataset needs to be in this particular directory")
-
-Include a github hash for the version you're using.
+### Prerequisites
+```
+git clone  https://github.com/gunrock/gunrock -b multigpu
+mkdir build
+cd build/
+cmake ..
+make -j16 pr_nibble
+```
+**Verify git SHA:** `commit d70a73c5167c5b59481d8ab07c98b376e77466cc`
 
 ### Partitioning the input dataset
 
-How did you do this? Command line if appropriate.
+Partitioning is handled automatically as Local Graph Clustering relies on Gunrock's multi-GPU `ForALL` operator and its frontier vertices are split evenly across all available GPUs (see `ForAll` **(TODO how to link to `hive_forall_phase2.md`?)** 
 
-<code>
-include a transcript
-</code>
+### Running the application (default configurations)
 
-### Running the application
+From the `build` directory
+
+```
+cd ../examples/pr_nibble/
+./hive-mgpu-run.sh
+```
+
+This will launch jobs that sweep across 1 to 16 GPU configurations per dataset and application option as specified in `hive-pr_nibble-test.sh` **(see `hive_run_apps_phase2.md` for more info)**.
+
 
 #### Datasets
+**Default Locations:**
 
-Provide their names. We will probably make a separate page for them so you can just use their names.
+```
+/home/u00u7u37rw7AjJoA4e357/data/gunrock/gunrock_dataset/mario-2TB/large
+```
+
+**Names:**
+
+```
+hollywood-2009
+europe_osm
+```
+
+### Running the application (alternate configurations)
+
+#### hive-mgpu-run.sh
+
+
+Modify `OUTPUT_DIR` to store generated output and json files in an alternate location.
+
+#### hive-geo-test.sh
+
+Modify `APP_OPTIONS` to specify alternate `--src` and `--max-iter` values.  Please see the Phase 1 single-GPU implementation details [here](https://gunrock.github.io/docs/#/hive/hive_pr_nibble) for additional parameter information.
+
+Please review the provided script and see "Running the Applications" chapter for details on running with additional datasets.
 
 #### Single-GPU (for baseline)
 

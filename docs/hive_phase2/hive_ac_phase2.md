@@ -6,6 +6,10 @@ From the Phase 1 writeup:
 
 > The application classification (AC) workflow is an implementation of probabalistic graph matching via belief propagation.  The workflow takes two node- and edge-attributed graphs as input -- a data graph `G = (U_G, E_G)` and a pattern graph `P = (U_P, E_P)`.  The goal is to find a subgraph `S` of `G` such that the dissimilarity between the node/edge features of `P` and `S` is minimized. The matching is optimized via loopy belief propagation, which consists of iteratively passing messages between nodes then updating beliefs about the optimal match.
 
+## Scalability Summary
+
+Bottlenecked by network bandwidth between GPUs
+
 ## Summary of Results
 
 We re-forumlate the `application_classification` workload to improve memory locality and admit a natural multi-GPU implementation.  We then parallelized the core computational region of `application_classification` across GPUs.  For the kernels in that region that do not require communication between GPUs, we attain near-perfect scaling.  Runtime of the entire application remains bottlenecked by network bandwidth between GPUs.  However, mitigating this bottleneck should be possible further optimization of the memory layout.
@@ -39,7 +43,7 @@ cd application_classification
 git checkout 40c38a343ac1662d3abf82fcfa86b6c720368c62
 
 # prep binary input data
-python prob2bin.py 
+python prob2bin.py
 
 # build
 mkdir -p results
@@ -98,7 +102,7 @@ From the perspective of the multi-GPU system, we are primarily bottlenecked by b
 ## Scalability behavior
 
 | GPUs | Runtime/Region 1 (ms) | Runtime/Scatter (ms) | Runtime/Region 2 (ms) |
-|------|-----------------------|----------------------| ----------------------| 
+|------|-----------------------|----------------------| ----------------------|
 | 1    |                       |                      |                       |
 | 2    |                       |                      |                       |
 | 3    |                       |                      |                       |

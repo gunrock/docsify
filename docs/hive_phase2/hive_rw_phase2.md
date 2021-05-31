@@ -4,6 +4,10 @@
 
 One-paragraph summary of application, written at a high level.
 
+## Scalability Summary
+
+One short phrase.
+
 ## Summary of Results
 
 One or two sentences that summarize "if you had one or two sentences to sum up your whole effort, what would you say". I will copy this directly to the high-level executive summary in the first page of the report. Talk to JDO about this. Write it last, probably.
@@ -56,7 +60,7 @@ cd ../examples/rw/
 ./hive-mgpu-run.sh
 ```
 
-This will launch jobs that sweep across 1 to 16 GPU configurations per dataset and application option as specified across three different test scripts: 
+This will launch jobs that sweep across 1 to 16 GPU configurations per dataset and application option as specified across three different test scripts:
 
 * `hive-rw-undirected-uniform.sh`
 * `hive-rw-directed-uniform.sh`
@@ -74,7 +78,7 @@ This will launch jobs that sweep across 1 to 16 GPU configurations per dataset a
 **Names:**
 
 ```
-dir_gs_twitter 
+dir_gs_twitter
 gs_twitter.values
 ```
 ### Running the application (alternate configurations)
@@ -137,17 +141,6 @@ e.g., random memory access?
 ## Scalability behavior
 
 **THIS IS REALLY THE ONLY IMPORTANT THING**
-
-| GPUs | Runtime (ms) | Speedup over single-GPU version |
-|------|--------------|---------------------------------|
-| 1    |              |                                 |
-| 2    |              |                                 |
-| 3    |              |                                 |
-| 4    |              |                                 |
-| 5    |              |                                 |
-| 6    |              |                                 |
-| 7    |              |                                 |
-| 8    |              |                                 |
 
 Why is scaling not ideal?
 

@@ -10,6 +10,10 @@ From the Phase 1 writeup:
 
 Note that mathematically this reduces to a sparse-sparse matrix multiplication of `G`'s adjacency matrix.
 
+## Scalability Summary
+
+One short phrase.
+
 ## Summary of Results
 
 We implemented a multi-GPU version of sparse-sparse matrix multiplication, based on chunking the rows of the left hand matrix.  This yields a communication-free implementation with good scaling properties.  However, our current implementation remains partially limited by load imbalance across GPUs.
@@ -33,34 +37,62 @@ The adjacency matrix `A` is assumed to be randomly permuted and the number of ro
 
 The multi-GPU implementation consists of wrapper code around the Phase 1 implementation that distributes `A` across all of the GPUs, launches independent computation on each GPU, and collects the results.
 
-## How To Run This Application on DARPA's DGX-1
+## How To Run This Application on NVIDIA's DGX-2
 
-### Prereqs/input
-
-__Note:__ Serban to edit.
+### Prerequisites
 
 ```
-# get code
-git clone https://github.com/owensgroup/graphblas_proj
+git clone https://github.com/owensgroup/graphblas_proj -b dev/mgpu2
 cd graphblas_proj
-git checkout 813780b6f4e8a88fc374f6581b5a808ba58dd7cd
-
-# convert data to binary
-python data/mtx2bin.py --inpath data/ml_full.mtx
-
-# build
-make clean
-make -j12
-
-# run
-./proj data/ml_full.bin
+make -j16
 ```
 
-### Running the application
+**Verify git SHA:** `commit c55074593fac49de088ca9afa9d2e82422bccda4`
+
+### Partitioning the input dataset
+
+Data partitioning occurs at runtime whereby matrix `A` is distributed across all available GPUs. Please see the summary above for more information.
+
+### Running the application (default configurations)
+
+```
+./hive-mgpu-run.sh
+```
+
+This will launch jobs that sweep across 1 to 16 GPU configurations per dataset as specified in `hive-proj-test.sh`.  See [Running the Applications](#running-the-applications) for additional information.
 
 #### Datasets
 
-Provide their names. We will probably make a separate page for them so you can just use their names.
+**Default Locations:**
+
+```
+/home/u00u7u37rw7AjJoA4e357/data/gunrock/hive_datasets/mario-2TB/proj_movielens
+```
+
+**Names:**
+
+```
+ml_1000000
+ml_5000000
+ml_full
+```
+
+### Running the application (alternate configurations)
+
+#### hive-mgpu-run.sh
+
+Modify `OUTPUT_DIR` to store generated output and json files in an alternate location.
+
+#### hive-proj-test.sh
+
+A tolerance value can be specified by setting a value in `APP_OPTIONS`
+
+Please review the provided script and see "Running the Applications" chapter for details on running with additional datasets.
+
+```
+# convert data to binary
+python data/mtx2bin.py --inpath data/ml_full.mtx
+```
 
 #### Single-GPU (for baseline)
 
@@ -84,7 +116,7 @@ No change from Phase 1.
 
 ### Implementation limitations
 
-Implementation limitations are largely the same as in Phase 1.  
+Implementation limitations are largely the same as in Phase 1.
 
 The input graph still must fit onto a single GPU, as this parallelization strategy requires the adjacency matrix `A` to be replicated across all GPUs.
 
@@ -96,20 +128,6 @@ No change from Phase 1 -- in the multi-GPU setting, each GPU is doing almost exa
 
 ## Scalability behavior
 
-**THIS IS REALLY THE ONLY IMPORTANT THING**
-
-| GPUs | Runtime (ms) | Speedup over single-GPU version |
-|------|--------------|---------------------------------|
-| 1    |              |                                 |
-| 2    |              |                                 |
-| 3    |              |                                 |
-| 4    |              |                                 |
-| 5    |              |                                 |
-| 6    |              |                                 |
-| 7    |              |                                 |
-| 8    |              |                                 |
-
 Scaling is predominantly limited by the presence of load imbalance due to the constant size chunking of rows.  To attain perfect scaling, we would want to use a dynamically chunk of the left hand matrix such that the number of nonzero elements is approximately equal, rather than such that the number of _rows_ is approximately equal.  This is a somewhat non-trivial optimization -- we'd need either some heuristic for creating chunks of rows with _approximately_ the same number of nonzero elements _or_ we'd need to add support for accumulating values across GPUs.  However, we do expect that one of these approaches would lead to further improvements in scaling.
 
 The time it takes to copy the input adjacency matrix `A` to each GPU also contributes to some imperfect scaling, though the cost of this operation tends to be small compared to the cost of the actal computation.
-  

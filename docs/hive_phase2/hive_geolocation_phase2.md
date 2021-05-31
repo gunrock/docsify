@@ -8,6 +8,10 @@ From Phase 1 report:
 
 We rely on a Gunrock's multi-GPU `ForALL` operator to implement Geolocation as the entire behavior can be described within a single-loop like structure. The core computation focuses on calculating a spatial median, and for multi-GPU `ForAll`, that work is split such that each GPU gets an equal number of vertices to process. We see a minor speed-up on a DGX-A100 going from 1 to 3 GPUs on a twitter dataset, but in general, due to the communication over the GPU-GPU interconnects for all the neighbors of each vertex, there's a general pattern of slowdown going from 1 GPU to multiple GPUs, and no scaling is observed.
 
+## Scalability Summary
+
+One short phrase.
+
 ## Summary of Gunrock Implementation
 
 The Phase 1 single-GPU implementation is [here](https://gunrock.github.io/docs/#/hive/hive_geolocation).
@@ -32,7 +36,7 @@ make -j16 geo
 
 ### Partitioning the input dataset
 
-Partitioning is handled automatically. Geolocation relies on Gunrock's multi-GPU `ForALL` operator and its frontier vertices are split evenly across all available GPUs (see `ForAll` **(TODO how to link to `hive_forall_phase2.md`?)** 
+Partitioning is handled automatically. Geolocation relies on Gunrock's multi-GPU `ForALL` operator and its frontier vertices are split evenly across all available GPUs (see `ForAll` **(TODO how to link to `hive_forall_phase2.md`?)**
 
 ### Running the application (default configurations)
 
@@ -101,17 +105,4 @@ No change from Phase 1.
 
 ## Scalability behavior
 
-**THIS IS REALLY THE ONLY IMPORTANT THING**
-
-| GPUs | Runtime (ms) | Speedup over single-GPU version |
-|------|--------------|---------------------------------|
-| 1    |              |                                 |
-| 2    |              |                                 |
-| 3    |              |                                 |
-| 4    |              |                                 |
-| 5    |              |                                 |
-| 6    |              |                                 |
-| 7    |              |                                 |
-| 8    |              |                                 |
-
-Scaling is not ideal because we perform too many remote memory accesses causing the GPU to be constantly waiting to compute, therefore wasting the potential that GPU's throughput offers us. We require an efficient way to broadcast the latitudes and longitudes of a vertex to all other GPUs local memory in between each iteration, which can help mitigate this issue and may result in better scaling characteristics. One possible way to achieve this in the future works is by not using a `ForAll` and instead more specialized operators, designed with access patterns of these applications in mind.
+Scaling is not ideal because we perform too many remote memory accesses causing the GPU to be constantly waiting to compute, therefore wasting the potential that GPU's throughput offers us. We require an efficient way to broadcast the latitudes and longitudes of a vertex to all other GPUs' local memory in between each iteration, which can help mitigate this issue and may result in better scaling characteristics. One possible way to achieve this in future work is by not using a `ForAll` and instead more specialized operators, designed with access patterns of these applications in mind.

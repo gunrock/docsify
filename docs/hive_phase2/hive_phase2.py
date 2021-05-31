@@ -32,11 +32,13 @@ files = sorted(
 print(
     """# HIVE Phase 2 Report&colon; Executive Summary
 
-This report is located online at the following URL: <https://gunrock.github.io/docs/hive_phase2/hive_phase2_summary.html>.
+This report is located online at the following URL: <https://gunrock.github.io/docs/hive_phase2/hive_phase2_summary>.
 
 Herein UC Davis produces the following deliverables that it promised to deliver in Phase 2:
 
 _list_
+
+We first [describe how to reproduce our results](hive_phase2/hive_run_apps_phase2) and then [describe the scalability behavior of our ForAll operator](hive_phase2/hive_forall_phase2.md).
 
 Specific notes on applications and scaling follow:
 

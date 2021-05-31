@@ -16,7 +16,7 @@ One or two sentences that summarize "if you had one or two sentences to sum up y
 
 ## Summary of Gunrock Implementation
 
-The Phase 1 single-GPU implementation is [here](../hive/hive_yourworkflowname).
+The Phase 1 single-GPU implementation is [here](../hive/hive_graphSage).
 
 We parallelize across GPUs by ...
 
@@ -33,27 +33,62 @@ Take as long as you need, but this might be short. Don't provide info that is al
 
 (If any.)
 
-## How To Run This Application on DARPA's DGX-1
+## How To Run This Application on NVIDIA's DGX-2
 
-### Prereqs/input
-
-(e.g., "build Gunrock's `dev-refactor` branch with hash X", "this particular dataset needs to be in this particular directory")
-
-Include a github hash for the version you're using.
+### Prerequisites
+```
+git clone  https://github.com/gunrock/gunrock -b multigpu
+mkdir build
+cd build/
+cmake ..
+make -j16 sage
+```
+**Verify git SHA:** `commit d70a73c5167c5b59481d8ab07c98b376e77466cc`
 
 ### Partitioning the input dataset
 
-How did you do this? Command line if appropriate.
+Partitioning is handled automatically as GraphSage relies on Gunrock's multi-GPU `ForALL` operator and its frontier vertices are split evenly across all available GPUs. Please refer to the chapter on [Gunrock's `ForAll` Operator](#gunrocks-forall-operator) for additional information.
 
-<code>
-include a transcript
-</code>
+### Running the application (default configurations)
 
-### Running the application
+From the `build` directory
+
+```
+cd ../examples/sage/
+./hive-mgpu-run.sh
+```
+
+This will launch jobs that sweep across 1 to 16 GPU configurations per dataset and application option as specified in `hive-sage-test.sh`.
+
+  [Running the Applications](#running-the-applications) chapter for details on running with additional datasets
+
+for additional parameter information, review the provided script, and see [Running the Applications](#running-the-applications) chapter for details on running with additional datasets.
 
 #### Datasets
+**Default Locations:**
 
-Provide their names. We will probably make a separate page for them so you can just use their names.
+```
+/home/u00u7u37rw7AjJoA4e357/data/gunrock/hive_datasets/mario-2TB
+/home/u00u7u37rw7AjJoA4e357/data/gunrock/gunrock_dataset/mario-2TB/large
+```
+
+**Names:**
+
+```
+pokec
+dir_gs_twitter
+europe_osm
+```
+
+### Running the application (alternate configurations)
+
+#### hive-mgpu-run.sh
+
+Modify `OUTPUT_DIR` to store generated output and json files in an alternate location.
+
+#### hive-sage-test.sh
+
+Modify `APP_OPTIONS` to specify alternate `--undirected` and `--batch-size` options.  Please see the Phase 1 single-GPU implementation details [here](https://gunrock.github.io/docs/#/hive/hive_graphSage) for additional parameter information, review the provided script, and see [Running the Applications](#running-the-applications) chapter for details on running with additional datasets.
 
 #### Single-GPU (for baseline)
 

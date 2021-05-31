@@ -86,7 +86,7 @@ Modify `OUTPUT_DIR` to store generated output and json files in an alternate loc
 
 A tolerance value can be specified by setting a value in `APP_OPTIONS`
 
-Please review the provided script and see "Running the Applications" chapter for details on running with additional datasets.
+Please review the provided script and see [Running the Applications](#running-the-applications) for information on running with additional datasets.
 
 #### Single-GPU (for baseline)
 

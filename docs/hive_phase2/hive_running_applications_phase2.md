@@ -27,7 +27,7 @@ This script configures SLURM with `NUM_GPUS` to sweep across on a chosen `PARTIT
 ```
 ./hive-mgpu-run.sh 16 dgx2 
 ```
-This runs `hive-application.sh` across 1 to 16 GPUs on the machine partition named `dgx2`.
+This runs `hive-application-test.sh` across 1 to 16 GPUs on the machine partition named `dgx2`.
 
 For some applications, this script might have additional parameter variables that are worth exploring and modifying. Please see the individual HIVE application chapters for more details.
 

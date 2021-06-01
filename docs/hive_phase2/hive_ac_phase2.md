@@ -113,18 +113,6 @@ Partitioning is done automatically inside the code.
 
 Provide their names. We will probably make a separate page for them so you can just use their names.
 
-#### Single-GPU (for baseline)
-
-<code>
-include a transcript
-</code>
-
-#### Multi-GPU
-
-<code>
-include a transcript
-</code>
-
 ### Output
 
 No change from Phase 1.

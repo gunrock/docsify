@@ -92,18 +92,6 @@ Modify `APP_OPTIONS` to specify alternate `--src` and `--max-iter` values.  Plea
 
 Please review the provided script and see [Running the Applications](#running-the-applications) for details on running with additional datasets.
 
-#### Single-GPU (for baseline)
-
-<code>
-include a transcript
-</code>
-
-#### Multi-GPU
-
-<code>
-include a transcript
-</code>
-
 ### Output
 
 (Only include this if it's different than Phase 1. Otherwise: "No change from Phase 1.")

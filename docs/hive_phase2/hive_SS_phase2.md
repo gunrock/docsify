@@ -6,18 +6,18 @@ From the [Phase 1 report](https://gunrock.github.io/docs/#/hive/hive_scan_statis
 
 ## Scalability Summary
 
-Bottlenecked by single-GPU operations
+Bottlenecked by single-GPU and communication
 
 ## Summary of Results
 
-We rely on Gunrock's multi-GPU `ForALL` operator to implement Scan Statistics. We see no scaling and in general performance degrades as we sweep from one to sixteen GPUs. The application is likely bottlenecked by the single GPU intersection operator that requires a two-hop neighborhood lookup.
+We rely on Gunrock's multi-GPU `ForALL` operator to implement Scan Statistics. We see no scaling and in general performance degrades as we sweep from one to sixteen GPUs. The application is likely bottlenecked by the single GPU intersection operator that requires a two-hop neighborhood lookup and accessing an array distributed across multiple GPUs.
 
 ## Summary of Gunrock Implementation
 
 The Phase 1 single-GPU implementation is [here](https://gunrock.github.io/docs/#/hive/hive_scan_statistics)
 
 
-We parallelize Scan Statistics by utilizing a multi-GPU `ForAll` operator that splits the `scan_stats` array evenly across all available GPUs. Furthermore, this application depends on triangle counting and an intersection operator that have not been parallelized. It is not clear that parallelizing these functions would lead to scalability due to the communication patterns they exhibit.
+We parallelize Scan Statistics by utilizing a multi-GPU `ForAll` operator that splits the `scan_stats` array evenly across all available GPUs. Additional information on multi-GPU `ForAll` can be found in [Gunrock's `ForAll` Operator](#gunrocks-forall-operator) section of the report. Furthermore, this application depends on triangle counting and an intersection operator that have not been parallelized (i.e., across multiple GPUs). It is not clear that parallelizing these functions would lead to scalability due to the communication patterns they exhibit.
 
 ### Differences in implementation from Phase 1
 
@@ -95,7 +95,7 @@ No change from Phase 1.
 
 **Single-GPU:** No change from Phase 1.
 
-**Multiple-GPUs:** Performance bottleneck is likely the single-GPU implementation of triangle counting and intersection. Though once parallelized across multiple GPUs, the random access patterns of these functions (e.g., two-hop neighborhoods) would bottleneck communication over NVLink.
+**Multiple-GPUs:** Performance bottleneck is likely the single-GPU implementation of triangle counting and intersection and the need to randomly access an array distributed across multiple GPUs. Though once parallelized across multiple GPUs, the random access patterns of these functions (e.g., two-hop neighborhoods) would bottleneck communication over NVLink.
 
 ## Scalability behavior
 

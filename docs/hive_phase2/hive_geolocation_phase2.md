@@ -16,7 +16,7 @@ One short phrase.
 
 The Phase 1 single-GPU implementation is [here](https://gunrock.github.io/docs/#/hive/hive_geolocation).
 
-We parallelize across GPUs by using multi-GPU `ForAll` operator that splits the latitude and longitude arrays of Geolocation algorithm equally over multiple devices. For more detail on how `ForAll` was written to be multi-GPU can be found "Gunrock's `ForAll` Operator" section of the report. One optimization that we experimented with was using `BlockLoads` and shared memory (fast memory), to collectively load and process latitudes and longitudes in fast memory.
+We parallelize across GPUs by using multi-GPU `ForAll` operator that splits the latitude and longitude arrays of Geolocation algorithm equally over multiple devices. For more detail on how `ForAll` was written to be multi-GPU can be found [Gunrock's `ForAll` Operator](#gunrocks-forall-operator) section of the report. One optimization that we experimented with was using `BlockLoads` and shared memory (fast memory), to collectively load and process latitudes and longitudes in fast memory.
 
 ### Differences in implementation from Phase 1
 

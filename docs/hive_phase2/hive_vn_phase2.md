@@ -4,7 +4,7 @@ The [Phase 1 writeup]((../hive/hive_vn.md)) contains a detailed description of t
 
 ## Scalability Summary
 
-One short phrase.
+We observe weak scaling
 
 ## Summary of Results
 

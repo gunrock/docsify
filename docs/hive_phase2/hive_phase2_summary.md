@@ -32,7 +32,7 @@ We rely on Gunrock's multi-GPU `ForALL` operator to implement Scan Statistics. W
 
 ## [App: GraphSAGE](#graphsage) ([HTML](https://gunrock.github.io/docs/#/hive_phase2/hive_Sage_phase2))
 
-We rely on Gunrock's multi-GPU `ForALL` operator to implement GraphSAGE. We see no scaling as we sweep from one to sixteen GPUs due to communication over GPU interconnects. 
+We rely on Gunrock's multi-GPU `ForALL` operator to implement GraphSAGE. We see no scaling as we sweep from one to sixteen GPUs due to communication over GPU interconnects.
 
 ## [App: Application Classification](#application-classification) ([HTML](https://gunrock.github.io/docs/#/hive_phase2/hive_ac_phase2))
 
@@ -75,4 +75,4 @@ We implemented `vertex_nomination` as a standalone CUDA program, and achieve goo
 
 ---
 
-We also produce web versions of our [scalability plots](https://gunrock.github.io/docs/#/hive_phase2/plots/) and [scalability tables of results](#/hive_phase2/plots/).
+We also produce web versions of our [scalability plots](https://gunrock.github.io/docs/#/hive_phase2/plots/) and [scalability tables of results](https://gunrock.github.io/docs/#/hive_phase2/tables/).

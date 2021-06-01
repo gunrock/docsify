@@ -117,12 +117,8 @@ No change from Phase 1.
 
 **Single-GPU:** No change from Phase 1.
 
-**Multiple-GPUs:** Performance bottleneck is the remote memory accesses from one GPU to another GPU's memory through NVLink. **SDP can we say anything else once we have the graphs?**
+**Multiple-GPUs:** Performance bottleneck is the remote memory accesses from one GPU to another GPU's memory through NVLink.
 
 ## Scalability behavior
 
-**THIS IS REALLY THE ONLY IMPORTANT THING**
-
-Why is scaling not ideal?
-
-What limits our scalability?
+GraphSearch scales poorly due to low compute (not enough computation per memory access) and high communication costs due to random access patterns (across multiple GPUs) characteristic to the underlying "random walk" algorithm used.

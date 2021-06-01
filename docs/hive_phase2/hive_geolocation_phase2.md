@@ -10,7 +10,7 @@ We rely on a Gunrock's multi-GPU `ForALL` operator to implement Geolocation as t
 
 ## Scalability Summary
 
-One short phrase.
+Bottlenecked by network bandwidth between GPUs
 
 ## Summary of Gunrock Implementation
 

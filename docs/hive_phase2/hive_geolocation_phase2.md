@@ -36,7 +36,7 @@ make -j16 geo
 
 ### Partitioning the input dataset
 
-Partitioning is handled automatically. Geolocation relies on Gunrock's multi-GPU `ForALL` operator and its frontier vertices are split evenly across all available GPUs (see `ForAll` **(TODO how to link to `hive_forall_phase2.md`?)**
+Partitioning is handled automatically. Geolocation relies on Gunrock's multi-GPU `ForALL` operator and its frontier vertices are split evenly across all available GPUs (see [Gunrock's `ForAll` Operator](#gunrocks-forall-operator) for more details).
 
 ### Running the application (default configurations)
 
@@ -47,7 +47,7 @@ cd ../examples/geo/
 ./hive-mgpu-run.sh
 ```
 
-This will launch jobs that sweep across 1 to 16 GPU configurations per dataset and application option as specified in `hive-geo-test.sh` **(see `hive_run_apps_phase2.md` for more info)**.
+This will launch jobs that sweep across 1 to 16 GPU configurations per dataset and application option as specified in `hive-geo-test.sh`. Please see [Running the Applications](#running-the-applications) for more information.
 
 
 #### Datasets
@@ -75,19 +75,7 @@ Modify `OUTPUT_DIR` to store generated output and json files in an alternate loc
 
 #### hive-geo-test.sh
 
-Please review the provided script and see "Running the Applications" chapter for details on running with additional datasets.
-
-#### Single-GPU (for baseline)
-
-<code>
-include a transcript
-</code>
-
-#### Multi-GPU
-
-<code>
-include a transcript
-</code>
+Please review the provided script and see the [Running the Applications](#running-the-applications) chapter for details on running with additional datasets.
 
 ### Output
 

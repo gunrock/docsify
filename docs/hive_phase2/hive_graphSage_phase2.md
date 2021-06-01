@@ -12,26 +12,17 @@ Bottlenecked by network bandwidth between GPUs
 
 ## Summary of Results
 
-One or two sentences that summarize "if you had one or two sentences to sum up your whole effort, what would you say". I will copy this directly to the high-level executive summary in the first page of the report. Talk to JDO about this. Write it last, probably.
+We rely on Gunrock's multi-GPU `ForALL` operator to implement GraphSAGE. We see no scaling as we sweep from one to sixteen GPUs due to communication over GPU interconnects. 
 
 ## Summary of Gunrock Implementation
 
 The Phase 1 single-GPU implementation is [here](../hive/hive_graphSage).
 
-We parallelize across GPUs by ...
-
-The multi-GPU implementation differs from the single-GPU implementation in the following way:
-
-- A
-- B
-- C
-
-
-Take as long as you need, but this might be short. Don't provide info that is already in the Phase 1 report.
+We parallelize across GPUs by utilizing a multi-GPU `For-All` operator and evenly distribute relevant arrays across multiple GPUs. Please see [Gunrock's `ForAll` Operator](#gunrocks-forall-operator) for more details.
 
 ### Differences in implementation from Phase 1
 
-(If any.)
+No change from Phase 1.
 
 ## How To Run This Application on NVIDIA's DGX-2
 
@@ -92,44 +83,23 @@ Modify `APP_OPTIONS` to specify alternate `--undirected` and `--batch-size` opti
 
 ### Output
 
-(Only include this if it's different than Phase 1. Otherwise: "No change from Phase 1.")
-
-What is output when you run? Output file? JSON? Anything else? How do you extract relevant statistics from the output?
-
-How do you make sure your output is correct/meaningful? (What are you comparing against?)
+No change from Phase 1.
 
 ## Performance and Analysis
 
-(Only include this if it's different than Phase 1. Otherwise: "No change from Phase 1.")
+No change from Phase 1.
 
-How do you measure performance? What are the relevant metrics? Runtime? Throughput? Some sort of accuracy/quality metric?
 
 ### Implementation limitations
 
-(Only include this if it's different than Phase 1. Otherwise: "No change from Phase 1.")
-
-e.g.:
-
-- Size of dataset that fits into GPU memory (what is the specific limitation?)
-- Restrictions on the type/nature of the dataset
-
-### Comparison against existing implementations
-
-(Delete this if there's nothing different from Phase 1.)
-
-- Reference implementation (python? Matlab?)
-- OpenMP reference
-
-Comparison is both performance and accuracy/quality.
+No change from Phase 1.
 
 ### Performance limitations
 
-(Only include this if it's different than Phase 1. Otherwise: "No change from Phase 1.")
+**Single-GPU:** No change from Phase 1.
 
-e.g., random memory access?
+**Multiple-GPUs:** Performance bottleneck is the remote memory accesses from one GPU to another GPU's memory through NVLink. 
 
 ## Scalability behavior
 
-Why is scaling not ideal?
-
-What limits our scalability?
+We observe no scaling with the current GraphSAGE implementation. Please see the chapter on [Gunrock's `ForAll` Operator](#gunrocks-forall-operator) for a discussion on future directions around more specialized operators to be designed with communication patterns in mind.

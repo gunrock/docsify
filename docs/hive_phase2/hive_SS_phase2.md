@@ -48,7 +48,7 @@ cd ../examples/ss/
 ./hive-mgpu-run.sh
 ```
 
-This will launch jobs that sweep across 1 to 16 GPU configurations per dataset and application option as specified in `hive-ss-test.sh` **(see `hive_run_apps_phase2.md` for more info)**.
+This will launch jobs that sweep across 1 to 16 GPU configurations per dataset and application option as specified in `hive-ss-test.sh`. See [Running the Applications](#running-the-applications) for more details.
 
 
 #### Datasets

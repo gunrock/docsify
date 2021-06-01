@@ -73,7 +73,7 @@ with open("hive_phase2_summary.md", "a") as dest:
             summary = summary.group(1)
             print(linkify(title))
             summaries += f"## [App: {title}](#{linkify(title)}) ([HTML](hive_phase2/{fname}))\n\n{summary}\n\n"
-    dest.write(summaries)
+    dest.write("\n" + summaries)
     dest.write(
         """---
 

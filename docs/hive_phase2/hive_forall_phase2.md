@@ -12,7 +12,7 @@ void ForAll(ArrayT* array, ApplyLambda apply, std::size_t size) {
 ```
 
 ## Summary of Multi-GPU `ForAll`
-In this write-up, we show how Gunrock's `ForAll` operator can be extended to support multiple GPU execution. We also explain what kind of scaling is expected with the new multi-GPU `ForAll` versus the kind of scaling we observe in real-world problems (such as the HIVE applications). We elaborate on what the performance bottlenecks are for our current and what can we do better in the future with specialized-scalable operators targetting interesting patterns present in these applications.
+In this write-up, we show how Gunrock's `ForAll` operator can be extended to support multiple GPU execution. We also explain what kind of scaling is expected with the new multi-GPU `ForAll` versus the kind of scaling we observe in real-world problems (such as the HIVE applications). We elaborate on what the performance bottlenecks are for our current implementation and what can we do better in the future with specialized-scalable operators targetting interesting patterns present in these applications.
 
 ## `ForAll` Implementation
 ### Approach to Single-GPU

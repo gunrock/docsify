@@ -90,18 +90,6 @@ Modify `OUTPUT_DIR` to store generated output and json files in an alternate loc
 
 Modify `APP_OPTIONS` to specify alternate `--undirected` and `--batch-size` options.  Please see the Phase 1 single-GPU implementation details [here](https://gunrock.github.io/docs/#/hive/hive_graphSage) for additional parameter information, review the provided script, and see [Running the Applications](#running-the-applications) chapter for details on running with additional datasets.
 
-#### Single-GPU (for baseline)
-
-<code>
-include a transcript
-</code>
-
-#### Multi-GPU
-
-<code>
-include a transcript
-</code>
-
 ### Output
 
 (Only include this if it's different than Phase 1. Otherwise: "No change from Phase 1.")

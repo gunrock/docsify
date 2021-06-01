@@ -12,26 +12,19 @@ Bottlenecked by network bandwidth between GPUs
 
 ## Summary of Results
 
-One or two sentences that summarize "if you had one or two sentences to sum up your whole effort, what would you say". I will copy this directly to the high-level executive summary in the first page of the report. Talk to JDO about this. Write it last, probably.
+We rely on a Gunrock's multi-GPU `ForALL` operator to implement GraphSearch as the entire behavior can be described within a single-loop like structure. The core computation focuses on determining which neighbor to visit next based on uniform, greedy, or stochastic functions. Each GPU is given an equal number of vertices to process. No scaling is observed, and in general we see a pattern of decreased performance as we move from 1 to 16 GPUs due to random neighbor access across GPU interconnects.
+
+
 
 ## Summary of Gunrock Implementation
 
 The Phase 1 single-GPU implementation is [here](https://gunrock.github.io/docs/#/hive/hive_graphsearch).
 
-We parallelize across GPUs by ...
-
-The multi-GPU implementation differs from the single-GPU implementation in the following way:
-
-- A
-- B
-- C
-
-
-Take as long as you need, but this might be short. Don't provide info that is already in the Phase 1 report.
+We parallelize across GPUs by using a multi-GPU `ForAll` operator that splits arrays equally across GPUs. For more detail on how `ForAll` was written to be multi-GPU can be found in [Gunrock's `ForAll` Operator](#gunrocks-forall-operator) section of the report.
 
 ### Differences in implementation from Phase 1
 
-(If any.)
+No change from Phase 1.
 
 ## How To Run This Application on NVIDIA's DGX-2
 
@@ -118,21 +111,7 @@ No change from Phase 1.
 
 ### Implementation limitations
 
-(Only include this if it's different than Phase 1. Otherwise: "No change from Phase 1.")
-
-e.g.:
-
-- Size of dataset that fits into GPU memory (what is the specific limitation?)
-- Restrictions on the type/nature of the dataset
-
-### Comparison against existing implementations
-
-(Delete this if there's nothing different from Phase 1.)
-
-- Reference implementation (python? Matlab?)
-- OpenMP reference
-
-Comparison is both performance and accuracy/quality.
+No change from Phase 1.
 
 ### Performance limitations
 

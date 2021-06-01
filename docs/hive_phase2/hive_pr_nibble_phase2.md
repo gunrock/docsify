@@ -1,6 +1,6 @@
 # Local Graph Clustering (LGC)
 
-The [Phase 1 writeup]((../hive/hive_pr_nibble.md)) contains a detailed description of the application.
+The [Phase 1 writeup]((https://gunrock.github.io/docs/#/hive/hive_pr_nibble)) contains a detailed description of the application.
 
 From the Phase 1 writeup:
 
@@ -20,7 +20,7 @@ We rely on Gunrock's multi-GPU `ForALL` operator to implement Local Graph Cluste
 
 ## Summary of Gunrock Implementation
 
-The Phase 1 single-GPU implementation is [here](../hive/hive_pr_nibble).
+The Phase 1 single-GPU implementation is [here](https://gunrock.github.io/docs/#/hive/hive_pr_nibble).
 
 We parallelize Local Graph Clustering by utilizing a multi-GPU `ForAll` operator that splits necessary arrays evenly across multiple GPUs. Additional information on multi-GPU `ForAll` can be found in [Gunrock's `ForAll` Operator](#gunrocks-forall-operator) section of the report. In addition, this application depends on single-GPU implementations of Gunrock's advance and filter operations.
 

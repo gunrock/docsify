@@ -1,6 +1,6 @@
 # Community Detection (Louvain)
 
-The [Phase 1 writeup]((../hive/hive_louvain.md)) contains a detailed description of the application.
+The [Phase 1 writeup]((https://gunrock.github.io/docs/#/hive/hive_louvain)) contains a detailed description of the application.
 
 From the Phase 1 writeup:
 
@@ -16,7 +16,7 @@ The application has a segmentation fault and is currently nonfunctional.
 
 ## Summary of Gunrock Implementation
 
-The Phase 1 single-GPU implementation is [here](../hive/hive_louvain).
+The Phase 1 single-GPU implementation is [here](https://gunrock.github.io/docs/#/hive/hive_louvain).
 
 We parallelize across GPUs by utilizing Gunrock's multi-GPU `ForAll` operator described [here](#gunrocks-forall-operator).
 

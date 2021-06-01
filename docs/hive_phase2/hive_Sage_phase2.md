@@ -1,6 +1,6 @@
 # GraphSAGE
 
-The [Phase 1 writeup]((../hive/hive_graphSage.md)) contains a detailed description of the application.
+The [Phase 1 writeup]((https://gunrock.github.io/docs/#/hive/hive_graphSage)) contains a detailed description of the application.
 
 From the Phase 1 writeup:
 
@@ -12,11 +12,11 @@ Bottlenecked by network bandwidth between GPUs
 
 ## Summary of Results
 
-We rely on Gunrock's multi-GPU `ForALL` operator to implement GraphSAGE. We see no scaling as we sweep from one to sixteen GPUs due to communication over GPU interconnects. 
+We rely on Gunrock's multi-GPU `ForALL` operator to implement GraphSAGE. We see no scaling as we sweep from one to sixteen GPUs due to communication over GPU interconnects.
 
 ## Summary of Gunrock Implementation
 
-The Phase 1 single-GPU implementation is [here](../hive/hive_graphSage).
+The Phase 1 single-GPU implementation is [here](https://gunrock.github.io/docs/#/hive/hive_graphSage).
 
 We parallelize across GPUs by utilizing a multi-GPU `For-All` operator and evenly distribute relevant arrays across multiple GPUs. Please see [Gunrock's `ForAll` Operator](#gunrocks-forall-operator) for more details.
 
@@ -98,7 +98,7 @@ No change from Phase 1.
 
 **Single-GPU:** No change from Phase 1.
 
-**Multiple-GPUs:** Performance bottleneck is the remote memory accesses from one GPU to another GPU's memory through NVLink. 
+**Multiple-GPUs:** Performance bottleneck is the remote memory accesses from one GPU to another GPU's memory through NVLink.
 
 ## Scalability behavior
 

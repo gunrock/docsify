@@ -1,6 +1,6 @@
 # Vertex Nomination
 
-The [Phase 1 writeup]((../hive/hive_vn.md)) contains a detailed description of the application.  The most important point to note is that `vertex_nomination` is a "multiple-source shortest paths" algorithm.  The algorithm description and implementation are identical to canonical single-source shorest paths (SSSP), with the minor modification that the search starts from multiple vertices instead of one.
+The [Phase 1 writeup]((https://gunrock.github.io/docs/#/hive/hive_vn)) contains a detailed description of the application.  The most important point to note is that `vertex_nomination` is a "multiple-source shortest paths" algorithm.  The algorithm description and implementation are identical to canonical single-source shorest paths (SSSP), with the minor modification that the search starts from multiple vertices instead of one.
 
 ## Scalability Summary
 
@@ -12,7 +12,7 @@ We implemented `vertex_nomination` as a standalone CUDA program, and achieve goo
 
 ## Summary of Gunrock Implementation and Differences from Phase 1
 
-The Phase 1 single-GPU implementation is [here](../hive/hive_vn.md).
+The Phase 1 single-GPU implementation is [here](https://gunrock.github.io/docs/#/hive/hive_vn).
 
 In Phase 1, `vertex_nomination` was implemented for a single GPU using the Gunrock framework.  However, The Phase 2 multi-GPU implementation required some functionality that is not currently available in Gunrock, so we implemented it as a standalone CUDA program (using the `thrust` and `NCCL` libraries).
 

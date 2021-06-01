@@ -1,6 +1,6 @@
 # Graph Projections
 
-The [Phase 1 writeup]((../hive/hive_proj.md)) contains a detailed description of the application.
+The [Phase 1 writeup]((https://gunrock.github.io/docs/#/hive/hive_proj)) contains a detailed description of the application.
 
 From the Phase 1 writeup:
 
@@ -20,7 +20,7 @@ We implemented a multi-GPU version of sparse-sparse matrix multiplication, based
 
 ## Summary of Gunrock Implementation
 
-The Phase 1 single-GPU implementation is [here](../hive/hive_proj.md).
+The Phase 1 single-GPU implementation is [here](https://gunrock.github.io/docs/#/hive/hive_proj).
 
 In Phase 1, we had two implementations: one using GraphBLAS and one using Gunrock.  The GraphBLAS implementation is more obviously distributed across GPUs, so we build off of that implementation.
 

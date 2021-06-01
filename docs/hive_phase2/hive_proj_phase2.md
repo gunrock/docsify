@@ -12,7 +12,7 @@ Note that mathematically this reduces to a sparse-sparse matrix multiplication o
 
 ## Scalability Summary
 
-One short phrase.
+Limited by load imbalance
 
 ## Summary of Results
 

@@ -79,7 +79,7 @@ Please review the provided script and see "Running the Applications" chapter for
 
 ### Output
 
-"No change from Phase 1.
+No change from Phase 1.
 
 ## Performance and Analysis
 

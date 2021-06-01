@@ -10,7 +10,7 @@ That is, given two graphs `A` and `B`, we seek to find the permutation matrix `P
 
 ## Scalability Summary
 
-One short phrase.
+We observe great scaling
 
 ## Summary of Results
 

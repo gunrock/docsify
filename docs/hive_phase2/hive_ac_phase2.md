@@ -1,6 +1,6 @@
 # Application Classification
 
-The [Phase 1 writeup]((../hive/hive_application_classification.md)) contains a detailed description of the application.
+The [Phase 1 writeup]((https://gunrock.github.io/docs/#/hive/hive_application_classification)) contains a detailed description of the application.
 
 From the Phase 1 writeup:
 
@@ -16,7 +16,7 @@ We re-forumlate the `application_classification` workload to improve memory loca
 
 ## Summary of Implementation
 
-The Phase 1 single-GPU implementation is [here](../hive/hive_application_classification.md).
+The Phase 1 single-GPU implementation is [here](https://gunrock.github.io/docs/#/hive/hive_application_classification).
 
 `application_classification` consists of two regions:
   - Region 1: initialization of distance and feature matrices
@@ -38,14 +38,14 @@ Because it is not a canonical graph workload, `application_classification` is wr
 The setup process assumes [Anaconda](https://www.anaconda.com/products/individual) is already installed.
 
 ```
-git clone \ 
-	https://github.com/porumbes/application_classification \
-	-b dev/mgpu_manual_reduce
+git clone \
+    https://github.com/porumbes/application_classification \
+    -b dev/mgpu_manual_reduce
 
 cd application_classification
 
 # prep binary input data
-./hive-gen-data.sh 
+./hive-gen-data.sh
 
 # build
 make -j16
@@ -89,41 +89,19 @@ JohnsHopkins
 
 Modify `OUTPUT_DIR` to store generated output and json files in an alternate location.
 
-#### hive-gen-data.sh 
+#### hive-gen-data.sh
 
-Unlike most of the other applications, Application Classification makes use of an additional script, `hive-gen-data.sh`, to generate necessary input. Please review the chapter on [Running the Applications](#running-the-applications) ror information on running with additional datasets.
+Unlike most of the other applications, Application Classification makes use of an additional script, `hive-gen-data.sh`, to generate necessary input. Please review the chapter on [Running the Applications](#running-the-applications) for information on running with additional datasets.
 
 #### hive-ac-test.sh
 
-Please see the Phase 1 single-GPU implementation details [here](https://gunrock.github.io/docs/#/hive/hive_application_classification) for additional parameter information and review the provided script. 
+Please see the Phase 1 single-GPU implementation details [here](https://gunrock.github.io/docs/#/hive/hive_application_classification) for additional parameter information and review the provided script.
 
 Given the setup in `hive-gen-data.sh`, modify the key-value store, `DATA_PATTERN` with the generated `rmat18_data.bin` as the key and the generated `georgiyPattern_pattern.bin` as the value. For example:
 
 ```
 DATA_PATTERN["rmat18"]="georgiyPattern"
 ```
-
-### Partitioning the input dataset
-
-Partitioning is done automatically inside the code.
-
-### Running the application
-
-#### Datasets
-
-Provide their names. We will probably make a separate page for them so you can just use their names.
-
-#### Single-GPU (for baseline)
-
-<code>
-include a transcript
-</code>
-
-#### Multi-GPU
-
-<code>
-include a transcript
-</code>
 
 ### Output
 
@@ -146,17 +124,6 @@ From the perspective of a single GPU, there is no change from Phase 1.
 From the perspective of the multi-GPU system, we are primarily bottlenecked by bandwidth across the NVLink network, which impacts both the runtime of the row scatter operation and the Region 2 kernels that require communication.  This could be (partially) mitigated by additional optimizations -- more details below.
 
 ## Scalability behavior
-
-| GPUs | Runtime/Region 1 (ms) | Runtime/Scatter (ms) | Runtime/Region 2 (ms) |
-|------|-----------------------|----------------------| ----------------------|
-| 1    |                       |                      |                       |
-| 2    |                       |                      |                       |
-| 3    |                       |                      |                       |
-| 4    |                       |                      |                       |
-| 5    |                       |                      |                       |
-| 6    |                       |                      |                       |
-| 7    |                       |                      |                       |
-| 8    |                       |                      |                       |
 
 Scaling of the whole workload's runtime is not ideal, primarily because:
   a) because Region 1 is not parallelized across GPUs

@@ -1,31 +1,30 @@
 # GraphSearch
 
-!> JDO notes, delete these when you copy this to `hive_yourworkflowname`: The goal of this report is to be useful to DARPA and to your colleagues. This is not a research paper. Be very honest. If there are limitations, spell them out. If something is broken or works poorly, say so. Above all else, make sure that the instructions to replicate the results you report are good instructions, and the process to replicate are as simple as possible; we want anyone to be able to replicate these results in a straightforward way.
+The Phase 1 report for GraphSearch can be found [here](https://gunrock.github.io/docs/#/hive/hive_graphsearch).
 
-One-paragraph summary of application, written at a high level.
+> The graph search (GS) workflow is a walk-based method that searches a graph for nodes that score highly on some arbitrary indicator of interest.
+
+>The use case given by the HIVE government partner was sampling a graph: given some seed nodes, and some model that can score a node as "interesting", find lots of "interesting" nodes as quickly as possible. Their algorithm attempts to solve this problem by implementing several different strategies for walking the graph.
+
+## Scalability Summary
+
+Bottlenecked by network bandwidth between GPUs
 
 ## Summary of Results
 
-One or two sentences that summarize "if you had one or two sentences to sum up your whole effort, what would you say". I will copy this directly to the high-level executive summary in the first page of the report. Talk to JDO about this. Write it last, probably.
+We rely on a Gunrock's multi-GPU `ForALL` operator to implement GraphSearch as the entire behavior can be described within a single-loop like structure. The core computation focuses on determining which neighbor to visit next based on uniform, greedy, or stochastic functions. Each GPU is given an equal number of vertices to process. No scaling is observed, and in general we see a pattern of decreased performance as we move from 1 to 16 GPUs due to random neighbor access across GPU interconnects.
+
+
 
 ## Summary of Gunrock Implementation
 
-The Phase 1 single-GPU implementation is [here](../hive/hive_yourworkflowname).
+The Phase 1 single-GPU implementation is [here](https://gunrock.github.io/docs/#/hive/hive_graphsearch).
 
-We parallelize across GPUs by ...
-
-The multi-GPU implementation differs from the single-GPU implementation in the following way:
-
-- A
-- B
-- C
-
-
-Take as long as you need, but this might be short. Don't provide info that is already in the Phase 1 report.
+We parallelize across GPUs by using a multi-GPU `ForAll` operator that splits arrays equally across GPUs. For more detail on how `ForAll` was written to be multi-GPU can be found in [Gunrock's `ForAll` Operator](#gunrocks-forall-operator) section of the report.
 
 ### Differences in implementation from Phase 1
 
-(If any.)
+No change from Phase 1.
 
 ## How To Run This Application on NVIDIA's DGX-2
 
@@ -56,13 +55,13 @@ cd ../examples/rw/
 ./hive-mgpu-run.sh
 ```
 
-This will launch jobs that sweep across 1 to 16 GPU configurations per dataset and application option as specified across three different test scripts: 
+This will launch jobs that sweep across 1 to 16 GPU configurations per dataset and application option as specified across three different test scripts:
 
 * `hive-rw-undirected-uniform.sh`
 * `hive-rw-directed-uniform.sh`
 * `hive-rw-directed-greedy.sh`
 
- **(see `hive_run_apps_phase2.md` for more info)**.
+Please see [Running the Applications](#running-the-applications) for additional information.
 
 #### Datasets
 **Default Locations:**
@@ -74,81 +73,39 @@ This will launch jobs that sweep across 1 to 16 GPU configurations per dataset a
 **Names:**
 
 ```
-dir_gs_twitter 
+dir_gs_twitter
 gs_twitter.values
 ```
 ### Running the application (alternate configurations)
 
-This application relies on Gunrock's random walk `rw` primitive. Modify `WALK_MODE` to control the application's `--walk-mode` parameter and specify `--undirected` as `true` or `false`. Please see the Phase 1 single-GPU implementation details [here](https://gunrock.github.io/docs/#/hive/hive_graphsearch) for additional parameter information.
+#### hive-mgpu-run.sh
 
 Modify `OUTPUT_DIR` to store generated output and json files in an alternate location.
 
+#### Additional hive-rw-\*.sh scripts
 
-#### Single-GPU (for baseline)
-
-<code>
-include a transcript
-</code>
-
-#### Multi-GPU
-
-<code>
-include a transcript
-</code>
+This application relies on Gunrock's random walk `rw` primitive. Modify `WALK_MODE` to control the application's `--walk-mode` parameter and specify `--undirected` as `true` or `false`. Please see the Phase 1 single-GPU implementation details [here](https://gunrock.github.io/docs/#/hive/hive_graphsearch) for additional parameter information.
 
 ### Output
 
-(Only include this if it's different than Phase 1. Otherwise: "No change from Phase 1.")
+No change from Phase 1.
 
-What is output when you run? Output file? JSON? Anything else? How do you extract relevant statistics from the output?
-
-How do you make sure your output is correct/meaningful? (What are you comparing against?)
 
 ## Performance and Analysis
 
-(Only include this if it's different than Phase 1. Otherwise: "No change from Phase 1.")
+No change from Phase 1.
 
-How do you measure performance? What are the relevant metrics? Runtime? Throughput? Some sort of accuracy/quality metric?
 
 ### Implementation limitations
 
-(Only include this if it's different than Phase 1. Otherwise: "No change from Phase 1.")
-
-e.g.:
-
-- Size of dataset that fits into GPU memory (what is the specific limitation?)
-- Restrictions on the type/nature of the dataset
-
-### Comparison against existing implementations
-
-(Delete this if there's nothing different from Phase 1.)
-
-- Reference implementation (python? Matlab?)
-- OpenMP reference
-
-Comparison is both performance and accuracy/quality.
+No change from Phase 1.
 
 ### Performance limitations
 
-(Only include this if it's different than Phase 1. Otherwise: "No change from Phase 1.")
+**Single-GPU:** No change from Phase 1.
 
-e.g., random memory access?
+**Multiple-GPUs:** Performance bottleneck is the remote memory accesses from one GPU to another GPU's memory through NVLink.
 
 ## Scalability behavior
 
-**THIS IS REALLY THE ONLY IMPORTANT THING**
-
-| GPUs | Runtime (ms) | Speedup over single-GPU version |
-|------|--------------|---------------------------------|
-| 1    |              |                                 |
-| 2    |              |                                 |
-| 3    |              |                                 |
-| 4    |              |                                 |
-| 5    |              |                                 |
-| 6    |              |                                 |
-| 7    |              |                                 |
-| 8    |              |                                 |
-
-Why is scaling not ideal?
-
-What limits our scalability?
+GraphSearch scales poorly due to low compute (not enough computation per memory access) and high communication costs due to random access patterns (across multiple GPUs) characteristic to the underlying "random walk" algorithm used.

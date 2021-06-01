@@ -68,6 +68,12 @@
   }).catch(console.error);
 
 
+  var spec_proj = "https://raw.githubusercontent.com/gunrock/docs/master/docs/hive_phase2/plots/proj.json";
+  vegaEmbed('#vis_proj', spec_proj, opt=svgopt).then(function(result) {
+    // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+  }).catch(console.error);
+
+
   var spec_rw = "https://raw.githubusercontent.com/gunrock/docs/master/docs/hive_phase2/plots/rw.json";
   vegaEmbed('#vis_rw', spec_rw, opt=svgopt).then(function(result) {
     // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
@@ -155,6 +161,9 @@
 
 
 <div id="vis_pr_nibble"></div>
+
+
+<div id="vis_proj"></div>
 
 
 <div id="vis_rw"></div>

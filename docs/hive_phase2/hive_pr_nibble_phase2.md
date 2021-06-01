@@ -1,31 +1,32 @@
 # Local Graph Clustering (LGC)
 
-!> JDO notes, delete these when you copy this to `hive_yourworkflowname`: The goal of this report is to be useful to DARPA and to your colleagues. This is not a research paper. Be very honest. If there are limitations, spell them out. If something is broken or works poorly, say so. Above all else, make sure that the instructions to replicate the results you report are good instructions, and the process to replicate are as simple as possible; we want anyone to be able to replicate these results in a straightforward way.
+The [Phase 1 writeup]((https://gunrock.github.io/docs/#/hive/hive_pr_nibble)) contains a detailed description of the application.
 
-One-paragraph summary of application, written at a high level.
+From the Phase 1 writeup:
+
+>>From [Andersen et al.](https://projecteuclid.org/euclid.im/1243430567):
+
+>> A local graph partitioning algorithm finds a cut near a specified starting vertex, with a running time that depends largely on the size of the small side of the cut, rather than the size of the input graph.
+
+>A common algorithm for local graph clustering is called PageRank-Nibble (PRNibble), which solves the L1 regularized PageRank problem. We implement a coordinate descent variant of this algorithm found in [Fountoulakis et al.](https://arxiv.org/pdf/1602.01886.pdf), which uses the fast iterative shrinkage-thresholding algorithm (FISTA).
+
+## Scalability Summary
+
+Bottlenecked by single-GPU and communication
 
 ## Summary of Results
 
-One or two sentences that summarize "if you had one or two sentences to sum up your whole effort, what would you say". I will copy this directly to the high-level executive summary in the first page of the report. Talk to JDO about this. Write it last, probably.
+We rely on Gunrock's multi-GPU `ForALL` operator to implement Local Graph Clustering and observe no scaling as we increase from one to sixteen GPUs. The application is likely bottlenecked by single-GPU filter and advance operators and communication across NVLink necessary to access arrays distributed across GPUs.
 
 ## Summary of Gunrock Implementation
 
-The Phase 1 single-GPU implementation is [here](../hive/hive_yourworkflowname).
+The Phase 1 single-GPU implementation is [here](https://gunrock.github.io/docs/#/hive/hive_pr_nibble).
 
-We parallelize across GPUs by ...
-
-The multi-GPU implementation differs from the single-GPU implementation in the following way:
-
-- A
-- B
-- C
-
-
-Take as long as you need, but this might be short. Don't provide info that is already in the Phase 1 report.
+We parallelize Local Graph Clustering by utilizing a multi-GPU `ForAll` operator that splits necessary arrays evenly across multiple GPUs. Additional information on multi-GPU `ForAll` can be found in [Gunrock's `ForAll` Operator](#gunrocks-forall-operator) section of the report. In addition, this application depends on single-GPU implementations of Gunrock's advance and filter operations.
 
 ### Differences in implementation from Phase 1
 
-(If any.)
+No change from Phase 1.
 
 ## How To Run This Application on NVIDIA's DGX-2
 
@@ -37,7 +38,7 @@ cd build/
 cmake ..
 make -j16 pr_nibble
 ```
-**Verify git SHA:** `commit d70a73c5167c5b59481d8ab07c98b376e77466cc`
+**Verify git SHA:** `commit 3e7d4f29f0222e9fd1f4e768269b704d6ebcd02c`
 
 ### Partitioning the input dataset
 
@@ -52,7 +53,7 @@ cd ../examples/pr_nibble/
 ./hive-mgpu-run.sh
 ```
 
-This will launch jobs that sweep across 1 to 16 GPU configurations per dataset and application option as specified in `hive-pr_nibble-test.sh` **(see `hive_run_apps_phase2.md` for more info)**.
+This will launch jobs that sweep across 1 to 16 GPU configurations per dataset and application option as specified in `hive-pr_nibble-test.sh`.  See [Running the Applications](#running-the-applications) for additional information.
 
 
 #### Datasets
@@ -80,73 +81,28 @@ Modify `OUTPUT_DIR` to store generated output and json files in an alternate loc
 
 Modify `APP_OPTIONS` to specify alternate `--src` and `--max-iter` values.  Please see the Phase 1 single-GPU implementation details [here](https://gunrock.github.io/docs/#/hive/hive_pr_nibble) for additional parameter information.
 
-Please review the provided script and see "Running the Applications" chapter for details on running with additional datasets.
-
-#### Single-GPU (for baseline)
-
-<code>
-include a transcript
-</code>
-
-#### Multi-GPU
-
-<code>
-include a transcript
-</code>
+Please review the provided script and see [Running the Applications](#running-the-applications) for details on running with additional datasets.
 
 ### Output
 
-(Only include this if it's different than Phase 1. Otherwise: "No change from Phase 1.")
-
-What is output when you run? Output file? JSON? Anything else? How do you extract relevant statistics from the output?
-
-How do you make sure your output is correct/meaningful? (What are you comparing against?)
+No change from Phase 1.
 
 ## Performance and Analysis
 
-(Only include this if it's different than Phase 1. Otherwise: "No change from Phase 1.")
+No change from Phase 1.
 
-How do you measure performance? What are the relevant metrics? Runtime? Throughput? Some sort of accuracy/quality metric?
 
 ### Implementation limitations
 
-(Only include this if it's different than Phase 1. Otherwise: "No change from Phase 1.")
-
-e.g.:
-
-- Size of dataset that fits into GPU memory (what is the specific limitation?)
-- Restrictions on the type/nature of the dataset
-
-### Comparison against existing implementations
-
-(Delete this if there's nothing different from Phase 1.)
-
-- Reference implementation (python? Matlab?)
-- OpenMP reference
-
-Comparison is both performance and accuracy/quality.
+No change from Phase 1.
 
 ### Performance limitations
 
-(Only include this if it's different than Phase 1. Otherwise: "No change from Phase 1.")
+**Single-GPU:** No change from Phase 1.
 
-e.g., random memory access?
+**Multiple-GPUs:** The performance bottleneck is likely due to single-GPU implementations of advance and filter operations randomly accessing numerous arrays distributed across multiple GPUs.
+
 
 ## Scalability behavior
 
-**THIS IS REALLY THE ONLY IMPORTANT THING**
-
-| GPUs | Runtime (ms) | Speedup over single-GPU version |
-|------|--------------|---------------------------------|
-| 1    |              |                                 |
-| 2    |              |                                 |
-| 3    |              |                                 |
-| 4    |              |                                 |
-| 5    |              |                                 |
-| 6    |              |                                 |
-| 7    |              |                                 |
-| 8    |              |                                 |
-
-Why is scaling not ideal?
-
-What limits our scalability?
+We observe no scaling with Local Graph Clustering as currently implemented. Please see the chapter on [Gunrock's `ForAll` Operator](#gunrocks-forall-operator) for a discussion on future directions around more specialized operators to be designed with communication patterns in mind.

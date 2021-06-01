@@ -1,12 +1,16 @@
 # Seeded Graph Matching (SGM)
 
-Phase 1 report can be found [here](https://gunrock.github.io/docs/#/hive/hive_sgm).
+The Phase 1 report for SGM can be found [here](https://gunrock.github.io/docs/#/hive/hive_sgm).
 
 From [Fishkind et al.](https://arxiv.org/pdf/1209.0367.pdf):
 
 > Given two graphs, the graph matching problem is to align the two vertex sets so as to minimize the number of adjacency disagreements between the two graphs. The seeded graph matching problem is the graph matching problem when we are first given a partial alignment that we are tasked with completing.
 
 That is, given two graphs `A` and `B`, we seek to find the permutation matrix `P` that maximizes the number of adjacency agreements between `A` and `P * B * P.T`, where `*` represents matrix multiplication.  The algorithm Fishkind et al. propose first relaxes the hard 0-1 constraints on `P` to the set of doubly stochastic matrices (each row and column sums to 1), then uses the Frank-Wolfe algorithm to minimize the objective function  `sum((A - P * B * P.T) ** 2)`.  Finally, the relaxed solution is projected back onto the set of permutation matrices to yield a feasible solution.
+
+## Scalability Summary
+
+We observe great scaling
 
 ## Summary of Results
 
@@ -36,6 +40,7 @@ cd SGM/test/
 make
 ```
 **Verify git SHA:** `commit d41a43d5653455c1adc59841499ce84a63ecd2db`
+
 ### Partitioning the input dataset
 
 Data partitioning occurs at runtime whereby matrix rows are split across multiple GPUs. Please see the summary above for more information.
@@ -86,33 +91,16 @@ Modify `OUTPUT_DIR` to store generated output and json files in an alternate loc
 
 A tolerance value can be specified by setting a value in `APP_OPTIONS`
 
-Please review the provided script and see "Running the Applications" chapter for details on running with additional datasets.
-
-#### Single-GPU (for baseline)
-
-<code>
-include a transcript
-</code>
-
-#### Multi-GPU
-
-<code>
-include a transcript
-</code>
+Please review the provided script and see [Running the Applications](#running-the-applications) for information on running with additional datasets.
 
 ### Output
 
-(Only include this if it's different than Phase 1. Otherwise: "No change from Phase 1.")
-
-What is output when you run? Output file? JSON? Anything else? How do you extract relevant statistics from the output?
-
-How do you make sure your output is correct/meaningful? (What are you comparing against?)
+No change from Phase 1.
 
 ## Performance and Analysis
 
-(Only include this if it's different than Phase 1. Otherwise: "No change from Phase 1.")
+No change from Phase 1.
 
-How do you measure performance? What are the relevant metrics? Runtime? Throughput? Some sort of accuracy/quality metric?
 
 ### Implementation limitations
 
@@ -120,21 +108,10 @@ No change from Phase 1.
 
 ### Performance limitations
 
-Our multi-GPU implementation does not consider the SpGEMM preprocessing step. As SpGEMM is one of the core computations for many other algorithms, one future opportunity will be to scale a load-balanced SpGEMM to a multi-GPU system using merge-based decomposition. CUDA’s new virtual memory APIs also allow us to map and unmap physical memory chunks to a contiguous virtual memory array, which can be used to perform and store SpGEMM in its sparse-format without relying on an intermediate dense representation and a conversion to sparse output.
+**Single-GPU:** No change from Phase 1.
+
+**Multiple-GPUs:** Our multi-GPU implementation does not consider the SpGEMM preprocessing step. As SpGEMM is one of the core computations for many other algorithms, one future opportunity will be to scale a load-balanced SpGEMM to a multi-GPU system using merge-based decomposition. CUDA’s new virtual memory APIs also allow us to map and unmap physical memory chunks to a contiguous virtual memory array, which can be used to perform and store SpGEMM in its sparse-format without relying on an intermediate dense representation and a conversion to sparse output.
 
 ## Scalability behavior
-
-**THIS IS REALLY THE ONLY IMPORTANT THING**
-
-| GPUs | Runtime (ms) | Speedup over single-GPU version |
-|------|--------------|---------------------------------|
-| 1    |              |                                 |
-| 2    |              |                                 |
-| 3    |              |                                 |
-| 4    |              |                                 |
-| 5    |              |                                 |
-| 6    |              |                                 |
-| 7    |              |                                 |
-| 8    |              |                                 |
 
 We observe great scaling for our bidding kernel as we increase the number of GPUs. If the input matrix is large enough, the rows can be easily split across multiple GPUs, and each GPU processes its equal share of rows, where within a GPU, each CUDA block processes one complete row.

@@ -18,6 +18,8 @@
 
 [pr_nibble](hive_phase2/tables/pr_nibble.html)
 
+[proj](hive_phase2/tables/proj.html)
+
 [rw_directed-greedy](hive_phase2/tables/rw_directed-greedy.html)
 
 [rw_directed-uniform](hive_phase2/tables/rw_directed-uniform.html)

@@ -40,7 +40,7 @@ Herein UC Davis produces the following deliverables that it promised to deliver 
 - Performance characterization of these applications across multiple GPUs
 - Analysis of the limits of scalability for these applications
 
-In our writeup, we first [describe how to reproduce our results](#running-the-applications) and then [describe the scalability behavior of our ForAll operator](#gunrocks-forall-operator).
+In our writeup, we first [describe how to reproduce our results](#running-the-applications) ([HTML](https://gunrock.github.io/docs/#/hive_phase2/hive_run_apps_phase2)) and then [describe the scalability behavior of our ForAll operator](#gunrocks-forall-operator) ([HTML](https://gunrock.github.io/docs/#/hive_phase2/hive_forall_phase2)) .
 
 We begin with a table that summarizes the scalability behavior for each application, then a longer description of each application:
 

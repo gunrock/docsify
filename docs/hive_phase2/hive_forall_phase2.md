@@ -73,6 +73,7 @@ Now, to be able to actually work on individual data elements per GPU, we simply 
 Multiple GPUs `ForAll` operator was initially intended as a `transform` operator, where given an array we apply a user-defined transformation on every element of the array. If the user-defined operations are restricted to the array/elements being processed and are simple, the observed scaling is linear. Each GPU gets an embarassingly parallel chunk of work to do independent of every other GPU on the system, therefore, expected scaling to be perfect-linear.
 
 However, what we observe in practice is that the user-defined functions can be complex computations used to implement some of the HIVE workloads. An example pattern that the user may want can be described as following:
+
 1. "Array" being processed in the `ForAll` is an active vertex set of the graph,
 2. Therefore, giving access to each vertex in a frontier within the user-defined operation,
 3. And in the operation itself, the user may do any random access to other arrays in the algorithm's problem.
@@ -81,6 +82,7 @@ These random accesses are observed in many applications, for example, in Geoloca
 
 ### Performance limitations
 For our multi-GPU work, we deploy three different memory schemes for allocating/managing the data that gets split equally among all the GPUs in the systems, these schemes are:
+
 1. Unified Memory Addressing Space (`cudaEnablePeerAccess()`)
 2. Unified Memory Management (`cudaMallocManaged()`)
 3. CUDA Virtual Memory Management (`cuMemAddressReserve()`)
@@ -89,5 +91,5 @@ With the help of prefetching the managed memory (2), all three APIs can perform 
 
 We found that although there are some accesses that are entirely random, many of the user-defined lambdas can be split into multiple parts and common patterns can be further extracted into operators. Once we switch to this specialized-operator model, we can scale our problems better (as further explained in the following section).
 
-### Optimizations and Future-Work
+### Optimizations and Future Work
 One lesson learned from implementing a multiple GPU `ForAll` operator is that there is a need to identify common patterns within the `ForAll` user-defined implementations to be made into operators that can potentially scale. Continuing the previously mentioned Geolocation example, we can look into implementing Geolocation with `NeighborReduction`, where `Reduction` is not a simple reduce, but more complex user-defined operations (such as `spatial-median`). Another reason why moving onto specialized graph operators instead of a general `ForAll` will be better is that we can then map communication patterns within these operators to be able to transfer information at a per-iteration basis between different GPUs using gather, scatter, broadcast (can be achieved using [NCCL](https://developer.nvidia.com/nccl) primitives.) We show one such example with Vertex Nomination, implemented using NCCL, an NVIDIA communication library for multiple GPUs.

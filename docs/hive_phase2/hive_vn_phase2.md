@@ -57,17 +57,19 @@ local_distances = all_reduce(local_distances, op="min")
 ```
 
 In the per-GPU `advance` phase, each device has
-  - a _local_ replica of the complete input graph
-  - a chunk of nodes it is responsible for computing on
-  - a _local_ copy of the `input_frontier` that is read from
-  - a _local_ copy of the `output_frontier` that is written to
-  - a _local_ copy of the `distance` array that is read / written
+
+- a _local_ replica of the complete input graph
+- a chunk of nodes it is responsible for computing on
+- a _local_ copy of the `input_frontier` that is read from
+- a _local_ copy of the `output_frontier` that is written to
+- a _local_ copy of the `distance` array that is read / written
 
 This data layout means that no communication between devices is required during the advance phase.
 
 During the `reduce` phase,
-  - the local output frontiers are reduced with the `or` operator (remember they are boolean masks)
-  - the local `distances` arrays are reduced with the `min` operator
+
+- the local output frontiers are reduced with the `or` operator (remember they are boolean masks)
+- the local `distances` arrays are reduced with the `min` operator
 
 After this phase, the copies of the input frontiers and the computed distances are the same on each device.  In our implementation, these reduces uses the `ncclAllReduce` function from NVIDIA's `nccl` library.
 

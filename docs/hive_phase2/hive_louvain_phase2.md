@@ -4,7 +4,7 @@ The [Phase 1 writeup]((../hive/hive_louvain.md)) contains a detailed description
 
 From the Phase 1 writeup:
 
-> Community detection in graphs means grouping vertices together, so that those vertices that are closer (have more connections) to each other are placed in the same cluster. A commonly used algorithm for community detection is Louvain (https://arxiv.org/pdf/0803.0476.pdf).
+> Community detection in graphs means grouping vertices together, so that those vertices that are closer (have more connections) to each other are placed in the same cluster. A commonly used algorithm for community detection is Louvain (<https://arxiv.org/pdf/0803.0476.pdf>).
 
 ## Scalability Summary
 
@@ -12,7 +12,7 @@ Application is nonfunctional
 
 ## Summary of Results
 
-The application has a segmentation fault is currently nonfunctional.
+The application has a segmentation fault and is currently nonfunctional.
 
 ## Summary of Gunrock Implementation
 
@@ -25,7 +25,7 @@ We parallelize across GPUs by utilizing Gunrock's multi-GPU `ForAll` operator de
 No change from Phase 1.
 
 
-# How To Run This Application on NVIDIA's DGX-2
+## How To Run This Application on NVIDIA's DGX-2
 
 ### Prerequisites
 ```

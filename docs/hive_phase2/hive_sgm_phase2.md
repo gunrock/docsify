@@ -40,6 +40,7 @@ cd SGM/test/
 make
 ```
 **Verify git SHA:** `commit d41a43d5653455c1adc59841499ce84a63ecd2db`
+
 ### Partitioning the input dataset
 
 Data partitioning occurs at runtime whereby matrix rows are split across multiple GPUs. Please see the summary above for more information.

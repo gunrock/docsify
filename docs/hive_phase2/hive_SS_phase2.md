@@ -14,7 +14,7 @@ We rely on Gunrock's multi-GPU `ForALL` operator to implement Scan Statistics. W
 
 ## Summary of Gunrock Implementation
 
-The Phase 1 single-GPU implementation is [here](https://gunrock.github.io/docs/#/hive/hive_scan_statistics)
+The Phase 1 single-GPU implementation is [here](https://gunrock.github.io/docs/#/hive/hive_scan_statistics).
 
 
 We parallelize Scan Statistics by utilizing a multi-GPU `ForAll` operator that splits the `scan_stats` array evenly across all available GPUs. Additional information on multi-GPU `ForAll` can be found in [Gunrock's `ForAll` Operator](#gunrocks-forall-operator) section of the report. Furthermore, this application depends on triangle counting and an intersection operator that have not been parallelized (i.e., across multiple GPUs). It is not clear that simply parallelizing these functions would lead to scalability due to the communication patterns they exhibit.

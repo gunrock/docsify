@@ -1,12 +1,14 @@
 # GraphSearch
 
-!> JDO notes, delete these when you copy this to `hive_yourworkflowname`: The goal of this report is to be useful to DARPA and to your colleagues. This is not a research paper. Be very honest. If there are limitations, spell them out. If something is broken or works poorly, say so. Above all else, make sure that the instructions to replicate the results you report are good instructions, and the process to replicate are as simple as possible; we want anyone to be able to replicate these results in a straightforward way.
+The Phase 1 report for GraphSearch can be found [here](https://gunrock.github.io/docs/#/hive/hive_graphsearch).
 
-One-paragraph summary of application, written at a high level.
+> The graph search (GS) workflow is a walk-based method that searches a graph for nodes that score highly on some arbitrary indicator of interest.
+
+>The use case given by the HIVE government partner was sampling a graph: given some seed nodes, and some model that can score a node as "interesting", find lots of "interesting" nodes as quickly as possible. Their algorithm attempts to solve this problem by implementing several different strategies for walking the graph.
 
 ## Scalability Summary
 
-One short phrase.
+Bottlenecked by network bandwidth between GPUs
 
 ## Summary of Results
 
@@ -14,7 +16,7 @@ One or two sentences that summarize "if you had one or two sentences to sum up y
 
 ## Summary of Gunrock Implementation
 
-The Phase 1 single-GPU implementation is [here](../hive/hive_yourworkflowname).
+The Phase 1 single-GPU implementation is [here](https://gunrock.github.io/docs/#/hive/hive_graphsearch).
 
 We parallelize across GPUs by ...
 
@@ -66,7 +68,7 @@ This will launch jobs that sweep across 1 to 16 GPU configurations per dataset a
 * `hive-rw-directed-uniform.sh`
 * `hive-rw-directed-greedy.sh`
 
- **(see `hive_run_apps_phase2.md` for more info)**.
+Please see [Running the Applications](#running-the-applications) for additional information.
 
 #### Datasets
 **Default Locations:**
@@ -83,9 +85,13 @@ gs_twitter.values
 ```
 ### Running the application (alternate configurations)
 
-This application relies on Gunrock's random walk `rw` primitive. Modify `WALK_MODE` to control the application's `--walk-mode` parameter and specify `--undirected` as `true` or `false`. Please see the Phase 1 single-GPU implementation details [here](https://gunrock.github.io/docs/#/hive/hive_graphsearch) for additional parameter information.
+#### hive-mgpu-run.sh
 
 Modify `OUTPUT_DIR` to store generated output and json files in an alternate location.
+
+#### Additional hive-rw-*.sh scripts
+
+This application relies on Gunrock's random walk `rw` primitive. Modify `WALK_MODE` to control the application's `--walk-mode` parameter and specify `--undirected` as `true` or `false`. Please see the Phase 1 single-GPU implementation details [here](https://gunrock.github.io/docs/#/hive/hive_graphsearch) for additional parameter information.
 
 
 #### Single-GPU (for baseline)
@@ -102,17 +108,13 @@ include a transcript
 
 ### Output
 
-(Only include this if it's different than Phase 1. Otherwise: "No change from Phase 1.")
+No change from Phase 1.
 
-What is output when you run? Output file? JSON? Anything else? How do you extract relevant statistics from the output?
-
-How do you make sure your output is correct/meaningful? (What are you comparing against?)
 
 ## Performance and Analysis
 
-(Only include this if it's different than Phase 1. Otherwise: "No change from Phase 1.")
+No change from Phase 1.
 
-How do you measure performance? What are the relevant metrics? Runtime? Throughput? Some sort of accuracy/quality metric?
 
 ### Implementation limitations
 
@@ -134,9 +136,9 @@ Comparison is both performance and accuracy/quality.
 
 ### Performance limitations
 
-(Only include this if it's different than Phase 1. Otherwise: "No change from Phase 1.")
+**Single-GPU:** No change from Phase 1.
 
-e.g., random memory access?
+**Multiple-GPUs:** Performance bottleneck is the remote memory accesses from one GPU to another GPU's memory through NVLink. **SDP can we say anything else once we have the graphs?**
 
 ## Scalability behavior
 

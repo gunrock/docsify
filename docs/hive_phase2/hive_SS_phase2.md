@@ -6,7 +6,7 @@ From the [Phase 1 report](https://gunrock.github.io/docs/#/hive/hive_scan_statis
 
 ## Scalability Summary
 
-Bottlenecked by network bandwidth between GPUs
+Bottlenecked by single-GPU operations
 
 ## Summary of Results
 

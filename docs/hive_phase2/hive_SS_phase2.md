@@ -88,7 +88,7 @@ No change from Phase 1.
 
 ### Implementation limitations
 
-"No change from Phase 1.
+No change from Phase 1.
 
 
 ### Performance limitations

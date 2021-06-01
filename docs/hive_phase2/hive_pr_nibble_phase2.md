@@ -90,7 +90,7 @@ Modify `OUTPUT_DIR` to store generated output and json files in an alternate loc
 
 Modify `APP_OPTIONS` to specify alternate `--src` and `--max-iter` values.  Please see the Phase 1 single-GPU implementation details [here](https://gunrock.github.io/docs/#/hive/hive_pr_nibble) for additional parameter information.
 
-Please review the provided script and see "Running the Applications" chapter for details on running with additional datasets.
+Please review the provided script and see [Running the Applications](#running-the-applications) for details on running with additional datasets.
 
 #### Single-GPU (for baseline)
 

@@ -103,16 +103,6 @@ Given the setup in `hive-gen-data.sh`, modify the key-value store, `DATA_PATTERN
 DATA_PATTERN["rmat18"]="georgiyPattern"
 ```
 
-### Partitioning the input dataset
-
-Partitioning is done automatically inside the code.
-
-### Running the application
-
-#### Datasets
-
-Provide their names. We will probably make a separate page for them so you can just use their names.
-
 ### Output
 
 No change from Phase 1.

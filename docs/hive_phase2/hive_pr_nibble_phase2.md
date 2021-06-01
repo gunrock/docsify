@@ -1,12 +1,18 @@
 # Local Graph Clustering (LGC)
 
-!> JDO notes, delete these when you copy this to `hive_yourworkflowname`: The goal of this report is to be useful to DARPA and to your colleagues. This is not a research paper. Be very honest. If there are limitations, spell them out. If something is broken or works poorly, say so. Above all else, make sure that the instructions to replicate the results you report are good instructions, and the process to replicate are as simple as possible; we want anyone to be able to replicate these results in a straightforward way.
+The [Phase 1 writeup]((../hive/hive_pr_nibble.md)) contains a detailed description of the application.
 
-One-paragraph summary of application, written at a high level.
+From the Phase 1 writeup:
+
+>>From [Andersen et al.](https://projecteuclid.org/euclid.im/1243430567):
+
+>> A local graph partitioning algorithm finds a cut near a specified starting vertex, with a running time that depends largely on the size of the small side of the cut, rather than the size of the input graph.
+
+>A common algorithm for local graph clustering is called PageRank-Nibble (PRNibble), which solves the L1 regularized PageRank problem. We implement a coordinate descent variant of this algorithm found in [Fountoulakis et al.](https://arxiv.org/pdf/1602.01886.pdf), which uses the fast iterative shrinkage-thresholding algorithm (FISTA).
 
 ## Scalability Summary
 
-One short phrase.
+Bottlenecked by network bandwidth between GPUs
 
 ## Summary of Results
 
@@ -14,7 +20,7 @@ One or two sentences that summarize "if you had one or two sentences to sum up y
 
 ## Summary of Gunrock Implementation
 
-The Phase 1 single-GPU implementation is [here](../hive/hive_yourworkflowname).
+The Phase 1 single-GPU implementation is [here](../hive/hive_pr_nibble).
 
 We parallelize across GPUs by ...
 
@@ -41,7 +47,7 @@ cd build/
 cmake ..
 make -j16 pr_nibble
 ```
-**Verify git SHA:** `commit d70a73c5167c5b59481d8ab07c98b376e77466cc`
+**Verify git SHA:** `commit 3e7d4f29f0222e9fd1f4e768269b704d6ebcd02c`
 
 ### Partitioning the input dataset
 
@@ -56,7 +62,7 @@ cd ../examples/pr_nibble/
 ./hive-mgpu-run.sh
 ```
 
-This will launch jobs that sweep across 1 to 16 GPU configurations per dataset and application option as specified in `hive-pr_nibble-test.sh` **(see `hive_run_apps_phase2.md` for more info)**.
+This will launch jobs that sweep across 1 to 16 GPU configurations per dataset and application option as specified in `hive-pr_nibble-test.sh`.  See [Running the Applications](#running-the-applications) for additional information.
 
 
 #### Datasets

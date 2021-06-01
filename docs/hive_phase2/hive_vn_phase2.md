@@ -132,18 +132,6 @@ Modify `OUTPUT_DIR` to store generated output and json files in an alternate loc
 
 Please see the Phase 1 single-GPU implementation details [here](https://gunrock.github.io/docs/#/hive/hive_vn) for additional parameter information, review the provided script, and see [Running the Applications](#running-the-applications) chapter for details on running with additional datasets.
 
-#### Single-GPU (for baseline)
-
-<code>
-include a transcript
-</code>
-
-#### Multi-GPU
-
-<code>
-include a transcript
-</code>
-
 ### Output
 
 No change from Phase 1.

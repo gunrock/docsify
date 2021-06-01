@@ -135,17 +135,6 @@ From the perspective of the multi-GPU system, we are primarily bottlenecked by b
 
 ## Scalability behavior
 
-| GPUs | Runtime/Region 1 (ms) | Runtime/Scatter (ms) | Runtime/Region 2 (ms) |
-|------|-----------------------|----------------------| ----------------------|
-| 1    |                       |                      |                       |
-| 2    |                       |                      |                       |
-| 3    |                       |                      |                       |
-| 4    |                       |                      |                       |
-| 5    |                       |                      |                       |
-| 6    |                       |                      |                       |
-| 7    |                       |                      |                       |
-| 8    |                       |                      |                       |
-
 Scaling of the whole workload's runtime is not ideal, primarily because:
   a) because Region 1 is not parallelized across GPUs
   b) because scattering the rows of the matrices across GPUs takes time.

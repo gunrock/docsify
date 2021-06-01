@@ -92,18 +92,6 @@ A tolerance value can be specified by setting a value in `APP_OPTIONS`
 
 Please review the provided script and see [Running the Applications](#running-the-applications) for information on running with additional datasets.
 
-#### Single-GPU (for baseline)
-
-<code>
-include a transcript
-</code>
-
-#### Multi-GPU
-
-<code>
-include a transcript
-</code>
-
 ### Output
 
 (Only include this if it's different than Phase 1. Otherwise: "No change from Phase 1.")

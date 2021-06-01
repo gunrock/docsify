@@ -92,18 +92,6 @@ Please review the provided script and see [Running the Applications](#running-th
 python data/mtx2bin.py --inpath data/ml_full.mtx
 ```
 
-#### Single-GPU (for baseline)
-
-<code>
-include a transcript
-</code>
-
-#### Multi-GPU
-
-<code>
-include a transcript
-</code>
-
 ### Output
 
 No change from Phase 1.

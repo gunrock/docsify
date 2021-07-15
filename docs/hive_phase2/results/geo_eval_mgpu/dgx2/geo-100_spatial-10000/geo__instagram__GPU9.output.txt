@@ -5,7 +5,7 @@ Reading from /home/u00u7u37rw7AjJoA4e357/data/gunrock/hive_datasets/mario-2TB/ge
   Reading edge values from /home/u00u7u37rw7AjJoA4e357/data/gunrock/hive_datasets/mario-2TB/geolocation/instagram/graph/instagram.mtx.coo_edge_values
 Reading from /home/u00u7u37rw7AjJoA4e357/data/gunrock/hive_datasets/mario-2TB/geolocation/instagram/graph/instagram.mtx.coo_edge_values, typeId = 18, targetId = 18, length = 41355870
   Subtracting 1 from node Ids...
-  graph loaded as COO in 2.559647s.
+  graph loaded as COO in 1.816154s.
 Converting 23731995 vertices, 41355870 directed edges ( ordered tuples) to CSR format...Done (1s).
 Degree Histogram (23731995 vertices, 41355870 edges):
     Degree 0: 16936581 (71.366023 %)
@@ -36,14 +36,14 @@ Using advance mode LB
 Using filter mode CULL
 __________________________
 --------------------------
-Run 0 elapsed: 205886.160135, #iterations = 100
+Run 0 elapsed: 587264.379025, #iterations = 100
 -------- NO VALIDATION --------
 [geolocation] finished.
- avg. elapsed: 205886.160135 ms
+ avg. elapsed: 587264.379025 ms
  iterations: 100
- min. elapsed: 205886.160135 ms
- max. elapsed: 205886.160135 ms
- load time: 7946.12 ms
- preprocess time: 2484.170000 ms
- postprocess time: 224.791050 ms
- total time: 208771.019936 ms
+ min. elapsed: 587264.379025 ms
+ max. elapsed: 587264.379025 ms
+ load time: 7246.44 ms
+ preprocess time: 2287.060000 ms
+ postprocess time: 131.925106 ms
+ total time: 589874.967098 ms

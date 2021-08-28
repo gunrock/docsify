@@ -16,6 +16,7 @@ files = sorted(
             (
                 f.startswith("hive_")
                 and f.endswith(".md")
+                and f != "hive_version_summary.md"
                 and f != "hive_datasets.md"
                 and f != "hive_template_phase2.md"
                 and f != "hive_phase2_summary.md"
@@ -32,7 +33,7 @@ files = sorted(
 print(
     """# HIVE Phase 2 Report&colon; Executive Summary
 
-This report is also located online at the following URL: <https://gunrock.github.io/docs/#/hive_phase2/hive_phase2_summary>. Links currently work better in the PDF version than the HTML version.
+This report ([version history](#version-summary) [[HTML](https://gunrock.github.io/docs/#/hive_phase2/hive_version_summary)])  is also located online at the following URL: <https://gunrock.github.io/docs/#/hive_phase2/hive_phase2_summary>. Links currently work better in the PDF version than the HTML version.
 
 Herein UC Davis produces the following deliverables that it promised to deliver in Phase 2:
 
@@ -114,7 +115,7 @@ table_tempfile = tempfile.NamedTemporaryFile(mode="w+", suffix=".md")
 table_tempfile.write("\n\n# Tables of Performance Results\n\n")
 
 # list of input files
-mdfiles = ["hive_phase2_summary.md", "hive_run_apps_phase2.md", "hive_forall_phase2.md"]
+mdfiles = ["hive_version_summary.md", "hive_phase2_summary.md", "hive_run_apps_phase2.md", "hive_forall_phase2.md"]
 for file in files:
     mdfiles.append(file)
     # format is hive_X_phase2.md

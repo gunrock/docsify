@@ -102,10 +102,15 @@ pandoc_cmd = [
     # '--variable', 'classoption=article',
     "--variable",
     "toc-depth=0",
+    "--variable",
+    "lof=1",  # list of figures
+    "--variable",
+    "lot=1",  # list of tables
     "--toc",
+    # "-o",
+    # "report/hive_phase2.tex",
     "-o",
     "report/hive_phase2.pdf",
-    # '-o', 'darpa.tex',
 ]
 
 # make a couple of temporary files
@@ -115,7 +120,12 @@ table_tempfile = tempfile.NamedTemporaryFile(mode="w+", suffix=".md")
 table_tempfile.write("\n\n# Tables of Performance Results\n\n")
 
 # list of input files
-mdfiles = ["hive_version_summary.md", "hive_phase2_summary.md", "hive_run_apps_phase2.md", "hive_forall_phase2.md"]
+mdfiles = [
+    "hive_version_summary.md",
+    "hive_phase2_summary.md",
+    "hive_run_apps_phase2.md",
+    "hive_forall_phase2.md",
+]
 for file in files:
     mdfiles.append(file)
     # format is hive_X_phase2.md
@@ -138,6 +148,7 @@ mdfiles.extend(
         )
     )
 )
+mdfiles.extend(["symbols.md"])
 
 
 pandoc_cmd.extend(mdfiles)

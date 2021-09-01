@@ -62,7 +62,7 @@ tablespage.write("# Tables of results\n\n")
 prims = df["primitive"].unique()
 for prim in prims:
     with open(f"{prim}_plots.md", "w") as plotlist:
-        plotlist.write(f'## Scalability plots\n\n![](plots/{prim}.pdf "{prim}")\n\n')
+        plotlist.write(f'## Scalability plots\n\n![{prim}: speedup over 1 GPU vs. number of GPUs](plots/{prim}.pdf "{prim}")\n\n')
     dfs[prim] = df[df["primitive"] == prim]
     dfs[prim] = dfs[prim].dropna(axis=1, how="all")  # drop columns if all n/a
 
@@ -87,15 +87,21 @@ for prim in prims:
                 name = prim + "_" + variant
                 dfs[name] = dfs[prim][dfs[prim]["variant"] == variant]
                 tables[name] = dfs[name][cols]
-                tables[name].to_markdown(buf=f"../tables/{name}.md", index=False)
+                tablefilename = f"../tables/{name}.md"
+                tables[name].to_markdown(buf=tablefilename, index=False)
+                with open(tablefilename, 'a') as tablefile:
+                    tablefile.write(f"\n\n: Tabular data for {name}")
                 tables[name].to_html(
                     buf=f"../tables/{name}.html", index=False, border=0
                 )
-                plotlist.write(f'![](plots/{name}.pdf "{name}")\n\n')
+                plotlist.write(f'![{name}: speedup over 1 GPU vs. number of GPUs](plots/{name}.pdf "{name}")\n\n')
                 tablespage.write(f"[{name}](hive_phase2/tables/{name}.html)\n\n")
     else:
         # only write top-level table if there are no subtables
-        tables[prim].to_markdown(buf=f"../tables/{prim}.md", index=False)
+        tablefilename = f"../tables/{prim}.md"
+        tables[prim].to_markdown(buf=tablefilename, index=False)
+        with open(tablefilename, 'a') as tablefile:
+            tablefile.write(f"\n\n: Tabular data for {prim}")
         tables[prim].to_html(buf=f"../tables/{prim}.html", index=False, border=0)
         tablespage.write(f"[{prim}](hive_phase2/tables/{prim}.html)\n\n")
 tablespage.close()

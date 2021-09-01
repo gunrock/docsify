@@ -1,8 +1,8 @@
 ## Scalability plots
 
-![](plots/ac.pdf "ac")
+![ac: speedup over 1 GPU vs. number of GPUs](plots/ac.pdf "ac")
 
-![](plots/ac_JohnsHopkins-JohnsHopkins.pdf "ac_JohnsHopkins-JohnsHopkins")
+![ac_JohnsHopkins-JohnsHopkins: speedup over 1 GPU vs. number of GPUs](plots/ac_JohnsHopkins-JohnsHopkins.pdf "ac_JohnsHopkins-JohnsHopkins")
 
-![](plots/ac_rmat18-georgiyPattern.pdf "ac_rmat18-georgiyPattern")
+![ac_rmat18-georgiyPattern: speedup over 1 GPU vs. number of GPUs](plots/ac_rmat18-georgiyPattern.pdf "ac_rmat18-georgiyPattern")
 

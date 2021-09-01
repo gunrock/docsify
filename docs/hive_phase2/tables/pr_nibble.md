@@ -32,3 +32,5 @@
 | pr_nibble   | hollywood-2009 |         14 |           17.1752  | 0.0935062 |
 | pr_nibble   | hollywood-2009 |         15 |           15.101   | 0.10635   |
 | pr_nibble   | hollywood-2009 |         16 |           14.662   | 0.109534  |
+
+: Tabular data for pr_nibble

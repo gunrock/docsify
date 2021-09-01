@@ -16,3 +16,5 @@
 | ac          | JohnsHopkins | JohnsHopkins-JohnsHopkins |         14 |             24.089 |   2.33505 |
 | ac          | JohnsHopkins | JohnsHopkins-JohnsHopkins |         15 |             24.602 |   2.28636 |
 | ac          | JohnsHopkins | JohnsHopkins-JohnsHopkins |         16 |             28.751 |   1.95642 |
+
+: Tabular data for ac_JohnsHopkins-JohnsHopkins

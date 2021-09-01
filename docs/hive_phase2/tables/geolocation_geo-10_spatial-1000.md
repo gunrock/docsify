@@ -32,3 +32,5 @@
 | geolocation | twitter   | geo-10_spatial-1000 |         14 |           6510.82  | 0.0511737  |
 | geolocation | twitter   | geo-10_spatial-1000 |         15 |           3360.71  | 0.0991406  |
 | geolocation | twitter   | geo-10_spatial-1000 |         16 |           3589.6   | 0.0928189  |
+
+: Tabular data for geolocation_geo-10_spatial-1000

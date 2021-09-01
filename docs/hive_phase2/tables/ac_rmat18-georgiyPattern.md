@@ -16,3 +16,5 @@
 | ac          | rmat18    | rmat18-georgiyPattern |         14 |             86.28  |   1.84427 |
 | ac          | rmat18    | rmat18-georgiyPattern |         15 |             88.604 |   1.7959  |
 | ac          | rmat18    | rmat18-georgiyPattern |         16 |             90.913 |   1.75029 |
+
+: Tabular data for ac_rmat18-georgiyPattern

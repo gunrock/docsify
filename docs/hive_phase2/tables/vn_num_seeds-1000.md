@@ -112,3 +112,5 @@
 | vn          | rmat24         | num_seeds-1000 |         14 |             27.993 | 4.96378   |
 | vn          | rmat24         | num_seeds-1000 |         15 |             26.284 | 5.28652   |
 | vn          | rmat24         | num_seeds-1000 |         16 |             25.696 | 5.4075    |
+
+: Tabular data for vn_num_seeds-1000

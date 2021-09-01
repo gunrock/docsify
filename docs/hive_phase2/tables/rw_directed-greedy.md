@@ -16,3 +16,5 @@
 | rw          | dir_gs_twitter | directed-greedy |         14 |            42.3774 |  0.93095  |
 | rw          | dir_gs_twitter | directed-greedy |         15 |            41.7984 |  0.943847 |
 | rw          | dir_gs_twitter | directed-greedy |         16 |            37.2768 |  1.05833  |
+
+: Tabular data for rw_directed-greedy

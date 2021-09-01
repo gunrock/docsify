@@ -48,3 +48,5 @@
 | Sage        | pokec          |         14 |            926.408 |  0.996093 |
 | Sage        | pokec          |         15 |            909.469 |  1.01464  |
 | Sage        | pokec          |         16 |            927.374 |  0.995055 |
+
+: Tabular data for Sage

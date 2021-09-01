@@ -16,3 +16,5 @@
 | rw          | dir_gs_twitter | directed-uniform |         14 |           149.857  |  0.123734 |
 | rw          | dir_gs_twitter | directed-uniform |         15 |           163.669  |  0.113293 |
 | rw          | dir_gs_twitter | directed-uniform |         16 |           167.475  |  0.110718 |
+
+: Tabular data for rw_directed-uniform
